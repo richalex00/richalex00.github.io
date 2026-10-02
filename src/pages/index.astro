@@ -1,0 +1,203 @@
+---
+import Base from "../layouts/Base.astro";
+import { person, projects, experience, education } from "../data/site";
+
+// Hand-set, slightly uneven fan so it looks held rather than computed.
+const fan = [
+  { r: -12, x: -84, y: 10 },
+  { r: -5, x: -43, y: 2 },
+  { r: 1, x: 0, y: -4 },
+  { r: 6, x: 42, y: 3 },
+  { r: 13, x: 83, y: 12 },
+];
+const strip = experience.slice(0, 3);
+---
+<Base>
+  <section class="hero wrap" id="hero">
+    <canvas id="contours" aria-hidden="true"></canvas>
+    <h1 class="cap" id="h1">{person.headline}</h1>
+    <p class="sub" id="sub">{person.subline}</p>
+  </section>
+
+  <section class="strip wrap" aria-label="Previously at">
+    <span class="muted small">Previously at</span>
+    <ul>
+      {strip.map((j) => (
+        <li>
+          <span class="logo" role="img" aria-label={j.company}
+            style={`--logo:url(${j.logo});width:${Math.round(30 * j.logoRatio)}px`}></span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="fan" aria-label="Selected projects">
+    <div class="hand">
+      {projects.map((p, i) => (
+        <a class={`card${p.fanContain ? " contain" : ""}`} href={`/work/${p.slug}/`}
+          style={`--r:${fan[i].r}deg;--x:${fan[i].x}%;--y:${fan[i].y}px;z-index:${i === 2 ? 5 : 5 - Math.abs(i - 2)}`}>
+          <img src={p.fan} alt="" loading="eager" />
+          <span class="card-label">{p.title}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="work wrap" id="work" aria-labelledby="work-h">
+    <h2 class="cap section-title" id="work-h">Selected work</h2>
+    <div class="grid">
+      {projects.map((p, i) => (
+        <a class={`proj${i === 0 ? " lead" : ""}`} href={`/work/${p.slug}/`}>
+          <div class="proj-text">
+            <h3 class="cap">{p.title}</h3>
+            <p class="proj-sub">{p.subtitle}</p>
+          </div>
+          <div class="proj-img"><img src={p.cover.src} alt={p.cover.alt} loading="lazy" /></div>
+          <p class="proj-meta muted">{p.year}, {p.place}</p>
+        </a>
+      ))}
+    </div>
+    <p class="more"><a href={person.github}>More code on GitHub</a></p>
+  </section>
+
+  <section class="exp wrap" id="experience" aria-labelledby="exp-h">
+    <h2 class="cap section-title" id="exp-h">Experience</h2>
+    <ol class="rows">
+      {experience.map((j) => (
+        <li class="row">
+          <span class="logo" role="img" aria-label={j.company}
+            style={`--logo:url(${j.logo});width:${Math.min(96, Math.round(34 * j.logoRatio))}px`}></span>
+          <div class="row-main">
+            <h3><span class="cap row-title">{j.title}</span> <span class="row-co">{j.company}</span></h3>
+            <ul class="bullets">{j.bullets.map((b) => <li>{b}</li>)}</ul>
+            <ul class="tags">{j.tags.map((t) => <li>{t}</li>)}</ul>
+          </div>
+          <p class="row-when muted">{j.dates}<br />{j.place}</p>
+        </li>
+      ))}
+    </ol>
+    <p class="more"><a class="pill" href={person.cv}>Download CV</a></p>
+  </section>
+
+  <section class="edu wrap" id="education" aria-labelledby="edu-h">
+    <h2 class="cap section-title" id="edu-h">Education</h2>
+    <ol class="rows">
+      {education.map((s) => (
+        <li class="row">
+          <span class="logo" role="img" aria-label={s.school}
+            style={`--logo:url(${s.logo});width:${Math.min(96, Math.round(34 * s.logoRatio))}px`}></span>
+          <div class="row-main">
+            <h3><span class="cap row-title">{s.degree}</span> <span class="row-co">{s.school}</span></h3>
+            <p class="note">{s.note}</p>
+          </div>
+          <p class="row-when muted">{s.dates}<br />{s.place}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+</Base>
+
+<script>
+  // Contour lines behind the headline. Seeded so the page looks the same on every visit,
+  // and knocked out around the text the way contour lines break around map labels.
+  function rng(seed: string) {
+    let h = 1779033703 ^ seed.length;
+    for (let i = 0; i < seed.length; i++) { h = Math.imul(h ^ seed.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19); }
+    return () => { h = Math.imul(h ^ (h >>> 16), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); return ((h ^= h >>> 16) >>> 0) / 4294967296; };
+  }
+  function draw() {
+    const cv = document.getElementById("contours") as HTMLCanvasElement | null;
+    const hero = document.getElementById("hero");
+    if (!cv || !hero) return;
+    const r = hero.getBoundingClientRect(), w = r.width, h = r.height, dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = w * dpr; cv.height = h * dpr;
+    const c = cv.getContext("2d")!; c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, w, h);
+    const rnd = rng("Richard Alexander"), n = 7, hills: number[][] = [];
+    for (let i = 0; i < n; i++) hills.push([rnd() * w, rnd() * h, 80 + rnd() * 220, 0.5 + rnd() * 0.8]);
+    const ph = rnd() * 1000;
+    const f = (x: number, y: number) => { let v = 0; for (const [hx, hy, s, a] of hills) { const dx = x - hx, dy = y - hy; v += a * Math.exp(-(dx * dx + dy * dy) / (2 * s * s)); } return v + 0.1 * Math.sin(x / 120 + ph) * Math.cos(y / 90 + ph); };
+    const step = 5, cols = Math.ceil(w / step) + 1, rows = Math.ceil(h / step) + 1, g = new Float32Array(cols * rows);
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) g[y * cols + x] = f(x * step, y * step);
+    c.strokeStyle = "#4F7D73"; c.lineCap = "round";
+    for (let L = 0.1, li = 0; L < 1.8; L += 0.1, li++) {
+      const idx = li % 5 === 4; c.globalAlpha = idx ? 0.45 : 0.25; c.lineWidth = idx ? 1.3 : 0.9; c.beginPath();
+      for (let y = 0; y < rows - 1; y++) for (let x = 0; x < cols - 1; x++) {
+        const a = g[y * cols + x], b = g[y * cols + x + 1], d = g[(y + 1) * cols + x + 1], e = g[(y + 1) * cols + x], p: number[][] = [];
+        if ((a - L) * (b - L) < 0) p.push([x + (L - a) / (b - a), y]);
+        if ((b - L) * (d - L) < 0) p.push([x + 1, y + (L - b) / (d - b)]);
+        if ((e - L) * (d - L) < 0) p.push([x + (L - e) / (d - e), y + 1]);
+        if ((a - L) * (e - L) < 0) p.push([x, y + (L - a) / (e - a)]);
+        for (let k = 0; k + 1 < p.length; k += 2) { c.moveTo(p[k][0] * step, p[k][1] * step); c.lineTo(p[k + 1][0] * step, p[k + 1][1] * step); }
+      }
+      c.stroke();
+    }
+    c.globalAlpha = 1; c.globalCompositeOperation = "destination-out";
+    for (const id of ["h1", "sub"]) {
+      const el = document.getElementById(id); if (!el) continue;
+      const range = document.createRange(); range.selectNodeContents(el);
+      for (const b of Array.from(range.getClientRects())) {
+        const pad = id === "h1" ? 12 : 8;
+        c.beginPath(); c.roundRect(b.left - r.left - pad, b.top - r.top - pad / 2, b.width + pad * 2, b.height + pad, (b.height + pad) / 2); c.fill();
+      }
+    }
+    c.globalCompositeOperation = "source-over";
+  }
+  (document.fonts?.ready ?? Promise.resolve()).then(draw);
+  let t: number | undefined;
+  window.addEventListener("resize", () => { clearTimeout(t); t = window.setTimeout(draw, 150); });
+</script>
+
+<style>
+  .hero { position: relative; isolation: isolate; text-align: center; padding-block: clamp(56px, 10vw, 110px) clamp(40px, 7vw, 70px); }
+  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
+  .hero h1 { font-size: clamp(3.4rem, 13vw, 9.5rem); color: var(--pine); display: inline-block; letter-spacing: -0.02em; word-spacing: 0.12em; }
+  .sub { font-size: clamp(1.25rem, 3vw, 2rem); line-height: 1.2; color: var(--contour); max-width: 30ch; margin: 18px auto 0; display: block; }
+
+  .strip { display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap; padding-block: 8px 24px; }
+  .strip ul { display: flex; align-items: center; gap: 36px; list-style: none; margin: 0; padding: 0; }
+  .logo { display: inline-block; height: 30px; background: var(--ink); -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat; flex: none; }
+
+  .fan { overflow: hidden; padding-block: 20px 60px; }
+  .hand { position: relative; height: clamp(250px, 34vw, 400px); max-width: 1180px; margin-inline: auto; }
+  .card { position: absolute; left: 50%; top: 20px; width: clamp(150px, 21vw, 250px); aspect-ratio: 3 / 4; border-radius: 12px; overflow: hidden; background: var(--ink);
+    transform: translateX(calc(-50% + var(--x))) translateY(var(--y)) rotate(var(--r)); transform-origin: 50% 110%;
+    box-shadow: 0 1px 0 rgba(0,0,0,.08), 0 14px 30px -16px rgba(0,0,0,.5); transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+  .card img { width: 100%; height: 100%; object-fit: cover; }
+  .card.contain img { object-fit: contain; padding: 14%; }
+  .card:hover, .card:focus-visible { transform: translateX(calc(-50% + var(--x))) translateY(calc(var(--y) - 22px)) rotate(calc(var(--r) * .4)); z-index: 10 !important; }
+  .card-label { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 12px 10px; font: 600 0.85rem/1.2 var(--f-serif); color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.55)); opacity: 0; transition: opacity .25s; }
+  .card:hover .card-label, .card:focus-visible .card-label { opacity: 1; }
+
+  .work, .exp, .edu { display: flex; flex-direction: column; gap: 28px; padding-block: 48px; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .proj { background: var(--panel); border-radius: 8px; padding: 22px; display: flex; flex-direction: column; gap: 16px; color: var(--ink); text-decoration: none; }
+  .proj.lead { grid-column: 1 / -1; }
+  .proj h3 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); }
+  .proj-sub { font-size: clamp(1.1rem, 1.8vw, 1.4rem); color: var(--muted); margin-top: 4px; }
+  .proj-img { border-radius: 5px; overflow: hidden; aspect-ratio: 16 / 10; background: var(--paper); }
+  .proj.lead .proj-img { aspect-ratio: 21 / 9; }
+  .proj-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+  .proj:hover .proj-img img { transform: scale(1.02); }
+  .proj:hover h3 { color: var(--pine); }
+  .proj-meta { font-size: 0.9rem; font-style: italic; }
+  .more { display: flex; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } .proj.lead .proj-img { aspect-ratio: 16 / 10; } }
+
+  .rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+  .row { display: grid; grid-template-columns: 110px minmax(0, 1fr) 170px; gap: 8px 28px; padding-block: 26px; border-bottom: 1px solid var(--rule); align-items: start; }
+  .row .logo { height: 34px; margin-top: 4px; }
+  .row h3 { font-weight: 400; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+  .row-title { font-size: clamp(1.5rem, 2.6vw, 2rem); color: var(--ink); }
+  .row-co { font-size: 1.15rem; color: var(--pine); font-weight: 500; }
+  .bullets { margin: 10px 0 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 4px; font-size: 1rem; }
+  .bullets li::marker { color: var(--contour); }
+  .tags { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tags li { font-size: 0.8rem; padding: 2px 10px; border: 1px solid var(--rule); border-radius: 999px; color: var(--muted); }
+  .note { margin-top: 6px; font-size: 1rem; color: var(--muted); }
+  .row-when { text-align: right; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+  @media (max-width: 760px) {
+    .row { grid-template-columns: 1fr; }
+    .row-when { text-align: left; order: -1; }
+    .row .logo { order: -2; }
+  }
+</style>

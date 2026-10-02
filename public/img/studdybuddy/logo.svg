@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
+  <!-- Shadow -->
+  <ellipse cx="50" cy="92" rx="28" ry="4" fill="rgba(0,0,0,0.12)" />
+  <!-- Left ear -->
+  <path d="M22 38 Q 18 18 32 22 L 30 38 Z" fill="#96E6A0" stroke="#101A14" stroke-width="2.5" stroke-linejoin="round" />
+  <!-- Right ear -->
+  <path d="M78 38 Q 82 18 68 22 L 70 38 Z" fill="#96E6A0" stroke="#101A14" stroke-width="2.5" stroke-linejoin="round" />
+  <!-- Body -->
+  <path d="M50 16 C 76 16 86 36 86 56 C 86 76 70 88 50 88 C 30 88 14 76 14 56 C 14 36 24 16 50 16 Z" fill="#96E6A0" stroke="#101A14" stroke-width="3" />
+  <!-- Cheeks -->
+  <ellipse cx="28" cy="60" rx="6" ry="3.5" fill="#FF9DBE" opacity="0.7" />
+  <ellipse cx="72" cy="60" rx="6" ry="3.5" fill="#FF9DBE" opacity="0.7" />
+  <!-- Eyes -->
+  <ellipse cx="38" cy="52" rx="4" ry="5" fill="#101A14" />
+  <ellipse cx="62" cy="52" rx="4" ry="5" fill="#101A14" />
+  <!-- Eye highlights -->
+  <ellipse cx="39.5" cy="50" rx="1.4" ry="1.7" fill="#fff" />
+  <ellipse cx="63.5" cy="50" rx="1.4" ry="1.7" fill="#fff" />
+  <!-- Smile -->
+  <path d="M40 68 Q 50 76 60 68" stroke="#101A14" stroke-width="3" fill="none" stroke-linecap="round" />
+  <!-- Star -->
+  <g transform="translate(82 18)">
+    <path d="M0 -6 L 1.5 -1.5 L 6 0 L 1.5 1.5 L 0 6 L -1.5 1.5 L -6 0 L -1.5 -1.5 Z" fill="#FFD23F" stroke="#101A14" stroke-width="1.5" stroke-linejoin="round" />
+  </g>
+</svg>
