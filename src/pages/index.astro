@@ -2,204 +2,187 @@
 import Base from "../layouts/Base.astro";
 import { person, projects, experience, education } from "../data/site";
 
-// Hand-set, slightly uneven fan so it looks held rather than computed.
-const fan = [
-  { r: -12, x: -84, y: 10 },
-  { r: -5, x: -43, y: 2 },
-  { r: 1, x: 0, y: -4 },
-  { r: 6, x: 42, y: 3 },
-  { r: 13, x: 83, y: 12 },
+// "Apr 2025 – Sep 2025" -> "2025", "Feb 2024 – Apr 2025" -> "2024–25"
+const years = (dates: string) => {
+  const y = dates.match(/\d{4}/g) ?? [];
+  if (y.length < 2 || y[0] === y[1]) return y[0] ?? dates;
+  return `${y[0]}–${y[1].slice(2)}`;
+};
+
+// 16x16 pixel icons, drawn from text grids
+const glyphs: Record<string, string[]> = {
+  Email: ["................","................","################","##............##","#.#..........#.#","#..#........#..#","#...#......#...#","#....#....#....#","#.....####.....#","#..............#","#..............#","#..............#","################","................","................","................"],
+  LinkedIn: ["################","################","##..############","##..############","################","##..##...#######","##..##.......###","##..##..###...##","##..##..####..##","##..##..####..##","##..##..####..##","##..##..####..##","##..##..####..##","################","################","................"],
+  GitHub: ["....########....","..############..",".##.##....##.##.",".###........###.","##............##","##............##","##............##","##............##","###..........###",".###........###.",".#.###....###.#.","..#.##....##.#..","...###....###...","....##....##....","................","................"],
+  CV: ["..##########....","..#.......#.#...","..#.......#..#..","..#.......####..","..#..........#..","..#.######...#..","..#..........#..","..#.########.#..","..#..........#..","..#.########.#..","..#..........#..","..#.#####....#..","..#..........#..","..############..","................","................"],
+};
+const rects = (rows: string[]) =>
+  rows.flatMap((row, y) => [...row].map((ch, x) => (ch === "#" ? `<rect x="${x}" y="${y}" width="1" height="1"/>` : ""))).join("");
+const contacts = [
+  { name: "Email", href: `mailto:${person.email}`, colour: "#22302C" },
+  { name: "LinkedIn", href: person.linkedin, colour: "#1F4D3F" },
+  { name: "GitHub", href: person.github, colour: "#22302C" },
+  { name: "CV", href: person.cv, colour: "#A44376" },
 ];
-// Fan position for each project in priority order: top card in the middle, then outwards.
-const slot = [2, 1, 3, 0, 4];
-const strip = experience.slice(0, 3);
 ---
 <Base>
-  <section class="hero wrap" id="hero">
-    <canvas id="contours" aria-hidden="true"></canvas>
-    <h1 class="cap" id="h1">{person.headline}</h1>
-    <p class="sub" id="sub">{person.subline}</p>
-  </section>
+  <header class="hero">
+    <canvas id="topo" aria-hidden="true"></canvas>
+    <div class="clock" aria-label="Local time in Stockholm"><i></i><span id="clock">Stockholm</span></div>
+    <h1>{person.name}</h1>
+  </header>
 
-  <section class="strip wrap" aria-label="Previously at">
-    <span class="muted small">Previously at</span>
-    <ul>
-      {strip.map((j) => (
-        <li>
-          <span class="logo" role="img" aria-label={j.company}
-            style={`--logo:url(${j.logo});width:${Math.round(30 * j.logoRatio)}px`}></span>
-        </li>
-      ))}
-    </ul>
-  </section>
+  <main class="col">
+    <section class="intro">
+      <span class="bubble" aria-hidden="true">hej!</span>
+      <button class="avatar" aria-label="Photo of Richard">
+        <canvas id="avatar" width="20" height="20"></canvas>
+        <img src="/img/me.jpg" alt="" />
+      </button>
+      {person.intro.map((t) => <p>{t}</p>)}
+      <p>Here are a few things I've made.</p>
+    </section>
 
-  <section class="fan" aria-label="Selected projects">
-    <div class="hand">
+    <div class="tiles">
       {projects.map((p, i) => (
-        <a class={`card${p.fanContain ? " contain" : ""}`} href={`/work/${p.slug}/`}
-          style={`--r:${fan[slot[i]].r}deg;--x:${fan[slot[i]].x}%;--y:${fan[slot[i]].y}px;z-index:${5 - Math.abs(slot[i] - 2)}`}>
-          <img src={p.fan} alt="" loading="eager" />
-          <span class="card-label">{p.title}</span>
+        <a class={`tile${i === 0 ? " lead" : ""}${p.fanContain ? " contain" : ""}${p.tileDark ? " dark" : ""}`} href={`/work/${p.slug}/`} data-trans>
+          <div class="frame"><img src={i === 0 ? p.cover.src : p.fan} alt={p.cover.alt} loading={i < 3 ? "eager" : "lazy"} /></div>
+          <div class="label"><b>{p.title}</b><span>{p.subtitle}</span></div>
         </a>
       ))}
     </div>
-  </section>
 
-  <section class="work wrap" id="work" aria-labelledby="work-h">
-    <h2 class="cap section-title" id="work-h">Selected work</h2>
-    <div class="grid">
-      {projects.map((p, i) => (
-        <a class={`proj${i === 0 ? " lead" : ""}`} href={`/work/${p.slug}/`}>
-          <div class="proj-text">
-            <h3 class="cap">{p.title}</h3>
-            <p class="proj-sub">{p.subtitle}</p>
-          </div>
-          <div class="proj-img"><img src={p.cover.src} alt={p.cover.alt} loading="lazy" /></div>
-          <p class="proj-meta muted">{p.year}, {p.place}</p>
-        </a>
-      ))}
-    </div>
-    <p class="more"><a href={person.github}>More code on GitHub</a></p>
-  </section>
+    <p>Before design, I was an engineer. Click a row for the details.</p>
 
-  <section class="exp wrap" id="experience" aria-labelledby="exp-h">
-    <h2 class="cap section-title" id="exp-h">Experience</h2>
-    <ol class="rows">
+    <div class="log">
       {experience.map((j) => (
-        <li class="row">
-          <span class="logo" role="img" aria-label={j.company}
-            style={`--logo:url(${j.logo});width:${Math.min(96, Math.round(34 * j.logoRatio))}px`}></span>
-          <div class="row-main">
-            <h3><span class="cap row-title">{j.title}</span> <span class="row-co">{j.company}</span></h3>
-            <ul class="bullets">{j.bullets.map((b) => <li>{b}</li>)}</ul>
-            <ul class="tags">{j.tags.map((t) => <li>{t}</li>)}</ul>
+        <details>
+          <summary><img src={j.logo} alt="" /><span class="role"><b>{j.title}</b>, {j.company}</span><span class="when">{years(j.dates)}</span></summary>
+          <div class="body">
+            <ul>{j.bullets.map((b) => <li>{b}</li>)}</ul>
+            <div class="tags">{j.place}, {j.dates}. {j.tags.join(", ")}</div>
           </div>
-          <p class="row-when muted">{j.dates}<br />{j.place}</p>
-        </li>
+        </details>
       ))}
-    </ol>
-    <p class="more"><a class="pill" href={person.cv}>Download CV</a></p>
-  </section>
+      {education.map((e) => (
+        <details>
+          <summary><img src={e.logo} alt="" /><span class="role"><b>{e.degree}</b></span><span class="when">{years(e.dates)}</span></summary>
+          <div class="body"><p class="edu-note">{e.school}, {e.place}. {e.note}</p></div>
+        </details>
+      ))}
+      <a class="cv" href={person.cv}>Download the full CV (PDF)</a>
+    </div>
 
-  <section class="edu wrap" id="education" aria-labelledby="edu-h">
-    <h2 class="cap section-title" id="edu-h">Education</h2>
-    <ol class="rows">
-      {education.map((s) => (
-        <li class="row">
-          <span class="logo" role="img" aria-label={s.school}
-            style={`--logo:url(${s.logo});width:${Math.min(96, Math.round(34 * s.logoRatio))}px`}></span>
-          <div class="row-main">
-            <h3><span class="cap row-title">{s.degree}</span> <span class="row-co">{s.school}</span></h3>
-            <p class="note">{s.note}</p>
-          </div>
-          <p class="row-when muted">{s.dates}<br />{s.place}</p>
-        </li>
+    <p>Here's a live snapshot of me:</p>
+    <div class="code" aria-label="Live snapshot: based in Stockholm, studying HCI at KTH">
+      <div><span class="k">let</span> <span class="v">location</span> = <span class="s">'Stockholm'</span></div>
+      <div><span class="k">let</span> <span class="v">time</span> = <span class="s" id="codetime">'--:--'</span></div>
+      <div><span class="k">let</span> <span class="v">studying</span> = <span class="s">'HCI @ KTH'</span></div>
+      <div><span class="k">let</span> <span class="v">hobbies</span> = [</div>
+      {person.hobbies.map((h) => <div>   <span class="s">'{h}'</span>,</div>)}
+      <div>]</div>
+    </div>
+
+    <p>{person.games}</p>
+    <div class="marble">
+      <p>{person.lifting}</p>
+      <figure>
+        <button class="statue-btn" aria-label="Show another statue"><canvas id="statue" role="img"></canvas></button>
+        <figcaption id="statue-cap">Head of an athlete</figcaption>
+      </figure>
+    </div>
+
+    <p class="thanks">Thanks for stopping by! If you'd like to talk about a role or a project, here's where to find me.</p>
+    <nav class="icons" aria-label="Contact">
+      {contacts.map((c) => (
+        <a href={c.href}><svg viewBox="0 0 16 16" fill={c.colour} aria-hidden="true" set:html={rects(glyphs[c.name])}></svg>{c.name}</a>
       ))}
-    </ol>
-  </section>
+    </nav>
+  </main>
+  <script is:inline src="/js/home.js"></script>
 </Base>
 
-<script>
-  // Contour lines behind the headline. Seeded so the page looks the same on every visit,
-  // and knocked out around the text the way contour lines break around map labels.
-  function rng(seed: string) {
-    let h = 1779033703 ^ seed.length;
-    for (let i = 0; i < seed.length; i++) { h = Math.imul(h ^ seed.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19); }
-    return () => { h = Math.imul(h ^ (h >>> 16), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); return ((h ^= h >>> 16) >>> 0) / 4294967296; };
-  }
-  function draw() {
-    const cv = document.getElementById("contours") as HTMLCanvasElement | null;
-    const hero = document.getElementById("hero");
-    if (!cv || !hero) return;
-    const r = hero.getBoundingClientRect(), w = r.width, h = r.height, dpr = Math.min(2, window.devicePixelRatio || 1);
-    cv.width = w * dpr; cv.height = h * dpr;
-    const c = cv.getContext("2d")!; c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, w, h);
-    const rnd = rng("Richard Alexander"), n = 7, hills: number[][] = [];
-    for (let i = 0; i < n; i++) hills.push([rnd() * w, rnd() * h, 80 + rnd() * 220, 0.5 + rnd() * 0.8]);
-    const ph = rnd() * 1000;
-    const f = (x: number, y: number) => { let v = 0; for (const [hx, hy, s, a] of hills) { const dx = x - hx, dy = y - hy; v += a * Math.exp(-(dx * dx + dy * dy) / (2 * s * s)); } return v + 0.1 * Math.sin(x / 120 + ph) * Math.cos(y / 90 + ph); };
-    const step = 5, cols = Math.ceil(w / step) + 1, rows = Math.ceil(h / step) + 1, g = new Float32Array(cols * rows);
-    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) g[y * cols + x] = f(x * step, y * step);
-    c.strokeStyle = "#4F7D73"; c.lineCap = "round";
-    for (let L = 0.1, li = 0; L < 1.8; L += 0.1, li++) {
-      const idx = li % 5 === 4; c.globalAlpha = idx ? 0.45 : 0.25; c.lineWidth = idx ? 1.3 : 0.9; c.beginPath();
-      for (let y = 0; y < rows - 1; y++) for (let x = 0; x < cols - 1; x++) {
-        const a = g[y * cols + x], b = g[y * cols + x + 1], d = g[(y + 1) * cols + x + 1], e = g[(y + 1) * cols + x], p: number[][] = [];
-        if ((a - L) * (b - L) < 0) p.push([x + (L - a) / (b - a), y]);
-        if ((b - L) * (d - L) < 0) p.push([x + 1, y + (L - b) / (d - b)]);
-        if ((e - L) * (d - L) < 0) p.push([x + (L - e) / (d - e), y + 1]);
-        if ((a - L) * (e - L) < 0) p.push([x, y + (L - a) / (e - a)]);
-        for (let k = 0; k + 1 < p.length; k += 2) { c.moveTo(p[k][0] * step, p[k][1] * step); c.lineTo(p[k + 1][0] * step, p[k + 1][1] * step); }
-      }
-      c.stroke();
-    }
-    c.globalAlpha = 1; c.globalCompositeOperation = "destination-out";
-    for (const id of ["h1", "sub"]) {
-      const el = document.getElementById(id); if (!el) continue;
-      const range = document.createRange(); range.selectNodeContents(el);
-      for (const b of Array.from(range.getClientRects())) {
-        const pad = id === "h1" ? 12 : 8;
-        c.beginPath(); c.roundRect(b.left - r.left - pad, b.top - r.top - pad / 2, b.width + pad * 2, b.height + pad, (b.height + pad) / 2); c.fill();
-      }
-    }
-    c.globalCompositeOperation = "source-over";
-  }
-  (document.fonts?.ready ?? Promise.resolve()).then(draw);
-  let t: number | undefined;
-  window.addEventListener("resize", () => { clearTimeout(t); t = window.setTimeout(draw, 150); });
-</script>
+<style is:global>
+  /* Hero: pixel topo map behind the name */
+  .hero { position: relative; height: 260px; display: grid; place-items: center; overflow: hidden; }
+  #topo { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated;
+    -webkit-mask-image: linear-gradient(#000 60%, transparent); mask-image: linear-gradient(#000 60%, transparent); }
+  .hero h1 { position: relative; margin: 0; font: 500 clamp(44px, 9vw, 84px)/1 var(--pixel); color: var(--pine); letter-spacing: 0.01em; text-align: center; padding: 0 16px; }
+  .clock { position: absolute; top: 16px; right: 16px; font: 500 12px/1 var(--mono); color: var(--muted); display: flex; align-items: center; gap: 8px; background: var(--paper); padding: 6px 8px; border: 2px solid var(--ink); z-index: 1; }
+  .clock i { width: 8px; height: 8px; background: var(--raspberry); display: block; animation: blink 2s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0.25; } }
 
-<style>
-  .hero { position: relative; isolation: isolate; text-align: center; padding-block: clamp(56px, 10vw, 110px) clamp(40px, 7vw, 70px); }
-  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
-  .hero h1 { font-size: clamp(3.4rem, 13vw, 9.5rem); color: var(--pine); display: inline-block; letter-spacing: -0.02em; word-spacing: 0.12em; }
-  .sub { font-size: clamp(1.25rem, 3vw, 2rem); line-height: 1.2; color: var(--contour); max-width: 30ch; margin: 18px auto 0; display: block; }
-
-  .strip { display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap; padding-block: 8px 24px; }
-  .strip ul { display: flex; align-items: center; gap: 36px; list-style: none; margin: 0; padding: 0; }
-  .logo { display: inline-block; height: 30px; background: var(--ink); -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat; flex: none; }
-
-  .fan { overflow: hidden; padding-block: 20px 60px; }
-  .hand { position: relative; height: clamp(250px, 34vw, 400px); max-width: 1180px; margin-inline: auto; }
-  .card { position: absolute; left: 50%; top: 20px; width: clamp(150px, 21vw, 250px); aspect-ratio: 3 / 4; border-radius: 12px; overflow: hidden; background: var(--ink);
-    transform: translateX(calc(-50% + var(--x))) translateY(var(--y)) rotate(var(--r)); transform-origin: 50% 110%;
-    box-shadow: 0 1px 0 rgba(0,0,0,.08), 0 14px 30px -16px rgba(0,0,0,.5); transition: transform .35s cubic-bezier(.2,.8,.2,1); }
-  .card img { width: 100%; height: 100%; object-fit: cover; }
-  .card.contain img { object-fit: contain; padding: 14%; }
-  .card:hover, .card:focus-visible { transform: translateX(calc(-50% + var(--x))) translateY(calc(var(--y) - 22px)) rotate(calc(var(--r) * .4)); z-index: 10 !important; }
-  .card-label { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 12px 10px; font: 600 0.85rem/1.2 var(--f-serif); color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.55)); opacity: 0; transition: opacity .25s; }
-  .card:hover .card-label, .card:focus-visible .card-label { opacity: 1; }
-
-  .work, .exp, .edu { display: flex; flex-direction: column; gap: 28px; padding-block: 48px; }
-  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-  .proj { background: var(--panel); border-radius: 8px; padding: 22px; display: flex; flex-direction: column; gap: 16px; color: var(--ink); text-decoration: none; }
-  .proj.lead { grid-column: 1 / -1; }
-  .proj h3 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); }
-  .proj-sub { font-size: clamp(1.1rem, 1.8vw, 1.4rem); color: var(--muted); margin-top: 4px; }
-  .proj-img { border-radius: 5px; overflow: hidden; aspect-ratio: 16 / 10; background: var(--paper); }
-  .proj.lead .proj-img { aspect-ratio: 21 / 9; }
-  .proj-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.2,.8,.2,1); }
-  .proj:hover .proj-img img { transform: scale(1.02); }
-  .proj:hover h3 { color: var(--pine); }
-  .proj-meta { font-size: 0.9rem; font-style: italic; }
-  .more { display: flex; }
-  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } .proj.lead .proj-img { aspect-ratio: 16 / 10; } }
-
-  .rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
-  .row { display: grid; grid-template-columns: 110px minmax(0, 1fr) 170px; gap: 8px 28px; padding-block: 26px; border-bottom: 1px solid var(--rule); align-items: start; }
-  .row .logo { height: 34px; margin-top: 4px; }
-  .row h3 { font-weight: 400; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
-  .row-title { font-size: clamp(1.5rem, 2.6vw, 2rem); color: var(--ink); }
-  .row-co { font-size: 1.15rem; color: var(--pine); font-weight: 500; }
-  .bullets { margin: 10px 0 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 4px; font-size: 1rem; }
-  .bullets li::marker { color: var(--contour); }
-  .tags { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
-  .tags li { font-size: 0.8rem; padding: 2px 10px; border: 1px solid var(--rule); border-radius: 999px; color: var(--muted); }
-  .note { margin-top: 6px; font-size: 1rem; color: var(--muted); }
-  .row-when { text-align: right; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+  /* Avatar + speech bubble */
+  .intro { position: relative; }
+  .avatar { position: absolute; left: -84px; top: 0; width: 56px; height: 56px; border: 2px solid var(--ink); background: var(--panel); cursor: pointer; padding: 0; }
+  .avatar canvas, .avatar img { width: 100%; height: 100%; display: block; image-rendering: pixelated; }
+  .avatar img { display: none; object-fit: cover; }
+  .avatar:hover canvas, .avatar:focus-visible canvas { display: none; }
+  .avatar:hover img, .avatar:focus-visible img { display: block; }
+  .bubble { position: absolute; left: -64px; top: -34px; font: 500 11px/1 var(--mono); background: var(--paper); border: 2px solid var(--ink); padding: 4px 6px; white-space: nowrap; }
+  .bubble::after { content: ""; position: absolute; left: 8px; bottom: -6px; width: 6px; height: 6px; background: var(--ink); }
   @media (max-width: 760px) {
-    .row { grid-template-columns: 1fr; }
-    .row-when { text-align: left; order: -1; }
-    .row .logo { order: -2; }
+    .avatar { position: static; margin: 32px 0 16px; }
+    .bubble { left: 68px; top: 46px; }
+  }
+
+  /* Project tiles */
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 8px 0 44px; }
+  .tile { display: block; color: inherit; text-decoration: none; }
+  .tile .frame { aspect-ratio: 16 / 10; border: 2px solid var(--ink); background: var(--panel); box-shadow: 4px 4px 0 var(--ink); overflow: hidden; transition: transform 120ms steps(2), box-shadow 120ms steps(2); }
+  .tile.lead { grid-column: 1 / -1; }
+  .tile.lead .frame { aspect-ratio: 16 / 8; }
+  .tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tile.contain .frame { display: grid; place-items: center; }
+  .tile.contain img { width: 46%; height: auto; object-fit: contain; }
+  .tile.dark .frame { background: var(--pine); }
+  .tile:hover .frame, .tile:focus-visible .frame { transform: translate(-2px, -2px) rotate(-1.5deg); box-shadow: 6px 6px 0 var(--raspberry); }
+  .tile:nth-child(odd):hover .frame { transform: translate(-2px, -2px) rotate(1.5deg); }
+  .tile .label { margin-top: 10px; font-size: 13px; line-height: 1.5; }
+  .tile .label span { color: var(--muted); display: block; }
+
+  /* Experience + education log */
+  .log { margin: 8px 0 44px; border-top: 2px solid var(--ink); }
+  .log details { border-bottom: 1px dashed var(--contour); }
+  .log summary { list-style: none; cursor: pointer; padding: 12px 0; display: grid; grid-template-columns: 22px 1fr auto; gap: 12px; align-items: center; }
+  .log summary::-webkit-details-marker { display: none; }
+  .log summary img { width: 22px; height: 22px; object-fit: contain; filter: grayscale(1) brightness(0.3); }
+  .log summary .role { font-size: 14px; line-height: 1.4; }
+  .log summary .when { font-size: 12px; color: var(--muted); text-align: right; white-space: nowrap; }
+  .log summary .when::after { content: " +"; color: var(--raspberry-text); font-weight: 700; }
+  .log details[open] .when::after { content: " −"; }
+  .log .body { padding: 0 0 14px 34px; font-size: 13px; line-height: 1.7; }
+  .log .body ul { margin: 0 0 8px; padding-left: 0; list-style: none; }
+  .log .body li::before { content: "> "; color: var(--contour); }
+  .log .tags { color: var(--muted); font-size: 12px; }
+  .log .edu-note { margin: 0; }
+  .cv { display: inline-block; margin-top: 14px; font-size: 13px; }
+
+  /* Live snapshot */
+  .code { background: var(--ink); color: var(--paper); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--pine); padding: 18px 20px; margin: 8px 0 44px; font-size: 14px; line-height: 1.8; counter-reset: line; overflow-x: auto; }
+  .code div { white-space: pre; }
+  .code div::before { counter-increment: line; content: counter(line); display: inline-block; width: 2ch; margin-right: 18px; color: #6E8079; text-align: right; }
+  .k { color: #E58AB8; } .v { color: #9CCFC0; } .s { color: #E8D9A8; }
+
+  /* Marble statue */
+  .marble { display: grid; grid-template-columns: 1fr 168px; gap: 24px; align-items: center; margin: 8px 0 1.4em; }
+  .marble p { margin: 0; }
+  .marble figure { margin: 0; }
+  .marble canvas { width: 100%; height: auto; display: block; image-rendering: pixelated; }
+  .statue-btn { all: unset; display: block; width: 100%; cursor: pointer; }
+  .statue-btn:focus-visible { outline: 2px solid var(--raspberry); outline-offset: 3px; }
+  .marble figcaption { font: italic 14px/1.3 var(--serif); color: var(--contour); text-align: center; margin-top: 6px; }
+
+  /* Contact */
+  .thanks { margin-top: 64px; }
+  .icons { display: flex; gap: 28px; margin: 12px 0 0; flex-wrap: wrap; }
+  .icons a { display: grid; justify-items: center; gap: 6px; color: var(--ink); text-decoration: none; font-size: 11px; }
+  .icons svg { width: 44px; height: 44px; shape-rendering: crispEdges; transition: transform 100ms steps(2); }
+  .icons a:hover svg { transform: translateY(-3px); }
+
+  @media (max-width: 420px) {
+    .tiles { grid-template-columns: 1fr; }
+    .icons { gap: 18px; }
+    .marble { grid-template-columns: 1fr 120px; gap: 16px; }
   }
 </style>

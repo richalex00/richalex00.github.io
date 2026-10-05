@@ -9,6 +9,14 @@ export const person = {
   cv: "/Richard_Alexander_CV.pdf",
   headline: "I design what I build",
   subline: "HCI designer at KTH, with engineering experience at IBM, General Motors and Ericsson.",
+  // Homepage text, top to bottom
+  intro: [
+    "I'm a design engineer from Ireland. Before moving into design, I wrote production software at IBM, General Motors and Ericsson.",
+    "I'm now doing an MSc in Human-Computer Interaction at KTH in Stockholm, where my research looks at how much people feel they own the work they make with AI.",
+  ],
+  games: "I studied computer games development, and it still shows. I like things you can poke, and I like interfaces that explain themselves without a manual.",
+  lifting: "Away from the screen, I lift. I think of it as design in a much slower material.",
+  hobbies: ["Lifting"],
 };
 
 export type Shot = { src: string; alt: string; caption?: string; wide?: boolean };
@@ -24,6 +32,7 @@ export type Project = {
   cover: Shot;
   fan: string; // image used on the fanned card
   fanContain?: boolean;
+  tileDark?: boolean; // pine background behind a contained image on the homepage tile
   intro: string;
   sections: Section[];
   link?: { label: string; href: string };
@@ -80,6 +89,7 @@ export const projects: Project[] = [
     cover: { src: "/img/vigil/slide-02.jpg", alt: "Vigil title slide with the growth-ring mark" },
     fan: "/img/vigil/icon.png",
     fanContain: true,
+    tileDark: true,
     intro:
       "A two-week venture sprint at the Polytechnic University of Bari, from problem framing to Pitch Day in front of an industry and investor jury. Vigil turns the EU's mandatory Digital Product Passport from a compliance cost into a source of revenue.",
     sections: [
