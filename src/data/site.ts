@@ -29,6 +29,7 @@ export type Project = {
   link?: { label: string; href: string };
 };
 
+// Order = priority. First is the lead in the grid and the top card in the fan.
 export const projects: Project[] = [
   {
     slug: "studdybuddy",
@@ -67,6 +68,66 @@ export const projects: Project[] = [
         ],
       },
     ],
+  },
+  {
+    slug: "vigil",
+    title: "Vigil",
+    subtitle: "A living record for every device in Europe",
+    year: "2026",
+    place: "EIT Digital Summer School, Bari",
+    role: "Team venture: brand, pitch, product",
+    tools: "Figma, business modelling, pitch",
+    cover: { src: "/img/vigil/slide-02.jpg", alt: "Vigil title slide with the growth-ring mark" },
+    fan: "/img/vigil/icon.png",
+    fanContain: true,
+    intro:
+      "A two-week venture sprint at the Polytechnic University of Bari, from problem framing to Pitch Day in front of an industry and investor jury. Vigil turns the EU's mandatory Digital Product Passport from a compliance cost into a source of revenue.",
+    sections: [
+      {
+        heading: "The idea",
+        body: [
+          "Every electronic device sold in the EU will need a Digital Product Passport. Vigil builds it as a living record: AI fills data gaps and drafts supplier requests, and verified lifecycle data opens up value in the second-hand market.",
+        ],
+        shots: [
+          { src: "/img/vigil/slide-03.jpg", alt: "Problem slide", caption: "The problem." },
+          { src: "/img/vigil/slide-05.jpg", alt: "Solution slide with two products", caption: "One platform, two products." },
+        ],
+      },
+      {
+        heading: "The brand",
+        body: [
+          "Our first identity read like a video-game emblem, so I rebuilt it around a different idea: the record of a device's life. The mark is a set of growth rings, cut at one point like a single slice through a trunk. That shared gap is the one verified checkpoint. I tested three ring treatments in Figma and kept the cleanest.",
+        ],
+        shots: [{ src: "/img/vigil/slide-11.jpg", alt: "Revenue streams slide", caption: "Three-tier pricing from the pitch.", wide: true }],
+      },
+    ],
+  },
+  {
+    slug: "map-generator",
+    title: "2D map generator",
+    subtitle: "Procedural islands from noise and cellular automata",
+    year: "2023",
+    place: "University of Limerick, BSc thesis (A1)",
+    role: "Solo project",
+    tools: "Unity, C#, Perlin noise, cellular automata",
+    cover: { src: "/img/mapgen/map-b.jpg", alt: "A generated island map with forests and water" },
+    fan: "/img/mapgen/map-c.jpg",
+    intro:
+      "My final-year project: a Unity tool that generates layered 2D terrain. It combines Perlin noise, cellular automata and flood fill, with live controls for map size, saturation, variation and minimum island size, plus saving and loading. It was graded A1.",
+    sections: [
+      {
+        heading: "How it works",
+        body: [
+          "Noise sets the base terrain, cellular automata smooth it into natural coastlines, and flood fill finds and removes islands below a minimum size. Objects like trees and rocks are then placed in layers on top. A 10,000-word research survey of procedural generation methods set the algorithm choices.",
+        ],
+        shots: [
+          { src: "/img/mapgen/map-a.jpg", alt: "Generated island map", caption: "Base terrain after smoothing." },
+          { src: "/img/mapgen/map-d.jpg", alt: "Generated island map with objects", caption: "With object layers placed." },
+          { src: "/img/mapgen/editor.jpg", alt: "Unity editor with generator controls", caption: "Live controls in the Unity editor.", wide: true },
+        ],
+      },
+    ],
+    link: { label: "Source and thesis on GitHub", href: "https://github.com/richalex00/Procedural-Content-Generation" },
   },
   {
     slug: "lactation-rooms",
@@ -137,66 +198,6 @@ export const projects: Project[] = [
         shots: [{ src: "/img/galleon/logo.jpg", alt: "Pelle's Reflex Galjoen pirate logo", caption: "The logo I designed for the ship." }],
       },
     ],
-  },
-  {
-    slug: "vigil",
-    title: "Vigil",
-    subtitle: "A living record for every device in Europe",
-    year: "2026",
-    place: "EIT Digital Summer School, Bari",
-    role: "Team venture: brand, pitch, product",
-    tools: "Figma, business modelling, pitch",
-    cover: { src: "/img/vigil/slide-02.jpg", alt: "Vigil title slide with the growth-ring mark" },
-    fan: "/img/vigil/icon.png",
-    fanContain: true,
-    intro:
-      "A two-week venture sprint at the Polytechnic University of Bari, from problem framing to Pitch Day in front of an industry and investor jury. Vigil turns the EU's mandatory Digital Product Passport from a compliance cost into a source of revenue.",
-    sections: [
-      {
-        heading: "The idea",
-        body: [
-          "Every electronic device sold in the EU will need a Digital Product Passport. Vigil builds it as a living record: AI fills data gaps and drafts supplier requests, and verified lifecycle data opens up value in the second-hand market.",
-        ],
-        shots: [
-          { src: "/img/vigil/slide-03.jpg", alt: "Problem slide", caption: "The problem." },
-          { src: "/img/vigil/slide-05.jpg", alt: "Solution slide with two products", caption: "One platform, two products." },
-        ],
-      },
-      {
-        heading: "The brand",
-        body: [
-          "Our first identity read like a video-game emblem, so I rebuilt it around a different idea: the record of a device's life. The mark is a set of growth rings, cut at one point like a single slice through a trunk. That shared gap is the one verified checkpoint. I tested three ring treatments in Figma and kept the cleanest.",
-        ],
-        shots: [{ src: "/img/vigil/slide-11.jpg", alt: "Revenue streams slide", caption: "Three-tier pricing from the pitch.", wide: true }],
-      },
-    ],
-  },
-  {
-    slug: "map-generator",
-    title: "2D map generator",
-    subtitle: "Procedural islands from noise and cellular automata",
-    year: "2023",
-    place: "University of Limerick, BSc thesis (A1)",
-    role: "Solo project",
-    tools: "Unity, C#, Perlin noise, cellular automata",
-    cover: { src: "/img/mapgen/map-b.jpg", alt: "A generated island map with forests and water" },
-    fan: "/img/mapgen/map-c.jpg",
-    intro:
-      "My final-year project: a Unity tool that generates layered 2D terrain. It combines Perlin noise, cellular automata and flood fill, with live controls for map size, saturation, variation and minimum island size, plus saving and loading. It was graded A1.",
-    sections: [
-      {
-        heading: "How it works",
-        body: [
-          "Noise sets the base terrain, cellular automata smooth it into natural coastlines, and flood fill finds and removes islands below a minimum size. Objects like trees and rocks are then placed in layers on top. A 10,000-word research survey of procedural generation methods set the algorithm choices.",
-        ],
-        shots: [
-          { src: "/img/mapgen/map-a.jpg", alt: "Generated island map", caption: "Base terrain after smoothing." },
-          { src: "/img/mapgen/map-d.jpg", alt: "Generated island map with objects", caption: "With object layers placed." },
-          { src: "/img/mapgen/editor.jpg", alt: "Unity editor with generator controls", caption: "Live controls in the Unity editor.", wide: true },
-        ],
-      },
-    ],
-    link: { label: "Source and thesis on GitHub", href: "https://github.com/richalex00/Procedural-Content-Generation" },
   },
 ];
 
