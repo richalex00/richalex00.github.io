@@ -55,6 +55,7 @@ const contacts = [
     <p>Before design, I was an engineer. Click a row for the details.</p>
 
     <div class="log">
+      <h2 class="log-head">Work</h2>
       {experience.map((j) => (
         <details>
           <summary><img src={j.logo} alt="" /><span class="role"><b>{j.title}</b>, {j.company}</span><span class="when">{years(j.dates)}</span></summary>
@@ -64,6 +65,7 @@ const contacts = [
           </div>
         </details>
       ))}
+      <h2 class="log-head">Education</h2>
       {education.map((e) => (
         <details>
           <summary><img src={e.logo} alt="" /><span class="role"><b>{e.degree}</b></span><span class="when">{years(e.dates)}</span></summary>
@@ -142,7 +144,9 @@ const contacts = [
   .tile .label span { color: var(--muted); display: block; }
 
   /* Experience + education log */
-  .log { margin: 8px 0 44px; border-top: 2px solid var(--ink); }
+  .log { margin: 8px 0 44px; }
+  .log-head { font: 500 20px/1 var(--pixel); color: var(--pine); margin: 36px 0 0; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
+  .log-head:first-child { margin-top: 0; }
   .log details { border-bottom: 1px dashed var(--contour); }
   .log summary { list-style: none; cursor: pointer; padding: 12px 0; display: grid; grid-template-columns: 22px 1fr auto; gap: 12px; align-items: center; }
   .log summary::-webkit-details-marker { display: none; }
