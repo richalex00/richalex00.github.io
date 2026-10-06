@@ -2,7 +2,7 @@
 // The StuddyBuddy logo with a live mascot: the lettering is the original PNG
 // (mascot painted out), and the mascot is the app's vector "boba" mascot laid
 // exactly over where it sat (scale 1.769, same star and shadow positions).
-// Hovering the parent tile plays it: a bob, a wink, and the star spinning.
+// Hovering the parent tile plays it: a bob and a star spin, then a wink.
 ---
 <div class="sb-logo" role="img" aria-label="StuddyBuddy logo">
   <img src="/img/studdybuddy/logo-text.png" alt="" />
@@ -39,44 +39,44 @@
   .sb-logo .sb-body { transform-origin: 50% 100%; }
   .sb-logo .sb-wink { opacity: 0; }
 
-  /* One 3.2s cycle: ~1.3s of action (two quick hops, a wink, one star turn),
-     then ~1.9s of rest before it repeats. Each keyframe carries its own easing
-     so hops lift off and land softly instead of moving at one constant curve. */
+  /* One 3.6s cycle: two quick hops while the star turns (~1.3s), a beat of
+     stillness, then the wink (~1.4-1.9s), then rest until it repeats. Each
+     keyframe carries its own easing so hops lift off and land softly. */
   .sb-logo svg * { will-change: transform, opacity; }
-  .sb-logo.play .sb-body { animation: sb-bob 3.2s infinite; }
-  .sb-logo.play .sb-shadow { animation: sb-shadow 3.2s infinite; }
-  .sb-logo.play .sb-eye { animation: sb-eye 3.2s infinite; }
-  .sb-logo.play .sb-wink { animation: sb-wink 3.2s infinite; }
-  .sb-logo.play .sb-star { animation: sb-star 3.2s infinite; }
+  .sb-logo.play .sb-body { animation: sb-bob 3.6s infinite; }
+  .sb-logo.play .sb-shadow { animation: sb-shadow 3.6s infinite; }
+  .sb-logo.play .sb-eye { animation: sb-eye 3.6s infinite; }
+  .sb-logo.play .sb-wink { animation: sb-wink 3.6s infinite; }
+  .sb-logo.play .sb-star { animation: sb-star 3.6s infinite; }
 
   @keyframes sb-bob {
     0% { transform: translateY(0) scale(1, 1); animation-timing-function: cubic-bezier(.3, 0, .5, 1); }
-    4% { transform: translateY(0) scale(1.05, 0.95); animation-timing-function: cubic-bezier(.2, .7, .4, 1); }
-    12% { transform: translateY(-8%) scale(0.98, 1.03); animation-timing-function: cubic-bezier(.5, 0, .8, .4); }
-    19% { transform: translateY(0) scale(1.04, 0.96); animation-timing-function: cubic-bezier(.2, .7, .4, 1); }
-    26% { transform: translateY(-4%) scale(0.99, 1.01); animation-timing-function: cubic-bezier(.5, 0, .8, .4); }
-    33% { transform: translateY(0) scale(1.02, 0.98); animation-timing-function: cubic-bezier(.3, 0, .3, 1); }
-    40%, 100% { transform: translateY(0) scale(1, 1); }
+    3.6% { transform: translateY(0) scale(1.05, 0.95); animation-timing-function: cubic-bezier(.2, .7, .4, 1); }
+    10.7% { transform: translateY(-8%) scale(0.98, 1.03); animation-timing-function: cubic-bezier(.5, 0, .8, .4); }
+    16.9% { transform: translateY(0) scale(1.04, 0.96); animation-timing-function: cubic-bezier(.2, .7, .4, 1); }
+    23.1% { transform: translateY(-4%) scale(0.99, 1.01); animation-timing-function: cubic-bezier(.5, 0, .8, .4); }
+    29.3% { transform: translateY(0) scale(1.02, 0.98); animation-timing-function: cubic-bezier(.3, 0, .3, 1); }
+    35.6%, 100% { transform: translateY(0) scale(1, 1); }
   }
   @keyframes sb-shadow {
-    0%, 4%, 19%, 33%, 40%, 100% { transform: scale(1); opacity: 1; animation-timing-function: ease-in-out; }
-    12% { transform: scale(0.78); opacity: 0.55; animation-timing-function: ease-in-out; }
-    26% { transform: scale(0.88); opacity: 0.75; animation-timing-function: ease-in-out; }
+    0%, 3.6%, 16.9%, 29.3%, 35.6%, 100% { transform: scale(1); opacity: 1; animation-timing-function: ease-in-out; }
+    10.7% { transform: scale(0.78); opacity: 0.55; animation-timing-function: ease-in-out; }
+    23.1% { transform: scale(0.88); opacity: 0.75; animation-timing-function: ease-in-out; }
   }
   @keyframes sb-eye {
-    0%, 15% { transform: scaleY(1); animation-timing-function: cubic-bezier(.5, 0, .7, .4); }
-    19%, 27% { transform: scaleY(0.08); animation-timing-function: cubic-bezier(.3, .6, .5, 1); }
-    32%, 100% { transform: scaleY(1); }
+    0%, 38.9% { transform: scaleY(1); animation-timing-function: cubic-bezier(.5, 0, .7, .4); }
+    42.5%, 49% { transform: scaleY(0.08); animation-timing-function: cubic-bezier(.3, .6, .5, 1); }
+    52.8%, 100% { transform: scaleY(1); }
   }
   @keyframes sb-wink {
-    0%, 16% { opacity: 0; }
-    19%, 27% { opacity: 1; }
-    30%, 100% { opacity: 0; }
+    0%, 39.7% { opacity: 0; }
+    42.5%, 49% { opacity: 1; }
+    51.8%, 100% { opacity: 0; }
   }
   @keyframes sb-star {
     0% { transform: rotate(0) scale(1); animation-timing-function: cubic-bezier(.4, 0, .2, 1); }
-    14% { transform: rotate(160deg) scale(1.3); animation-timing-function: cubic-bezier(.3, 0, .2, 1); }
-    38%, 100% { transform: rotate(360deg) scale(1); }
+    12.4% { transform: rotate(160deg) scale(1.3); animation-timing-function: cubic-bezier(.3, 0, .2, 1); }
+    33.8%, 100% { transform: rotate(360deg) scale(1); }
   }
   @media (prefers-reduced-motion: reduce) { .sb-logo.play * { animation: none !important; } }
 </style>
