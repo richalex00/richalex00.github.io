@@ -218,7 +218,7 @@ $("play").addEventListener("click", () => {
   playTimer = setInterval(() => {
     if (++i >= STAGES.length) return stopPlay();
     stage = STAGES[i]; run();
-  }, 1100);
+  }, 3200); // long enough to read each caption and see the change
 });
 
 $("new").addEventListener("click", newMap);
