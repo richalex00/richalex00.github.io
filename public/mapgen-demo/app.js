@@ -43,9 +43,13 @@ const $ = (id) => document.getElementById(id);
 const canvas = $("map"), ctx = canvas.getContext("2d");
 const staticLayer = document.createElement("canvas"), sctx = staticLayer.getContext("2d");
 
+// A map can be linked to: ?seed=735&stage=islands&grid=2&size=48
+const query = new URLSearchParams(location.search);
 let params = clone(DEFAULTS);
-let seed = randomSeed();
-let stage = "objects";
+if (query.has("grid")) params.gridSize = Math.min(3, Math.max(1, Number(query.get("grid")) || 1));
+if (query.has("size")) params.mapSize = Math.min(96, Math.max(32, Number(query.get("size")) || 64));
+let seed = query.has("seed") ? Number(query.get("seed")) >>> 0 : randomSeed();
+let stage = STAGES.includes(query.get("stage")) ? query.get("stage") : "objects";
 let result = null;
 let selected = 0; // selected island number, 0 = none
 let atlas, tiles, waterPatterns = [];

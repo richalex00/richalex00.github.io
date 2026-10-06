@@ -130,8 +130,8 @@ export const projects: Project[] = [
     place: "University of Limerick, BSc thesis (A1)",
     role: "Solo project",
     tools: "Unity, C#, Perlin noise, cellular automata",
-    cover: { src: "/img/mapgen/map-b.jpg", alt: "A generated island map with forests and water" },
-    fan: "/img/mapgen/map-c.jpg",
+    cover: { src: "/img/mapgen/cover.png", alt: "Close-up of a generated map: grassy islands with forests, rock fields and an inland lake, surrounded by sea" },
+    fan: "/img/mapgen/cover.png",
     demo: {
       href: "/mapgen-demo/",
       label: "Try the generator",
@@ -146,9 +146,19 @@ export const projects: Project[] = [
           "Noise sets the base terrain, cellular automata smooth it into natural coastlines, and flood fill finds and removes islands below a minimum size. Objects like trees and rocks are then placed in layers on top. A 10,000-word research survey of procedural generation methods set the algorithm choices.",
         ],
         shots: [
-          { src: "/img/mapgen/map-a.jpg", alt: "Generated island map", caption: "Base terrain after smoothing." },
-          { src: "/img/mapgen/map-d.jpg", alt: "Generated island map with objects", caption: "With object layers placed." },
-          { src: "/img/mapgen/editor.jpg", alt: "Unity editor with generator controls", caption: "Live controls in the Unity editor.", wide: true },
+          { src: "/img/mapgen/stage-1.png", alt: "Scattered single tiles of land and water", caption: "1. Every tile starts as random land or water." },
+          { src: "/img/mapgen/stage-2.png", alt: "The same area smoothed into islands with a lagoon", caption: "2. Cellular automata smooth the noise into coastlines." },
+          { src: "/img/mapgen/stage-3.png", alt: "The same islands with patches of rocky ground", caption: "3. A rock layer grows inland, and flood fill clears up tiny islands and lakes." },
+          { src: "/img/mapgen/stage-4.png", alt: "The same islands covered in trees and bushes, with rocks in the sea", caption: "4. Trees, bushes and sea rocks are placed on their layers." },
+        ],
+      },
+      {
+        heading: "At scale",
+        body: [
+          "The generator can also tile a grid of maps. Each one gets its own variation roll, so a 2×2 grid reads as four different regions rather than one repeated pattern.",
+        ],
+        shots: [
+          { src: "/img/mapgen/grid.jpg", alt: "A large map made of four regions with different amounts of land", caption: "A 2×2 grid of 48×48 maps.", wide: true },
         ],
       },
     ],
