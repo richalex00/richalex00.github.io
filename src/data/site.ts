@@ -38,6 +38,7 @@ export type Project = {
   link?: { label: string; href: string };
   demo?: { href: string; label: string; note: string }; // opens in a window over the case study
   tile?: { src: string; bg: string }; // homepage tile image shown whole on a solid colour, instead of the cover
+  tileVideo?: { src: string; poster: string; bg: string }; // homepage tile animation, played on hover
 };
 
 // Order = priority. First is the lead in the grid and the top card in the fan.
@@ -96,6 +97,7 @@ export const projects: Project[] = [
     tools: "Figma, business modelling, pitch",
     cover: { src: "/img/vigil/slide-02.jpg", alt: "Vigil title slide with the growth-ring mark" },
     fan: "/img/vigil/icon.png",
+    tileVideo: { src: "/img/vigil/mark.mp4", poster: "/img/vigil/mark-end.jpg", bg: "#111F1B" },
     fanContain: true,
     tileDark: true,
     intro:
