@@ -1,6 +1,5 @@
 import { generate, DEFAULTS, STAGES } from "./gen.js";
-
-const T = 16; // tile size in the source tileset, in pixels
+import { T, loadAssets, drawLayers, drawWater } from "./render.js";
 
 // Controls mirror the Unity inspector (MapGenerator + ObjectGenerator), with
 // the same ranges. `get`/`set` map each slider onto the params object.
@@ -52,7 +51,7 @@ let seed = query.has("seed") ? Number(query.get("seed")) >>> 0 : randomSeed();
 let stage = STAGES.includes(query.get("stage")) ? query.get("stage") : "objects";
 let result = null;
 let selected = 0; // selected island number, 0 = none
-let atlas, tiles, waterPatterns = [];
+let assets;
 
 function randomSeed() { return (Math.random() * 2 ** 31) >>> 0; }
 
@@ -84,62 +83,17 @@ function buildControls() {
 }
 
 // ---------- Rendering ----------
-// Screen layout follows the Unity scene: map x is printed at world -x, so the
-// map is mirrored left-right on screen; y runs top to bottom.
-function landSprite(map, x, y) {
-  const W = map.length, H = map[0].length;
-  const isLand = (mx, my) => mx >= 0 && mx < W && my >= 0 && my < H && map[mx][my] >= 1;
-  // RuleTile: first rule whose neighbours all match wins. Rule offsets are in
-  // Unity world space (y up); world dx is map -dx, world dy is map -dy.
-  for (const rule of tiles.land.rules) {
-    let ok = true;
-    for (const [dx, dy, n] of rule.neighbors) {
-      const land = isLand(x - dx, y - dy);
-      if ((n === 1 && !land) || (n === 2 && land)) { ok = false; break; }
-    }
-    if (ok) return rule.sprites[0];
-  }
-  return tiles.land.default;
-}
-
-function blit(c, key, px, py) {
-  const f = tiles.frames[key];
-  c.drawImage(atlas, f.x, f.y, f.w, f.h, px, py, f.w, f.h);
-}
-
 function drawStatic() {
-  const { map, objects, islandInfo } = result;
-  const W = map.length, H = map[0].length;
+  const W = result.map.length;
   staticLayer.width = canvas.width = W * T;
-  staticLayer.height = canvas.height = H * T;
-  sctx.clearRect(0, 0, staticLayer.width, staticLayer.height);
-  const col = (x) => W - 1 - x;
-
-  for (let x = 0; x < W; x++)
-    for (let y = 0; y < H; y++)
-      if (map[x][y] >= 1) blit(sctx, landSprite(map, x, y), col(x) * T, y * T);
-  for (let x = 0; x < W; x++)
-    for (let y = 0; y < H; y++)
-      if (map[x][y] >= 2) blit(sctx, tiles.rock, col(x) * T, y * T);
-
-  // Objects sit at tile corners in the original (sprite pivot centred on the
-  // integer world position), so they are offset half a tile from the grid.
-  const sprite = Object.fromEntries(Object.entries(tiles.objects).map(([k, v]) => [k, v.sprite]));
-  for (const o of objects) blit(sctx, sprite[o.name], (col(o.x) - 0.5) * T, (o.y + 0.5) * T);
-
-  if (selected && islandInfo) {
-    sctx.fillStyle = "rgba(164, 67, 118, 0.45)";
-    for (let x = 0; x < W; x++)
-      for (let y = 0; y < H; y++)
-        if (islandInfo[x][y] === selected) sctx.fillRect(col(x) * T, y * T, T, T);
-  }
+  staticLayer.height = canvas.height = W * T;
+  drawLayers(sctx, assets, result, { selected });
   fitCanvas();
 }
 
 let frame = 0;
 function drawFrame() {
-  ctx.fillStyle = waterPatterns[frame];
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  drawWater(ctx, assets, frame, canvas.width, canvas.height);
   ctx.drawImage(staticLayer, 0, 0);
 }
 
@@ -243,23 +197,12 @@ new ResizeObserver(fitCanvas).observe($("view"));
 
 // ---------- Boot ----------
 async function boot() {
-  const [img, data] = await Promise.all([
-    new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = "atlas.png"; }),
-    fetch("tiles.json").then((r) => r.json()),
-  ]);
-  atlas = img; tiles = data;
-  // One pattern per water animation frame; the whole sea is filled at once.
-  waterPatterns = tiles.water.frames.map((key) => {
-    const f = tiles.frames[key], c = document.createElement("canvas");
-    c.width = f.w; c.height = f.h;
-    c.getContext("2d").drawImage(atlas, f.x, f.y, f.w, f.h, 0, 0, f.w, f.h);
-    return ctx.createPattern(c, "repeat");
-  });
+  assets = await loadAssets();
   buildControls();
   run();
   // AnimatedTile speed 1.5 in the original: 1.5 frames per second
   if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    setInterval(() => { frame = (frame + 1) % waterPatterns.length; drawFrame(); }, 1000 / tiles.water.speed);
+    setInterval(() => { frame = (frame + 1) % assets.water.length; drawFrame(); }, 1000 / assets.tiles.water.speed);
   }
 }
 boot();

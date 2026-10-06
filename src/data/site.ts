@@ -132,6 +132,7 @@ export const projects: Project[] = [
     tools: "Unity, C#, Perlin noise, cellular automata",
     cover: { src: "/img/mapgen/cover.png", alt: "Close-up of a generated map: grassy islands with forests, rock fields and an inland lake, surrounded by sea" },
     fan: "/img/mapgen/cover.png",
+    tileVideo: { src: "/img/mapgen/generate.mp4", poster: "/img/mapgen/generate-end.png", bg: "#2e86c1" },
     demo: {
       href: "/mapgen-demo/",
       label: "Try the generator",
