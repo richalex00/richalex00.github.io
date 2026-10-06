@@ -24,7 +24,7 @@ const group = (shots: Shot[] = []) => {
   <div class="bar">
     <a class="back" href="/" data-trans>
       <svg viewBox="0 0 8 8" fill="currentColor" aria-hidden="true"><rect x="0" y="3" width="8" height="2"/><rect x="1" y="2" width="1" height="4"/><rect x="2" y="1" width="1" height="6"/><rect x="3" y="0" width="1" height="8"/></svg>
-      Index
+      World map
     </a>
   </div>
 
@@ -61,7 +61,7 @@ const group = (shots: Shot[] = []) => {
     {p.link && <p><a href={p.link.href}>{p.link.label}</a></p>}
 
     <nav class="next">
-      <a href="/" data-trans>Back to index</a>
+      <a href="/" data-trans>Back to the world map</a>
       <a href={`/work/${next.slug}/`} data-trans>Next: {next.title}</a>
     </nav>
   </main>
