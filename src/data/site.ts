@@ -37,6 +37,7 @@ export type Project = {
   sections: Section[];
   link?: { label: string; href: string };
   demo?: { href: string; label: string; note: string }; // opens in a window over the case study
+  tile?: { src: string; bg: string }; // homepage tile image shown whole on a solid colour, instead of the cover
 };
 
 // Order = priority. First is the lead in the grid and the top card in the fan.
@@ -51,6 +52,7 @@ export const projects: Project[] = [
     tools: "React, TypeScript, Supabase, Cloudflare, Figma",
     cover: { src: "/img/studdybuddy/calendar.jpg", alt: "StuddyBuddy week view with AI-proposed study blocks and the AI chat panel" },
     fan: "/img/studdybuddy/calendar.jpg",
+    tile: { src: "/img/studdybuddy/logo.png", bg: "#F5FAF4" },
     demo: {
       href: "/studdybuddy-demo/",
       label: "Try the live demo",
