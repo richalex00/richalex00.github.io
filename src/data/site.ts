@@ -37,7 +37,7 @@ export type Project = {
   sections: Section[];
   link?: { label: string; href: string };
   demo?: { href: string; label: string; note: string }; // opens in a window over the case study
-  tile?: { src: string; bg: string }; // homepage tile image shown whole on a solid colour, instead of the cover
+  tile?: { src: string; bg: string; animated?: boolean }; // homepage tile image shown whole on a solid colour, instead of the cover; animated = live logo component
   tileVideo?: { src: string; poster: string; bg: string }; // homepage tile animation, played on hover
 };
 
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     tools: "React, TypeScript, Supabase, Cloudflare, Figma",
     cover: { src: "/img/studdybuddy/calendar.jpg", alt: "StuddyBuddy week view with AI-proposed study blocks and the AI chat panel" },
     fan: "/img/studdybuddy/calendar.jpg",
-    tile: { src: "/img/studdybuddy/logo.png", bg: "#F5FAF4" },
+    tile: { src: "/img/studdybuddy/logo.png", bg: "#F5FAF4", animated: true },
     demo: {
       href: "/studdybuddy-demo/",
       label: "Try the live demo",

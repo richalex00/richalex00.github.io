@@ -1,0 +1,72 @@
+---
+// The StuddyBuddy logo with a live mascot: the lettering is the original PNG
+// (mascot painted out), and the mascot is the app's vector "boba" mascot laid
+// exactly over where it sat (scale 1.769, same star and shadow positions).
+// Hovering the parent tile plays it: a bob, a wink, and the star spinning.
+---
+<div class="sb-logo" role="img" aria-label="StuddyBuddy logo">
+  <img src="/img/studdybuddy/logo-text.png" alt="" />
+  <svg viewBox="0 0 100 100" aria-hidden="true">
+    <ellipse class="sb-shadow" cx="50" cy="92" rx="28" ry="4" fill="rgba(0,0,0,0.12)" />
+    <g class="sb-body">
+      <path d="M22 38 Q 18 18 32 22 L 30 38 Z" fill="#96E6A0" stroke="#101A14" stroke-width="2.5" stroke-linejoin="round" />
+      <path d="M78 38 Q 82 18 68 22 L 70 38 Z" fill="#96E6A0" stroke="#101A14" stroke-width="2.5" stroke-linejoin="round" />
+      <path d="M50 16 C 76 16 86 36 86 56 C 86 76 70 88 50 88 C 30 88 14 76 14 56 C 14 36 24 16 50 16 Z" fill="#96E6A0" stroke="#101A14" stroke-width="3" />
+      <ellipse cx="28" cy="60" rx="6" ry="3.5" fill="#FF9DBE" opacity="0.7" />
+      <ellipse cx="72" cy="60" rx="6" ry="3.5" fill="#FF9DBE" opacity="0.7" />
+      <g>
+        <ellipse cx="38" cy="52" rx="4" ry="5" fill="#101A14" />
+        <ellipse cx="39.5" cy="50" rx="1.4" ry="1.7" fill="#fff" />
+      </g>
+      <g class="sb-eye">
+        <ellipse cx="62" cy="52" rx="4" ry="5" fill="#101A14" />
+        <ellipse cx="63.5" cy="50" rx="1.4" ry="1.7" fill="#fff" />
+      </g>
+      <path class="sb-wink" d="M57.5 52.5 Q 62 49 66.5 52.5" stroke="#101A14" stroke-width="2.6" fill="none" stroke-linecap="round" />
+      <path d="M40 68 Q 50 76 60 68" stroke="#101A14" stroke-width="3" fill="none" stroke-linecap="round" />
+      <g transform="translate(82 18)">
+        <path class="sb-star" d="M0 -6 L 1.5 -1.5 L 6 0 L 1.5 1.5 L 0 6 L -1.5 1.5 L -6 0 L -1.5 -1.5 Z" fill="#FFD23F" stroke="#101A14" stroke-width="1.5" stroke-linejoin="round" />
+      </g>
+    </g>
+  </svg>
+</div>
+
+<style is:global>
+  .sb-logo { position: relative; width: 72%; aspect-ratio: 493 / 180; }
+  .sb-logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+  .sb-logo svg { position: absolute; left: 63.98%; top: 0.92%; width: 35.88%; overflow: visible; }
+  .sb-logo .sb-body, .sb-logo .sb-shadow, .sb-logo .sb-eye, .sb-logo .sb-star { transform-box: fill-box; transform-origin: center; }
+  .sb-logo .sb-body { transform-origin: 50% 100%; }
+  .sb-logo .sb-wink { opacity: 0; }
+
+  /* One 2.4s cycle: two little bobs, a wink in the middle, one full star turn. */
+  .sb-logo.play .sb-body { animation: sb-bob 2.4s ease-in-out infinite; }
+  .sb-logo.play .sb-shadow { animation: sb-shadow 2.4s ease-in-out infinite; }
+  .sb-logo.play .sb-eye { animation: sb-eye 2.4s ease-in-out infinite; }
+  .sb-logo.play .sb-wink { animation: sb-wink 2.4s ease-in-out infinite; }
+  .sb-logo.play .sb-star { animation: sb-star 2.4s cubic-bezier(.5, 0, .3, 1) infinite; }
+
+  @keyframes sb-bob {
+    0%, 50%, 100% { transform: translateY(0) scale(1, 1); }
+    8%, 58% { transform: translateY(0) scale(1.04, 0.96); }
+    25%, 75% { transform: translateY(-7%) scale(0.98, 1.03); }
+  }
+  @keyframes sb-shadow {
+    0%, 50%, 100% { transform: scale(1); opacity: 1; }
+    25%, 75% { transform: scale(0.8); opacity: 0.6; }
+  }
+  @keyframes sb-eye {
+    0%, 38%, 62%, 100% { transform: scaleY(1); }
+    42%, 58% { transform: scaleY(0); }
+  }
+  @keyframes sb-wink {
+    0%, 40%, 60%, 100% { opacity: 0; }
+    42%, 58% { opacity: 1; }
+  }
+  @keyframes sb-star {
+    0% { transform: rotate(0) scale(1); }
+    50% { transform: rotate(200deg) scale(1.35); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce) { .sb-logo.play * { animation: none !important; } }
+</style>
