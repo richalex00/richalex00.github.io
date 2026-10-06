@@ -1,4 +1,4 @@
-// Home page: Stockholm clock, pixel avatar, marble statue and the pixel contour map behind the name.
+// Home page: Stockholm clock, pixel avatar and marble statue. (The contour map is topo.js.)
 (function () {
 /* ---------- Clock ---------- */
 function tick() {
@@ -59,29 +59,4 @@ av.src = "/img/me.jpg";
 })();
 
 
-/* ---------- Pixel topo map: contour lines at low resolution, scaled up ---------- */
-// wait for the pixel font so the gap around the name is measured correctly
-document.fonts.ready.then(function topo() {
-  const cv = document.getElementById("topo"), hero = cv.parentElement, h1 = hero.querySelector("h1");
-  const CELL = 5;
-  const W = Math.ceil(hero.clientWidth / CELL), H = Math.ceil(hero.clientHeight / CELL);
-  cv.width = W; cv.height = H;
-  const x = cv.getContext("2d");
-  const hills = Array.from({ length: 7 }, () => ({ x: Math.random() * W, y: Math.random() * H, r: 18 + Math.random() * 40, a: Math.random() < 0.3 ? -1 : 1 }));
-  const f = (i, j) => hills.reduce((s, k) => s + k.a * Math.exp(-((i - k.x) ** 2 + (j - k.y) ** 2) / (2 * k.r * k.r)), 0);
-  const field = []; for (let j = 0; j < H; j++) { field[j] = []; for (let i = 0; i < W; i++) field[j][i] = f(i, j); }
-  const STEP = 0.17, band = v => Math.floor(v / STEP);
-  // keep the name clear, like a label on a real map
-  const hr = hero.getBoundingClientRect(), tr = h1.getBoundingClientRect(), pad = 14;
-  const cx0 = (tr.left - hr.left - pad) / CELL, cx1 = (tr.right - hr.left + pad) / CELL;
-  const cy0 = (tr.top - hr.top - pad) / CELL, cy1 = (tr.bottom - hr.top + pad) / CELL;
-  for (let j = 0; j < H - 1; j++) for (let i = 0; i < W - 1; i++) {
-    const b = band(field[j][i]);
-    if (b === band(field[j][i + 1]) && b === band(field[j + 1][i])) continue;
-    if (i > cx0 && i < cx1 && j > cy0 && j < cy1) continue;
-    const index = ((b % 5) + 5) % 5 === 0;
-    x.fillStyle = index ? "rgba(79,125,115,0.42)" : "rgba(79,125,115,0.18)";
-    x.fillRect(i, j, 1, 1);
-  }
-});
 })();

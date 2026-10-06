@@ -55,6 +55,11 @@ const pageTitle = title ? `${title} | ${person.name}` : `${person.name}, ${perso
   ::selection { background: var(--pine); color: var(--paper); }
   .col { max-width: 560px; margin: 0 auto; padding: 8px 16px 0; position: relative; }
 
+  /* Header with a pixel contour map behind the title (drawn by /js/topo.js) */
+  .hero { position: relative; display: grid; place-items: center; align-content: center; overflow: hidden; }
+  .hero > canvas[data-topo] { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated;
+    -webkit-mask-image: linear-gradient(#000 60%, transparent); mask-image: linear-gradient(#000 60%, transparent); }
+
   .dither {
     margin-top: 90px; height: 140px;
     background-image: radial-gradient(var(--contour) 1px, transparent 1.3px);
