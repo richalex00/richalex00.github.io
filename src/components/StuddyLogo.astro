@@ -13,17 +13,17 @@
       <path d="M78 38 Q 82 18 68 22 L 70 38 Z" fill="#96E6A0" stroke="#101A14" stroke-width="2.5" stroke-linejoin="round" />
       <path d="M50 16 C 76 16 86 36 86 56 C 86 76 70 88 50 88 C 30 88 14 76 14 56 C 14 36 24 16 50 16 Z" fill="#96E6A0" stroke="#101A14" stroke-width="3" />
       <ellipse cx="28" cy="60" rx="6" ry="3.5" fill="#FF9DBE" opacity="0.7" />
-      <ellipse cx="72" cy="60" rx="6" ry="3.5" fill="#FF9DBE" opacity="0.7" />
-      <g>
+      <ellipse class="sb-blush-r" cx="72" cy="60" rx="6" ry="3.5" fill="#FF9DBE" opacity="0.7" />
+      <g class="sb-eye-l">
         <ellipse cx="38" cy="52" rx="4" ry="5" fill="#101A14" />
         <ellipse cx="39.5" cy="50" rx="1.4" ry="1.7" fill="#fff" />
       </g>
       <g class="sb-eye">
         <ellipse cx="62" cy="52" rx="4" ry="5" fill="#101A14" />
-        <ellipse cx="63.5" cy="50" rx="1.4" ry="1.7" fill="#fff" />
+        <ellipse class="sb-glint" cx="63.5" cy="50" rx="1.4" ry="1.7" fill="#fff" />
       </g>
-      <path class="sb-wink" d="M57.5 52.5 Q 62 49 66.5 52.5" stroke="#101A14" stroke-width="2.6" fill="none" stroke-linecap="round" />
-      <path d="M40 68 Q 50 76 60 68" stroke="#101A14" stroke-width="3" fill="none" stroke-linecap="round" />
+      <path class="sb-wink" d="M57 53.5 Q 62 47.5 67 53.5" stroke="#101A14" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path class="sb-mouth" d="M40 68 Q 50 76 60 68" stroke="#101A14" stroke-width="3" fill="none" stroke-linecap="round" />
       <g transform="translate(82 18)">
         <path class="sb-star" d="M0 -6 L 1.5 -1.5 L 6 0 L 1.5 1.5 L 0 6 L -1.5 1.5 L -6 0 L -1.5 -1.5 Z" fill="#FFD23F" stroke="#101A14" stroke-width="1.5" stroke-linejoin="round" />
       </g>
@@ -35,9 +35,10 @@
   .sb-logo { position: relative; width: 72%; aspect-ratio: 493 / 180; }
   .sb-logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
   .sb-logo svg { position: absolute; left: 63.98%; top: 0.92%; width: 35.88%; overflow: visible; }
-  .sb-logo .sb-body, .sb-logo .sb-shadow, .sb-logo .sb-eye, .sb-logo .sb-star { transform-box: fill-box; transform-origin: center; }
+  .sb-logo .sb-body, .sb-logo .sb-shadow, .sb-logo .sb-eye, .sb-logo .sb-eye-l, .sb-logo .sb-wink,
+  .sb-logo .sb-blush-r, .sb-logo .sb-mouth, .sb-logo .sb-star { transform-box: fill-box; transform-origin: center; }
   .sb-logo .sb-body { transform-origin: 50% 100%; }
-  .sb-logo .sb-wink { opacity: 0; }
+  .sb-logo .sb-wink { opacity: 0; transform: rotate(-14deg) scale(0.7, 0.6); }
 
   /* One 3.6s cycle: two quick hops while the star turns (~1.3s), a beat of
      stillness, then the wink (~1.4-1.9s), then rest until it repeats. Each
@@ -48,6 +49,10 @@
   .sb-logo.play .sb-eye { animation: sb-eye 3.6s infinite; }
   .sb-logo.play .sb-wink { animation: sb-wink 3.6s infinite; }
   .sb-logo.play .sb-star { animation: sb-star 3.6s infinite; }
+  .sb-logo.play .sb-eye-l { animation: sb-eye-l 3.6s infinite; }
+  .sb-logo.play .sb-glint { animation: sb-glint 3.6s infinite; }
+  .sb-logo.play .sb-blush-r { animation: sb-blush 3.6s infinite; }
+  .sb-logo.play .sb-mouth { animation: sb-mouth 3.6s infinite; }
 
   @keyframes sb-bob {
     0% { transform: translateY(0) scale(1, 1); animation-timing-function: cubic-bezier(.3, 0, .5, 1); }
@@ -63,15 +68,46 @@
     10.7% { transform: scale(0.78); opacity: 0.55; animation-timing-function: ease-in-out; }
     23.1% { transform: scale(0.88); opacity: 0.75; animation-timing-function: ease-in-out; }
   }
+  /* The wink (~1.4-1.95s), cartoon style: the right eye squashes to a thin
+     line, swaps at that instant for the closed arc (tilted up to the right),
+     which overshoots into a little squeeze and settles; opening reverses it.
+     Both stay fully opaque, so there's never a ghosted half-eye. Meanwhile the
+     cheek lifts, the mouth tips up on that side and the other eye narrows. */
   @keyframes sb-eye {
-    0%, 38.9% { transform: scaleY(1); animation-timing-function: cubic-bezier(.5, 0, .7, .4); }
-    42.5%, 49% { transform: scaleY(0.08); animation-timing-function: cubic-bezier(.3, .6, .5, 1); }
-    52.8%, 100% { transform: scaleY(1); }
+    0%, 38.9% { transform: translateY(0) scaleY(1); opacity: 1; animation-timing-function: cubic-bezier(.55, 0, .8, .4); }
+    41.4% { transform: translateY(-14%) scaleY(0.12); opacity: 1; }
+    41.5%, 49.3% { transform: translateY(-14%) scaleY(0.12); opacity: 0; }
+    49.4% { transform: translateY(-14%) scaleY(0.12); opacity: 1; animation-timing-function: cubic-bezier(.2, .6, .35, 1); }
+    53.5%, 100% { transform: translateY(0) scaleY(1); opacity: 1; }
+  }
+  /* The eye's highlight would show as a gap in the squashed line; fade it first. */
+  @keyframes sb-glint {
+    0%, 38.9% { opacity: 1; }
+    40.4%, 51.5% { opacity: 0; }
+    53.5%, 100% { opacity: 1; }
   }
   @keyframes sb-wink {
-    0%, 39.7% { opacity: 0; }
-    42.5%, 49% { opacity: 1; }
-    51.8%, 100% { opacity: 0; }
+    0%, 41.4% { opacity: 0; transform: rotate(-14deg) scale(1.1, 0.35); }
+    41.5% { opacity: 1; transform: rotate(-14deg) scale(1.1, 0.35); animation-timing-function: cubic-bezier(.2, .7, .4, 1); }
+    43.4% { opacity: 1; transform: rotate(-14deg) scale(0.94, 1.18); animation-timing-function: ease-in-out; }
+    45%, 47.8% { opacity: 1; transform: rotate(-14deg) scale(1, 1); animation-timing-function: cubic-bezier(.5, 0, .8, .5); }
+    49.3% { opacity: 1; transform: rotate(-14deg) scale(1.1, 0.35); }
+    49.4%, 100% { opacity: 0; transform: rotate(-14deg) scale(1.1, 0.35); }
+  }
+  @keyframes sb-eye-l {
+    0%, 39% { transform: scaleY(1); animation-timing-function: ease-in-out; }
+    43%, 48.5% { transform: scaleY(0.82); animation-timing-function: ease-in-out; }
+    53%, 100% { transform: scaleY(1); }
+  }
+  @keyframes sb-blush {
+    0%, 39% { transform: translateY(0) scale(1); animation-timing-function: ease-in-out; }
+    43%, 48.5% { transform: translateY(-30%) scale(1.15, 1.1); animation-timing-function: ease-in-out; }
+    53.5%, 100% { transform: translateY(0) scale(1); }
+  }
+  @keyframes sb-mouth {
+    0%, 39% { transform: rotate(0); animation-timing-function: ease-in-out; }
+    43%, 48.5% { transform: rotate(-7deg) translateX(3%); animation-timing-function: ease-in-out; }
+    53.5%, 100% { transform: rotate(0); }
   }
   @keyframes sb-star {
     0% { transform: rotate(0) scale(1); animation-timing-function: cubic-bezier(.4, 0, .2, 1); }
