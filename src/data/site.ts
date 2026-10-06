@@ -60,8 +60,16 @@ export const projects: Project[] = [
       note: "StuddyBuddy isn't running publicly at the moment, because keeping the AI hosted costs more than it's worth between rounds of testing. This is the real app running on a frozen copy of my own KTH Canvas and timetable data. AI replies are scripted, and your changes reset when you reload.",
     },
     intro:
-      "Students can see their deadlines, but not when to start. StuddyBuddy connects to Canvas, plans the week with AI and gives every course its own tutor. I founded it out of an entrepreneurial challenge at the University of Twente and kept building it after the course ended.",
+      "Students can see their deadlines, but not when to start. StuddyBuddy connects to Canvas, plans the week with AI and gives every course its own tutor. I founded it through Novel-T's Entrepreneurial Experience at the University of Twente, pitched it to investors, and carried it on after the programme ended.",
     sections: [
+      {
+        heading: "From challenge to startup",
+        body: [
+          "StuddyBuddy began as our entry to Novel-T's Entrepreneurial Experience: three UTwente students, a problem we lived every week, and a working prototype built over one hackathon weekend.",
+          "As founder I set the vision and carried the pitch. We framed the problem, shaped a business model (freemium, with a €4.99 premium tier and university licensing later) and pitched it to investors at the end of the programme.",
+          "When the programme finished, I kept going. I moved the prototype onto a stack I control, connected it to real Canvas and timetable data, and demoed it at the KTH Lovable Buildathon in Stockholm on 1 September 2026.",
+        ],
+      },
       {
         heading: "The trust problem",
         body: [
@@ -93,9 +101,11 @@ export const projects: Project[] = [
         ],
       },
       {
-        heading: "Keeping the AI honest",
+        heading: "Building with AI",
         body: [
-          "Early versions left the language model to choose the times, with the rules written only into its prompt. I moved slot-finding into plain, tested code: the model now says what to schedule and roughly when, and the scheduler places each block around lectures, personal plans and the student's sleep hours. A proposal can't clash with a class or land at 3am, whatever the model asks for.",
+          "AI runs through the product: the planner drafts the week, and every course gets its own tutor that answers from that course's Canvas material.",
+          "It's also how I build. The first prototype came together on Lovable; I then moved it to React and Supabase on Cloudflare, working with Claude Code. I set the design and interaction rules and review every change before it ships.",
+          "Using AI well also means knowing where not to trust it. Early versions left the language model to choose the times, with the rules written only into its prompt. I moved slot-finding into plain, tested code: the model now says what to schedule and roughly when, and the scheduler places each block around lectures, personal plans and the student's sleep hours. A proposal can't clash with a class or land at 3am, whatever the model asks for.",
         ],
       },
       {
@@ -105,12 +115,6 @@ export const projects: Project[] = [
         ],
         shots: [
           { src: "/img/studdybuddy/groups-concept.jpg", alt: "Heatmap of a team's free hours across the week, with suggested meeting times outlined and a vote list", caption: "Concept: who's free this week, with suggested times outlined.", wide: true },
-        ],
-      },
-      {
-        heading: "Built and shipped",
-        body: [
-          "The first prototype was built on Lovable. I then moved it to React and Supabase on Cloudflare with an AI-assisted workflow in Claude Code, where I set the design and interaction rules and review every change. I demoed it at the KTH Lovable Buildathon on 1 September 2026.",
         ],
       },
     ],
