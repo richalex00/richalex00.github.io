@@ -1,0 +1,1 @@
+import{u as s,j as e,N as r}from"./index-DqWIn2Ia.js";function a(){const{user:t,loading:n}=s();return n?e.jsx("div",{className:"min-h-screen flex items-center justify-center text-muted-foreground",children:"Loading…"}):e.jsx(r,{to:t?"/dashboard":"/auth"})}export{a as component};

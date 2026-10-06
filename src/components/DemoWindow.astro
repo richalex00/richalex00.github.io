@@ -1,0 +1,109 @@
+---
+// A button that opens a live app demo in a pixel "window" over the page.
+// The iframe only loads on first open, so the case study stays light.
+interface Props { href: string; title: string; label: string; note?: string }
+const { href, title, label, note } = Astro.props;
+---
+<div class="demo">
+  <button class="demo-open" type="button" data-demo-open>
+    <svg viewBox="0 0 8 8" fill="currentColor" aria-hidden="true"><rect x="1" y="0" width="2" height="8"/><rect x="3" y="1" width="2" height="6"/><rect x="5" y="2" width="1" height="4"/><rect x="6" y="3" width="1" height="2"/></svg>
+    {label}
+  </button>
+  {note && <p class="demo-note">{note}</p>}
+
+  <dialog class="demo-win" aria-label={`${title}, live demo`}>
+    <div class="demo-bar">
+      <span class="demo-title">{title}<span class="demo-dim"> · live demo</span></span>
+      <a class="demo-tab" href={href} target="_blank" rel="noopener">Open in new tab</a>
+      <button class="demo-close" type="button" data-demo-close aria-label="Close demo">
+        <svg viewBox="0 0 8 8" fill="currentColor" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/><rect x="0" y="7" width="1" height="1"/></svg>
+      </button>
+    </div>
+    <div class="demo-body">
+      <p class="demo-loading">Loading {title}…</p>
+      <iframe data-src={href} title={`${title} demo`} loading="lazy"></iframe>
+    </div>
+  </dialog>
+</div>
+
+<script is:inline>
+  document.querySelectorAll(".demo").forEach((root) => {
+    const dlg = root.querySelector("dialog");
+    const frame = root.querySelector("iframe");
+    root.querySelector("[data-demo-open]").addEventListener("click", () => {
+      if (!frame.src) {
+        // "load" fires on the empty SPA shell; reveal once the app has drawn
+        // (same origin, so its DOM is readable), with a timeout as a fallback.
+        frame.addEventListener("load", () => {
+          const start = Date.now();
+          const check = () => {
+            let ready = false;
+            try { ready = !!frame.contentDocument.querySelector("main, h1"); } catch (e) { ready = true; }
+            if (ready || Date.now() - start > 6000) root.classList.add("loaded");
+            else setTimeout(check, 100);
+          };
+          check();
+        }, { once: true });
+        frame.src = frame.dataset.src;
+      }
+      dlg.showModal();
+      document.documentElement.classList.add("demo-lock");
+    });
+    root.querySelector("[data-demo-close]").addEventListener("click", () => dlg.close());
+    // A click on the backdrop lands on the dialog element itself.
+    dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener("close", () => document.documentElement.classList.remove("demo-lock"));
+  });
+</script>
+
+<style is:global>
+  .demo { margin: 8px 0 32px; text-align: center; }
+  .demo-open {
+    display: inline-flex; align-items: center; gap: 10px;
+    font: 700 14px/1 var(--mono); color: var(--paper); background: var(--pine);
+    border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+    padding: 13px 20px; cursor: pointer;
+    transition: transform 0.08s steps(2), box-shadow 0.08s steps(2);
+  }
+  .demo-open svg { width: 12px; height: 12px; shape-rendering: crispEdges; }
+  .demo-open:hover { background: var(--raspberry); }
+  .demo-open:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
+  .demo-note { font-size: 12px; line-height: 1.6; color: var(--muted); margin: 14px auto 0; max-width: 46ch; }
+
+  html.demo-lock { overflow: hidden; }
+  .demo-win {
+    padding: 0; border: 2px solid var(--ink); background: var(--paper);
+    box-shadow: 8px 8px 0 var(--ink);
+    width: min(1320px, calc(100vw - 48px)); height: min(860px, calc(100dvh - 48px));
+    max-width: none; max-height: none; overflow: hidden;
+  }
+  .demo-win[open] { display: flex; flex-direction: column; animation: demo-in 0.18s steps(4); }
+  .demo-win::backdrop { background: rgba(31, 77, 63, 0.55); backdrop-filter: blur(2px); }
+  @keyframes demo-in { from { transform: translateY(16px); opacity: 0; } }
+
+  .demo-bar {
+    display: flex; align-items: center; gap: 16px; flex: none;
+    background: var(--pine); color: var(--paper); padding: 8px 8px 8px 14px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .demo-title { font: 500 17px/1 var(--pixel); flex: 1; text-align: left; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .demo-dim { opacity: 0.65; }
+  .demo-tab { color: var(--paper); font-size: 12px; white-space: nowrap; }
+  .demo-tab:hover { color: #F2C9DD; }
+  .demo-close {
+    width: 30px; height: 30px; flex: none; display: grid; place-items: center; cursor: pointer;
+    background: var(--paper); color: var(--ink); border: 2px solid var(--ink);
+  }
+  .demo-close svg { width: 12px; height: 12px; shape-rendering: crispEdges; }
+  .demo-close:hover { background: var(--raspberry); color: var(--paper); }
+
+  .demo-body { position: relative; flex: 1; background: #F6FBF4; }
+  .demo-body iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; opacity: 0; transition: opacity 0.2s; }
+  .demo.loaded .demo-body iframe { opacity: 1; }
+  .demo-loading { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; font-size: 13px; color: var(--muted); }
+
+  @media (max-width: 700px) {
+    .demo-win { width: 100vw; height: 100dvh; border: 0; box-shadow: none; }
+    .demo-tab { display: none; }
+  }
+</style>

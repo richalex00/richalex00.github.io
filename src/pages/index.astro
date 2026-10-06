@@ -47,7 +47,7 @@ const contacts = [
       {projects.map((p, i) => (
         <a class={`tile${i === 0 ? " lead" : ""}${p.fanContain ? " contain" : ""}${p.tileDark ? " dark" : ""}`} href={`/work/${p.slug}/`} data-trans>
           <div class="frame"><img src={i === 0 ? p.cover.src : p.fan} alt={p.cover.alt} loading={i < 3 ? "eager" : "lazy"} /></div>
-          <div class="label"><b>{p.title}</b><span>{p.subtitle}</span></div>
+          <div class="label"><b>{p.title}</b>{p.demo && <em class="live">live demo</em>}<span>{p.subtitle}</span></div>
         </a>
       ))}
     </div>
@@ -142,6 +142,7 @@ const contacts = [
   .tile:nth-child(odd):hover .frame { transform: translate(-2px, -2px) rotate(1.5deg); }
   .tile .label { margin-top: 10px; font-size: 13px; line-height: 1.5; }
   .tile .label span { color: var(--muted); display: block; }
+  .tile .label .live { font: 700 10px/1 var(--mono); font-style: normal; text-transform: uppercase; letter-spacing: 0.06em; color: var(--paper); background: var(--raspberry); padding: 3px 6px; margin-left: 8px; vertical-align: 2px; }
 
   /* Experience + education log */
   .log { margin: 8px 0 44px; }

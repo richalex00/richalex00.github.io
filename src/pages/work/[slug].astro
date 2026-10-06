@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import DemoWindow from "../../components/DemoWindow.astro";
 import { projects, type Project, type Shot } from "../../data/site";
 
 export function getStaticPaths() {
@@ -37,6 +38,7 @@ const group = (shots: Shot[] = []) => {
       <dt>Tools</dt><dd>{p.tools}</dd>
     </dl>
     <p>{p.intro}</p>
+    {p.demo && <DemoWindow href={p.demo.href} title={p.title} label={p.demo.label} note={p.demo.note} />}
     <figure><img src={p.cover.src} alt={p.cover.alt} /></figure>
 
     {p.sections.map((s) => (

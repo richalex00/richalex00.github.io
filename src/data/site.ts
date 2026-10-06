@@ -36,6 +36,7 @@ export type Project = {
   intro: string;
   sections: Section[];
   link?: { label: string; href: string };
+  demo?: { href: string; label: string; note: string }; // opens in a window over the case study
 };
 
 // Order = priority. First is the lead in the grid and the top card in the fan.
@@ -50,8 +51,13 @@ export const projects: Project[] = [
     tools: "React, TypeScript, Supabase, Cloudflare, Figma",
     cover: { src: "/img/studdybuddy/calendar.jpg", alt: "StuddyBuddy week view with AI-proposed study blocks and the AI chat panel" },
     fan: "/img/studdybuddy/calendar.jpg",
+    demo: {
+      href: "/studdybuddy-demo/",
+      label: "Try the live demo",
+      note: "StuddyBuddy isn't running publicly at the moment, because keeping the AI hosted costs more than it's worth between rounds of testing. This is the real app running on a frozen copy of my own KTH Canvas and timetable data. AI replies are scripted, and your changes reset when you reload.",
+    },
     intro:
-      "Students can see their deadlines, but not when to start. StuddyBuddy connects to Canvas, plans the week with AI and gives every course its own tutor. I founded it out of an entrepreneurial challenge at the University of Twente and kept building it after the course ended. It is now heading into a closed beta.",
+      "Students can see their deadlines, but not when to start. StuddyBuddy connects to Canvas, plans the week with AI and gives every course its own tutor. I founded it out of an entrepreneurial challenge at the University of Twente and kept building it after the course ended.",
     sections: [
       {
         heading: "What students told us",

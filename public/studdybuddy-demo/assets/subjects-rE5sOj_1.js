@@ -1,0 +1,1 @@
+import{j as t,O as o}from"./index-DqWIn2Ia.js";import{R as r}from"./RequireAuth-CIgDo5qs.js";import"./queries-BDVyl93_.js";import"./createLucideIcon-D55N0iUr.js";import"./sparkles-D_v4LWS0.js";import"./chevron-right-xc7vRErP.js";const x=()=>t.jsx(r,{children:t.jsx(o,{})});export{x as component};

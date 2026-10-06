@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "demo:sync": "rm -rf public/studdybuddy-demo && cp -r ../studdybuddy-ai/dist/client public/studdybuddy-demo && rm public/studdybuddy-demo/_shell.html"
   },
   "dependencies": {
     "astro": "^7.3.5"
