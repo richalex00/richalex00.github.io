@@ -98,8 +98,8 @@ const contacts = [
     <div class="marble">
       <p>{person.lifting}</p>
       <figure>
-        <button class="statue-btn" aria-label="Show another statue"><canvas id="statue" role="img"></canvas></button>
-        <figcaption id="statue-cap">Head of an athlete</figcaption>
+        <button class="statue-btn" aria-label="Sisyphus carrying a computer uphill. Push him."><canvas id="statue"></canvas></button>
+        <figcaption>One must imagine the designer happy.</figcaption>
       </figure>
     </div>
 
@@ -219,8 +219,8 @@ const contacts = [
   .code div::before { counter-increment: line; content: counter(line); display: inline-block; width: 2ch; margin-right: 18px; color: #6E8079; text-align: right; }
   .k { color: #E58AB8; } .v { color: #9CCFC0; } .s { color: #E8D9A8; }
 
-  /* Marble statue */
-  .marble { display: grid; grid-template-columns: 1fr 168px; gap: 24px; align-items: center; margin: 8px 0 1.4em; }
+  /* Sisyphus (marble, 120px sprite at 2x; stacked under the text on phones) */
+  .marble { display: grid; grid-template-columns: 1fr 240px; gap: 24px; align-items: center; margin: 8px 0 1.4em; }
   .marble p { margin: 0; }
   .marble figure { margin: 0; }
   .marble canvas { width: 100%; height: auto; display: block; image-rendering: pixelated; }
@@ -238,6 +238,7 @@ const contacts = [
   @media (max-width: 420px) {
     .tiles { grid-template-columns: 1fr; }
     .icons { gap: 18px; }
-    .marble { grid-template-columns: 1fr 120px; gap: 16px; }
+    .marble { grid-template-columns: 1fr; gap: 16px; }
+    .marble figure { width: 240px; max-width: 100%; justify-self: center; }
   }
 </style>
