@@ -73,11 +73,13 @@ const group = (shots: Shot[] = []) => {
 </Base>
 
 <style is:global>
-  .bar { position: sticky; top: 0; display: flex; align-items: center; padding: 14px 16px; background: var(--paper); z-index: 2; }
-  .back { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); text-decoration: none; font-size: 13px; font-weight: 500; }
-  .back svg { width: 16px; height: 16px; shape-rendering: crispEdges; }
-  .back:hover { color: var(--raspberry-text); }
-  .case-hero { min-height: 220px; padding: 24px 16px 28px; }
+  /* Floating button over the contours, styled like the homepage clock; fixed so it stays reachable on long pages */
+  .bar { position: fixed; top: 16px; left: 16px; z-index: 5; }
+  .back { display: inline-flex; align-items: center; gap: 8px; font: 500 12px/1 var(--mono); color: var(--ink); text-decoration: none;
+    background: var(--paper); padding: 6px 8px; border: 2px solid var(--ink); }
+  .back svg { width: 10px; height: 10px; shape-rendering: crispEdges; }
+  .back:hover, .back:focus-visible { background: var(--pine); color: var(--paper); }
+  .case-hero { min-height: 240px; padding: 56px 16px 28px; }
   .case-hero h1, .case-hero .sub { position: relative; }
   .case-hero h1 { font: 500 clamp(36px, 7vw, 56px)/1.05 var(--pixel); color: var(--pine); margin: 0 0 8px; text-align: center; text-wrap: balance; max-width: 560px; }
   .case-hero .sub { text-align: center; font: italic 19px/1.4 var(--serif); color: var(--contour); margin: 0; max-width: 560px; }
