@@ -11,15 +11,14 @@ function tick() {
 tick(); setInterval(tick, 10000);
 
 /* ---------- Pixel avatar: the real photo, downsampled ---------- */
-// Cropped to head and shoulders (the photo is mostly cliffs and sea), so the
-// face spans enough of the 24x24 grid to be recognisable. Hover shows the full photo.
-const AVATAR_CROP = { x: 0.3, y: 0.275, size: 0.575 }; // fractions of the photo
+// The whole photo on a 32x32 grid: fine enough that the face reads at 76px,
+// coarse enough to stay pixel art. Hover shows the full photo.
 const av = new Image();
 av.onload = () => {
   const c = document.getElementById("avatar"), x = c.getContext("2d");
   const s = Math.min(av.width, av.height);
   x.imageSmoothingEnabled = true;
-  x.drawImage(av, AVATAR_CROP.x * s, AVATAR_CROP.y * s, AVATAR_CROP.size * s, AVATAR_CROP.size * s, 0, 0, c.width, c.height);
+  x.drawImage(av, (av.width - s) / 2, (av.height - s) / 2, s, s, 0, 0, c.width, c.height);
 };
 av.src = "/img/me.jpg";
 
