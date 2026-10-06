@@ -132,6 +132,11 @@ export const projects: Project[] = [
     tools: "Unity, C#, Perlin noise, cellular automata",
     cover: { src: "/img/mapgen/map-b.jpg", alt: "A generated island map with forests and water" },
     fan: "/img/mapgen/map-c.jpg",
+    demo: {
+      href: "/mapgen-demo/",
+      label: "Try the generator",
+      note: "A web port of the Unity tool: the same algorithm, tiles and controls. Drag a slider and the same map reshapes, press Space for a new one, or play through the five stages of generation.",
+    },
     intro:
       "My final-year project: a Unity tool that generates layered 2D terrain. It combines Perlin noise, cellular automata and flood fill, with live controls for map size, saturation, variation and minimum island size, plus saving and loading. It was graded A1.",
     sections: [

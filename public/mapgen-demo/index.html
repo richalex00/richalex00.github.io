@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Map Generator | Richard Alexander</title>
+  <meta name="description" content="Live demo of my procedural 2D map generator: random fill, cellular automata, flood fill and object layers, with the original controls." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Pixelify+Sans:wght@500&display=swap" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <section class="stage">
+      <div class="view" id="view">
+        <canvas id="map" aria-label="Generated map"></canvas>
+        <div class="tip" id="tip" hidden></div>
+      </div>
+      <div class="steps" role="group" aria-label="Generation stage">
+        <button class="play" id="play" type="button" title="Play the stages in order">▶ Play</button>
+        <ol id="steps">
+          <li><button type="button" data-stage="noise"><b>1</b> Noise</button></li>
+          <li><button type="button" data-stage="cellular"><b>2</b> Smooth</button></li>
+          <li><button type="button" data-stage="rocks"><b>3</b> Rocks</button></li>
+          <li><button type="button" data-stage="islands"><b>4</b> Islands</button></li>
+          <li><button type="button" data-stage="objects"><b>5</b> Objects</button></li>
+        </ol>
+      </div>
+      <p class="caption" id="caption"></p>
+    </section>
+
+    <aside class="panel">
+      <header>
+        <h1>Map Generator</h1>
+        <p>My BSc thesis tool, ported from Unity to the web. Drag a slider: the same map reshapes. <b>Space</b> rolls a new one; click land to inspect an island.</p>
+      </header>
+
+      <div class="actions">
+        <button class="primary" id="new" type="button">New map <kbd>Space</kbd></button>
+        <button id="save" type="button">Save PNG</button>
+        <button id="reset" type="button">Reset</button>
+      </div>
+      <div class="seed">seed <span id="seed"></span></div>
+
+      <form id="controls" autocomplete="off"></form>
+
+      <p class="status" id="status"></p>
+      <p class="credit">Tiles: <a href="https://opengameart.org/content/zelda-like-tilesets-and-sprites" target="_blank" rel="noopener">ArMM1998</a> (CC0). <a href="https://github.com/richalex00/Procedural-Content-Generation" target="_blank" rel="noopener">Unity source</a>.</p>
+    </aside>
+  </div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

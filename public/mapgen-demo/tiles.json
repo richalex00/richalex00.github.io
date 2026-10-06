@@ -1,0 +1,881 @@
+{
+ "frames": {
+  "Sprites/bushes/Assets_shadow_source.png#Assets_shadow_source_140": {
+   "x": 0,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_0": {
+   "x": 17,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_201": {
+   "x": 34,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_235": {
+   "x": 51,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_236": {
+   "x": 68,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_237": {
+   "x": 85,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_275": {
+   "x": 102,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_277": {
+   "x": 119,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_310": {
+   "x": 136,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_311": {
+   "x": 153,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_312": {
+   "x": 170,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_348": {
+   "x": 187,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_349": {
+   "x": 204,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_38": {
+   "x": 221,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_381": {
+   "x": 238,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_382": {
+   "x": 255,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_39": {
+   "x": 272,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_390": {
+   "x": 289,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_40": {
+   "x": 306,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_41": {
+   "x": 323,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_515": {
+   "x": 340,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_77": {
+   "x": 357,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_78": {
+   "x": 374,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_79": {
+   "x": 391,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  },
+  "Sprites/new graphics/Overworld.png#Overworld_80": {
+   "x": 408,
+   "y": 0,
+   "w": 16,
+   "h": 16,
+   "pivot": [
+    0.0,
+    0.0
+   ],
+   "align": 0
+  }
+ },
+ "land": {
+  "default": "Sprites/new graphics/Overworld.png#Overworld_0",
+  "rules": [
+   {
+    "sprites": [
+     "Sprites/new graphics/Overworld.png#Overworld_275"
+    ],
+    "neighbors": [
+     [
+      1,
+      0,
+      2
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      -1,
+      0,
+      1
+     ],
+     [
+      0,
+      -1,
+      1
+     ],
+     [
+      -1,
+      -1,
+      1
+     ],
+     [
+      -1,
+      1,
+      1
+     ]
+    ],
+    "transform": 0,
+    "output": 0
+   },
+   {
+    "sprites": [
+     "Sprites/new graphics/Overworld.png#Overworld_277"
+    ],
+    "neighbors": [
+     [
+      -1,
+      0,
+      2
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      0,
+      -1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ],
+     [
+      1,
+      -1,
+      1
+     ]
+    ],
+    "transform": 0,
+    "output": 0
+   },
+   {
+    "sprites": [
+     "Sprites/new graphics/Overworld.png#Overworld_236"
+    ],
+    "neighbors": [
+     [
+      0,
+      -1,
+      2
+     ],
+     [
+      -1,
+      0,
+      1
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ],
+     [
+      -1,
+      1,
+      1
+     ]
+    ],
+    "transform": 0,
+    "output": 0
+   },
+   {
+    "sprites": [
+     "Sprites/new graphics/Overworld.png#Overworld_349"
+    ],
+    "neighbors": [
+     [
+      -1,
+      0,
+      1
+     ],
+     [
+      0,
+      -1,
+      1
+     ],
+     [
+      1,
+      0,
+      2
+     ],
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      -1,
+      -1,
+      1
+     ],
+     [
+      1,
+      1,
+      2
+     ]
+    ],
+    "transform": 0,
+    "output": 0
+   },
+   {
+    "sprites": [
+     "Sprites/new graphics/Overworld.png#Overworld_348"
+    ],
+    "neighbors": [
+     [
+      -1,
+      0,
+      2
+     ],
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      0,
+      -1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ],
+     [
+      -1,
+      1,
+      2
+     ],
+     [
+      1,
+      -1,
+      1
+     ]
+    ],
+    "transform": 0,
+    "output": 0
+   },
+   {
+    "sprites": [
+     "Sprites/new graphics/Overworld.png#Overworld_381"
+    ],
+    "neighbors": [
+     [
+      -1,
+      0,
+      2
+     ],
+     [
+      -1,
+      -1,
+      2
+     ],
+     [
+      0,
+      -1,
+      2
+     ],
+     [
+      1,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      1
+     ]
+    ],
+    "transform": 0,
+    "output": 0
+   },
+   {
+    "sprites": [
+     "Sprites/new graphics/Overworld.png#Overworld_382"
+    ],
+    "neighbors": [
+     [
+      0,
+      -1,
+      2
+     ],
+     [
+      1,
+      -1,
+      2
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      1,
+      0,
+      2
+     ],
+     [
+      -1,
+      0,
+      1
+     ],
+     [
+      -1,
+      1,
+      1
+     ]
+    ],
+    "transform": 0,
+    "output": 0
+   },
+   {
+    "sprites": [
+     "Sprites/new graphics/Overworld.png#Overworld_311"
+    ],
+    "neighbors": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      -1,
+      0,
+      1
+     ],
+     [
+      -1,
+      -1,
+      1
+     ],
+     [
+      0,
+      -1,
+      1
+     ],
+     [
+      1,
+      -1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ]
+    ],
+    "transform": 0,
+    "output": 0
+   },
+   {
+    "sprites": [
+     "Sprites/new graphics/Overworld.png#Overworld_237"
+    ],
+    "neighbors": [
+     [
+      -1,
+      0,
+      1
+     ],
+     [
+      0,
+      -1,
+      1
+     ],
+     [
+      -1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ],
+     [
+      1,
+      -1,
+      1
+     ],
+     [
+      -1,
+      -1,
+      2
+     ]
+    ],
+    "transform": 0,
+    "output": 0
+   },
+   {
+    "sprites": [
+     "Sprites/new graphics/Overworld.png#Overworld_235"
+    ],
+    "neighbors": [
+     [
+      1,
+      -1,
+      2
+     ],
+     [
+      0,
+      -1,
+      1
+     ],
+     [
+      -1,
+      -1,
+      1
+     ],
+     [
+      -1,
+      0,
+      1
+     ],
+     [
+      -1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ]
+    ],
+    "transform": 0,
+    "output": 0
+   },
+   {
+    "sprites": [
+     "Sprites/new graphics/Overworld.png#Overworld_310"
+    ],
+    "neighbors": [
+     [
+      1,
+      1,
+      2
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      -1,
+      1,
+      1
+     ],
+     [
+      -1,
+      0,
+      1
+     ],
+     [
+      -1,
+      -1,
+      1
+     ],
+     [
+      0,
+      -1,
+      1
+     ],
+     [
+      1,
+      -1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ]
+    ],
+    "transform": 0,
+    "output": 0
+   },
+   {
+    "sprites": [
+     "Sprites/new graphics/Overworld.png#Overworld_312"
+    ],
+    "neighbors": [
+     [
+      -1,
+      1,
+      2
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ],
+     [
+      1,
+      -1,
+      1
+     ],
+     [
+      0,
+      -1,
+      1
+     ],
+     [
+      -1,
+      -1,
+      1
+     ],
+     [
+      -1,
+      0,
+      1
+     ]
+    ],
+    "transform": 0,
+    "output": 0
+   },
+   {
+    "sprites": [
+     "Sprites/new graphics/Overworld.png#Overworld_0"
+    ],
+    "neighbors": [
+     [
+      -1,
+      1,
+      1
+     ],
+     [
+      -1,
+      0,
+      1
+     ],
+     [
+      -1,
+      -1,
+      1
+     ],
+     [
+      0,
+      -1,
+      1
+     ],
+     [
+      1,
+      -1,
+      1
+     ],
+     [
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      1,
+      0,
+      1
+     ]
+    ],
+    "transform": 0,
+    "output": 0
+   }
+  ]
+ },
+ "water": {
+  "frames": [
+   "Sprites/new graphics/Overworld.png#Overworld_38",
+   "Sprites/new graphics/Overworld.png#Overworld_39",
+   "Sprites/new graphics/Overworld.png#Overworld_40",
+   "Sprites/new graphics/Overworld.png#Overworld_41",
+   "Sprites/new graphics/Overworld.png#Overworld_77",
+   "Sprites/new graphics/Overworld.png#Overworld_78",
+   "Sprites/new graphics/Overworld.png#Overworld_79",
+   "Sprites/new graphics/Overworld.png#Overworld_80"
+  ],
+  "speed": 1.5
+ },
+ "rock": "Sprites/new graphics/Overworld.png#Overworld_201",
+ "objects": {
+  "Tree": {
+   "sprite": "Sprites/new graphics/Overworld.png#Overworld_515",
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "order": 30
+  },
+  "Plant": {
+   "sprite": "Sprites/bushes/Assets_shadow_source.png#Assets_shadow_source_140",
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "order": 30
+  },
+  "WaterRock": {
+   "sprite": "Sprites/new graphics/Overworld.png#Overworld_390",
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "order": 30
+  }
+ }
+}
