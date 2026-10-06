@@ -51,8 +51,8 @@ export const projects: Project[] = [
     place: "Enschede and Stockholm",
     role: "Founder, product design, front end",
     tools: "React, TypeScript, Supabase, Cloudflare, Figma",
-    cover: { src: "/img/studdybuddy/calendar.jpg", alt: "StuddyBuddy week view with AI-proposed study blocks and the AI chat panel" },
-    fan: "/img/studdybuddy/calendar.jpg",
+    cover: { src: "/img/studdybuddy/dashboard-2026.jpg", alt: "StuddyBuddy dashboard: today's study path, focus and XP stats, an AI suggestion and upcoming deadlines" },
+    fan: "/img/studdybuddy/dashboard-2026.jpg",
     tile: { src: "/img/studdybuddy/logo.png", bg: "#F5FAF4", animated: true },
     demo: {
       href: "/studdybuddy-demo/",
@@ -63,20 +63,48 @@ export const projects: Project[] = [
       "Students can see their deadlines, but not when to start. StuddyBuddy connects to Canvas, plans the week with AI and gives every course its own tutor. I founded it out of an entrepreneurial challenge at the University of Twente and kept building it after the course ended.",
     sections: [
       {
+        heading: "The trust problem",
+        body: [
+          "Canvas tells students what's due, never when to start. StuddyBuddy's answer is an AI that plans the week, but an AI rewriting your calendar is a trust problem before it's a UI problem.",
+          "The first version asked for blind trust in two places. The dashboard offered one suggestion at a time, with a yes-or-dismiss choice and no reason given. The planner listed its changes with a single Accept or Reject for the whole batch, so a student who liked four changes out of five had to take all five or none.",
+        ],
+        shots: [
+          { src: "/img/studdybuddy/before-suggestion.png", alt: "Dark suggestion card with Yes, plan it and Dismiss buttons", caption: "Before: one suggestion, yes or dismiss." },
+          { src: "/img/studdybuddy/before-proposal.png", alt: "Proposed changes card listing three study blocks with a single Reject and Accept", caption: "Before: one Accept or Reject for every change at once." },
+        ],
+      },
+      {
         heading: "What students told us",
         body: [
-          "We ran 17 interviews and 3 observational studies with university students. The same thing kept coming up: they wanted help planning, but they did not trust an AI to rearrange their week without asking.",
-          "That shaped the core rule of the product. The AI proposes, the student decides.",
+          "With my course team at the University of Twente, I ran 7 interviews and 3 observational studies with students, then 10 more interviews to test the concept.",
+          "Two findings shaped the design. Our hypothesis that AI time estimates would reduce stress was not supported: most students distrusted them, and wanted to keep control or have the AI learn from them over time. And across the interviews the same point kept coming back: the product should take away mental effort, not take over the schedule.",
+          "That became the rule for the product. The AI proposes, the student decides.",
         ],
       },
       {
         heading: "Preview first, act inline",
         body: [
-          "The AI drafts the week as ghost blocks on the calendar. Each block can be accepted, moved or dismissed in place, so nothing lands in the schedule until the student says yes. When the AI moves or removes something, it explains why in the chat panel beside the calendar.",
+          "Instead of a list to approve, the AI's plan appears on the calendar itself, as dashed ghost blocks in the free slots around lectures. Each block is its own decision, made in place. When the AI wants to move or remove something already on the calendar, it explains why in the chat beside it.",
         ],
         shots: [
-          { src: "/img/studdybuddy/calendar.jpg", alt: "Calendar with proposed study blocks and the AI chat", caption: "The week view, with AI proposals and the chat panel.", wide: true },
-          { src: "/img/studdybuddy/dashboard.jpg", alt: "StuddyBuddy dashboard with courses and upcoming deadlines", caption: "The dashboard pulls courses and deadlines from Canvas.", wide: true },
+          { src: "/img/studdybuddy/flow-1-preview.jpg", alt: "Week calendar with three dashed ghost study blocks, and a bar reading 3 of 3 proposed slots selected", caption: "1. Asked to plan the week, the AI drafts three study blocks as ghosts. Nothing is saved yet.", wide: true },
+          { src: "/img/studdybuddy/flow-2-choose.jpg", alt: "The same calendar with one ghost block marked skipped, and the bar reading 2 of 3 selected", caption: "2. Tap a ghost to skip it. The bar keeps count, so accepting is no longer all-or-nothing.", wide: true },
+          { src: "/img/studdybuddy/flow-3-added.jpg", alt: "The calendar with the two accepted study blocks now solid", caption: "3. Only the ticked blocks land on the calendar.", wide: true },
+        ],
+      },
+      {
+        heading: "Keeping the AI honest",
+        body: [
+          "Early versions left the language model to choose the times, with the rules written only into its prompt. I moved slot-finding into plain, tested code: the model now says what to schedule and roughly when, and the scheduler places each block around lectures, personal plans and the student's sleep hours. A proposal can't clash with a class or land at 3am, whatever the model asks for.",
+        ],
+      },
+      {
+        heading: "Next: group scheduling",
+        body: [
+          "Group scheduling was the other pain point students confirmed, with 6 of 10 calling it a real problem. The next piece shows when a team is free as a heatmap and suggests meeting times to vote on. It's a concept for now: in the demo it runs on sample teammates.",
+        ],
+        shots: [
+          { src: "/img/studdybuddy/groups-concept.jpg", alt: "Heatmap of a team's free hours across the week, with suggested meeting times outlined and a vote list", caption: "Concept: who's free this week, with suggested times outlined.", wide: true },
         ],
       },
       {
