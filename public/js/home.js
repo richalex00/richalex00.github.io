@@ -21,6 +21,13 @@ av.onload = () => {
   x.drawImage(av, (av.width - s) / 2, (av.height - s) / 2, s, s, 0, 0, c.width, c.height);
 };
 av.src = "/img/me.jpg";
+const avBtn = document.querySelector(".avatar");
+avBtn.addEventListener("click", () => {
+  const on = avBtn.getAttribute("aria-pressed") !== "true";
+  avBtn.setAttribute("aria-pressed", on);
+  avBtn.classList.toggle("hold", !on);
+});
+avBtn.addEventListener("mouseleave", () => avBtn.classList.remove("hold"));
 
 /* ---------- Sisyphus: dithered marble, carved in pixel by pixel ----------
    Each push moves the percentage on his screen. At 100% it ships as the next
