@@ -12,7 +12,7 @@ export const person = {
   // Homepage text, top to bottom
   intro: [
     "I'm a design engineer from Ireland. Before moving into design, I wrote production software at IBM, General Motors and Ericsson.",
-    "I'm now doing an MSc in Human-Computer Interaction at KTH in Stockholm, where my research looks at how much people feel they own the work they make with AI.",
+    "I'm now doing an MSc in Human-Computer Interaction at KTH in Stockholm.",
   ],
   games: "I studied computer games development, and it still shows. I like things you can poke, and I like interfaces that explain themselves without a manual.",
   lifting: "Away from the screen, I lift. I think of it as design in a much slower material.",
