@@ -28,7 +28,7 @@
   }
   const inGutter = (px) => px < colL || px > colR;
   function minable(e) {
-    if (!inGutter(e.clientX) || e.target.closest("a, button, summary, input, .clock")) return false;
+    if (!inGutter(e.clientX) || e.target.closest("a, button, summary, input, dialog, .clock") || document.querySelector("dialog[open]")) return false;
     if (name) { const r = name.getBoundingClientRect(); if (e.clientX > r.left && e.clientX < r.right && e.clientY > r.top && e.clientY < r.bottom) return false; }
     return true;
   }

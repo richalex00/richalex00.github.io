@@ -112,7 +112,6 @@ const contacts = [
   </main>
   <script is:inline src="/js/home.js"></script>
   <script is:inline src="/js/topo.js"></script>
-  <script is:inline src="/js/mine.js"></script>
   <script is:inline>
     // Animated tiles rest on their final frame and play once on hover or focus.
     // Touch screens have no hover, so there it plays once when scrolled into view.
@@ -206,6 +205,7 @@ const contacts = [
   .log summary .role { font-size: 14px; line-height: 1.4; }
   .log summary .when { font-size: 12px; color: var(--muted); text-align: right; white-space: nowrap; }
   .log summary .when::after { content: " +"; color: var(--raspberry-text); font-weight: 700; }
+  .log summary:hover .role, .log summary:hover .when, .log summary:focus-visible .role, .log summary:focus-visible .when { color: var(--raspberry-text); }
   .log details[open] .when::after { content: " −"; }
   .log .body { padding: 0 0 14px 34px; font-size: 13px; line-height: 1.7; }
   .log .body ul { margin: 0 0 8px; padding-left: 0; list-style: none; }
