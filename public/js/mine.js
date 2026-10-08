@@ -16,15 +16,21 @@
   cv.style.cssText = "position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:0;image-rendering:pixelated";
   document.body.prepend(cv);
   const x = cv.getContext("2d");
-  let W, H, colL, colR, img = null, running = false, last = 0;
+  let W, H, colL, colR, groundY = 0, img = null, running = false, last = 0, queued = false, drawn = false;
   let rocks = [], dust = [], cracks = [];
   const pile = new Map(); // cell column -> alphas, bottom first
 
   function size() {
     W = innerWidth; H = innerHeight;
     cv.width = Math.ceil(W / CELL); cv.height = Math.ceil(H / CELL) + 1;
+    drawn = false; // resizing clears the canvas
+    measure();
+  }
+  // layout reads, cached: only redone when the page's size changes, never per frame
+  function measure() {
     const r = col.getBoundingClientRect();
     colL = r.left - GAP; colR = r.right + GAP;
+    groundY = floor ? scrollY + floor.getBoundingClientRect().top + floor.offsetHeight * 0.2 : document.documentElement.scrollHeight;
   }
   const inGutter = (px) => px < colL || px > colR;
   function minable(e) {
@@ -86,22 +92,27 @@
     if (!pile.has(c)) pile.set(c, []);
     pile.get(c).push(a);
   }
-  const rot = ([i, j], q) => [[i, j], [-j, i], [-i, -j], [j, -i]][q];
+  const ROCK_RGB = `rgb(${ROCK})`, INK_RGB = `rgb(${INK})`;
+  // one fixed colour per pass; alpha via globalAlpha instead of a new rgba() string per pixel
+  let top = 0;
+  const dot = (px, py, a) => { x.globalAlpha = a; x.fillRect(Math.round(px / CELL), Math.round((py - top) / CELL), 1, 1); };
 
   function frame(t) {
     const dt = Math.min(0.05, (t - last) / 1000); last = t;
-    const top = scrollY, groundY = floor ? top + floor.getBoundingClientRect().top + floor.offsetHeight * 0.2 : document.documentElement.scrollHeight;
+    top = scrollY;
     const ground = (c) => groundY - height(c) * CELL;
-    x.clearRect(0, 0, cv.width, cv.height);
-    const dot = (px, py, rgb, a) => { x.fillStyle = `rgba(${rgb},${a})`; x.fillRect(Math.round(px / CELL), Math.round((py - top) / CELL), 1, 1); };
+    if (drawn) x.clearRect(0, 0, cv.width, cv.height); // nothing on it: skip the clear
+
+    x.fillStyle = INK_RGB;
 
     cracks = cracks.filter((c) => {
       const age = (t - c.born) / 1000; if (age > 5) return false;
       const a = 0.7 * Math.min(1, (5 - age) / 2);
-      for (const [i, j] of c.rays) dot(c.x + i * CELL, c.y + j * CELL, INK, a);
+      for (const [i, j] of c.rays) dot(c.x + i * CELL, c.y + j * CELL, a);
       return true;
     });
 
+    x.fillStyle = ROCK_RGB;
     rocks = rocks.filter((b) => {
       b.vy += G * dt; b.x += b.vx * dt; b.y += b.vy * dt; b.vx *= 1 - 0.6 * dt;
       if (!inGutter(b.x) && b.vy > 0) b.x += (b.x - (colL + colR) / 2 < 0 ? -1 : 1) * 260 * dt; // drift out of the text column
@@ -113,30 +124,44 @@
       }
       if (b.y - top > H + 400 && b.y > groundY + 50) return false;
       const q = Math.floor(Math.max(0, t - b.born) / 1000 / b.turn) % 4;
-      for (const cell of b.cells) { const [i, j] = rot(cell, q); dot(b.x + i * CELL, b.y + j * CELL, ROCK, b.alpha); }
+      for (const [i, j] of b.cells) { // rotate by q quarter turns
+        const ri = q === 0 ? i : q === 1 ? -j : q === 2 ? -i : j, rj = q === 0 ? j : q === 1 ? i : q === 2 ? -j : -i;
+        dot(b.x + ri * CELL, b.y + rj * CELL, b.alpha);
+      }
       return true;
     });
 
     dust = dust.filter((d) => {
       d.age += dt; if (d.age > d.life) return false;
       d.vy += 380 * dt; d.x += d.vx * dt; d.y += d.vy * dt;
-      dot(d.x, d.y, ROCK, 0.45 * (1 - d.age / d.life));
+      dot(d.x, d.y, 0.45 * (1 - d.age / d.life));
       return true;
     });
 
-    if (groundY - top < H + PILE_MAX * CELL) {
+    const pileOn = pile.size && groundY - top < H + PILE_MAX * CELL;
+    if (pileOn) {
       for (const [c, stack] of pile) stack.forEach((a, k) => {
-        x.fillStyle = `rgba(${ROCK},${a})`;
+        x.globalAlpha = a;
         x.fillRect(c, Math.round((groundY - (k + 1) * CELL - top) / CELL), 1, 1);
       });
     }
-    // keep animating while anything moves; redraw on scroll only when the pile or cracks need it
+    x.globalAlpha = 1;
+    drawn = !!(cracks.length || rocks.length || dust.length || pileOn);
+    // keep animating while anything moves; otherwise only redraw when scroll/resize moves the pile
     if (rocks.length || dust.length || cracks.length) requestAnimationFrame(frame); else running = false;
+  }
+  // one still frame per animation frame at most, however many scroll/resize events arrive
+  function redraw() {
+    if (running || queued || (!pile.size && !drawn)) return;
+    queued = true;
+    requestAnimationFrame((t) => { queued = false; if (!running) { last = t; frame(t); } });
   }
 
   size();
   if (Math.min(colL, W - colR) < 60) { cv.remove(); return; } // no margins on phones
-  addEventListener("resize", size);
-  addEventListener("scroll", () => { if (!running && pile.size) { last = performance.now(); frame(last); } }, { passive: true });
+  let resizing = 0;
+  addEventListener("resize", () => { cancelAnimationFrame(resizing); resizing = requestAnimationFrame(() => { size(); redraw(); }); });
+  new ResizeObserver(() => { measure(); redraw(); }).observe(document.body); // content above the ground grew or shrank
+  addEventListener("scroll", redraw, { passive: true });
   addEventListener("click", (e) => { if (minable(e) && !getSelection().toString()) strike(e.pageX, e.pageY); });
 })();

@@ -5,8 +5,8 @@
 // Hovering the parent tile plays it, like the StuddyBuddy logo.
 ---
 <div class="gl-logo" role="img" aria-label="Pelle's Reflex Galjoen logo">
-  <img src="/img/galleon/logo-tile-mouth.jpg" alt="" />
-  <img class="gl-jaw" src="/img/galleon/jaw.png" alt="" data-cycle />
+  <img src="/img/galleon/logo-tile-mouth.jpg" alt="" loading="lazy" decoding="async" />
+  <img class="gl-jaw" src="/img/galleon/jaw.png" alt="" loading="lazy" decoding="async" data-cycle />
 </div>
 
 <style is:global>
@@ -26,5 +26,4 @@
     38% { transform: translateY(0) rotate(0); }
     45% { transform: translateY(12%) rotate(1.5deg); }
   }
-  @media (prefers-reduced-motion: reduce) { .gl-logo.play .gl-jaw { animation: none !important; } }
 </style>

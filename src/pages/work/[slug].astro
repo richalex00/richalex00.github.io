@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import DemoWindow from "../../components/DemoWindow.astro";
 import { projects, type Project, type Shot } from "../../data/site";
+import { size } from "../../data/imageSize";
 
 export function getStaticPaths() {
   return projects.map((p, i) => ({ params: { slug: p.slug }, props: { p, next: projects[(i + 1) % projects.length] } }));
@@ -19,6 +20,10 @@ const group = (shots: Shot[] = []) => {
   if (buf.length) out.push(buf);
   return out;
 };
+
+const dims = Object.fromEntries(await Promise.all(
+  [p.cover, ...p.sections.flatMap((s) => s.shots ?? [])].map(async (sh) => [sh.src, await size(sh.src)]),
+));
 ---
 <Base title={p.title} description={`${p.title}: ${p.subtitle}.`}>
   <div class="bar">
@@ -44,7 +49,7 @@ const group = (shots: Shot[] = []) => {
     </dl>
     <p>{p.intro}</p>
     {p.demo && <DemoWindow href={p.demo.href} title={p.title} label={p.demo.label} note={p.demo.note} />}
-    <figure><img src={p.cover.src} alt={p.cover.alt} /></figure>
+    <figure><img src={p.cover.src} alt={p.cover.alt} {...dims[p.cover.src]} fetchpriority="high" /></figure>
 
     {p.sections.map((s) => (
       <section>
@@ -54,7 +59,7 @@ const group = (shots: Shot[] = []) => {
           <div class={g.length > 1 ? "pair" : ""}>
             {g.map((sh) => (
               <figure>
-                <img src={sh.src} alt={sh.alt} loading="lazy" />
+                <img src={sh.src} alt={sh.alt} {...dims[sh.src]} loading="lazy" decoding="async" />
                 {sh.caption && <figcaption>{sh.caption}</figcaption>}
               </figure>
             ))}

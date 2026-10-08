@@ -31,8 +31,6 @@ export type Project = {
   tools: string;
   cover: Shot;
   fan: string; // image used on the fanned card
-  fanContain?: boolean;
-  tileDark?: boolean; // pine background behind a contained image on the homepage tile
   intro: string;
   sections: Section[];
   links?: { label: string; href: string }[];
@@ -135,8 +133,6 @@ export const projects: Project[] = [
     cover: { src: "/img/vigil/slide-02.jpg", alt: "Vigil title slide with the growth-ring mark" },
     fan: "/img/vigil/icon.png",
     tileVideo: { src: "/img/vigil/mark.mp4", poster: "/img/vigil/mark-end.jpg", bg: "#111F1B" },
-    fanContain: true,
-    tileDark: true,
     links: [{ label: "See the pitch deck (PDF)", href: "/papers/vigil-pitch-deck.pdf" }],
     intro:
       "A two-week venture sprint at the Polytechnic University of Bari, from problem framing to Pitch Day in front of an industry and investor jury. Vigil turns the EU's mandatory Digital Product Passport from a compliance cost into a source of revenue.",
@@ -298,11 +294,11 @@ export const projects: Project[] = [
   },
 ];
 
-export type Job = { logo: string; logoRatio: number; title: string; company: string; dates: string; place: string; bullets: string[]; tags: string[] };
+export type Job = { logo: string; title: string; company: string; dates: string; place: string; bullets: string[]; tags: string[] };
 
 export const experience: Job[] = [
   {
-    logo: "/logos/ibm-logo.svg", logoRatio: 2.68,
+    logo: "/logos/ibm-logo.svg",
     title: "Full-stack Developer", company: "IBM", dates: "Apr 2025 – Sep 2025", place: "Cork",
     bullets: [
       "Resolved customer integration issues on IBM API Connect, IBM's API management platform.",
@@ -312,7 +308,7 @@ export const experience: Job[] = [
     tags: ["Node.js", "React", "PostgreSQL", "GraphQL", "Kubernetes", "OpenShift"],
   },
   {
-    logo: "/logos/general-motors-logo.svg", logoRatio: 1,
+    logo: "/logos/general-motors-logo.svg",
     title: "Software Developer", company: "General Motors", dates: "Feb 2024 – Apr 2025", place: "Limerick",
     bullets: [
       "Completed an intensive 8-month training and assessment programme in mainframe technologies.",
@@ -322,7 +318,7 @@ export const experience: Job[] = [
     tags: ["COBOL", "JCL", "REXX", "PL/I", "Azure DevOps", "Git"],
   },
   {
-    logo: "/logos/ericsson-logo.svg", logoRatio: 1.14,
+    logo: "/logos/ericsson-logo.svg",
     title: "Software Engineer", company: "Ericsson", dates: "Jan 2022 – Aug 2022", place: "Athlone",
     bullets: [
       "Set up and maintained microservices on Linux in an agile team.",
@@ -331,7 +327,7 @@ export const experience: Job[] = [
     tags: ["Docker", "Kubernetes", "Linux", "JavaScript", "Gerrit"],
   },
   {
-    logo: "/logos/ul-logo.svg", logoRatio: 2.19,
+    logo: "/logos/ul-logo.svg",
     title: "Teaching Assistant", company: "University of Limerick", dates: "Sep 2020 – Jun 2021", place: "Limerick",
     bullets: [
       "Led weekly peer-learning groups for first-year Java students through the lockdowns.",
@@ -341,21 +337,21 @@ export const experience: Job[] = [
   },
 ];
 
-export type School = { logo: string; logoRatio: number; degree: string; school: string; dates: string; place: string; note: string };
+export type School = { logo: string; degree: string; school: string; dates: string; place: string; note: string };
 
 export const education: School[] = [
   {
-    logo: "/logos/kth-logo.svg", logoRatio: 1,
+    logo: "/logos/kth-logo.svg",
     degree: "MSc Human-Computer Interaction and Design", school: "KTH Royal Institute of Technology", dates: "2026 – 2027", place: "Stockholm",
     note: "EIT Digital double degree, second year. Minor in Innovation and Entrepreneurship. Full scholarship.",
   },
   {
-    logo: "/logos/logo-ut.svg", logoRatio: 2.7,
+    logo: "/logos/logo-ut.svg",
     degree: "MSc Interaction Technology", school: "University of Twente", dates: "2025 – 2026", place: "Enschede",
     note: "EIT Digital double degree, first year.",
   },
   {
-    logo: "/logos/ul-logo.svg", logoRatio: 2.19,
+    logo: "/logos/ul-logo.svg",
     degree: "BSc Computer Games Development", school: "University of Limerick", dates: "2019 – 2023", place: "Limerick",
     note: "Thesis graded A1. President's Volunteer Award, 2020/21.",
   },

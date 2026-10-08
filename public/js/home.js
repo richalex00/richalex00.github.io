@@ -1,13 +1,18 @@
 // Home page: Stockholm clock, pixel avatar and Sisyphus. (The contour map is topo.js.)
 (function () {
 /* ---------- Clock ---------- */
+// formatters built once (toLocale*String builds a new one per call); the DOM is only
+// touched when the minute changes, and not at all while the tab is hidden
+const clock = document.getElementById("clock");
+const fmtT = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Stockholm", hour: "2-digit", minute: "2-digit" });
+const fmtD = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Stockholm", weekday: "short" });
 function tick() {
-  const now = new Date();
-  const t = now.toLocaleTimeString("en-GB", { timeZone: "Europe/Stockholm", hour: "2-digit", minute: "2-digit" });
-  const d = now.toLocaleDateString("en-GB", { timeZone: "Europe/Stockholm", weekday: "short" });
-  document.getElementById("clock").textContent = `Stockholm ${d} ${t}`;
+  if (document.hidden) return;
+  const now = new Date(), s = `Stockholm ${fmtD.format(now)} ${fmtT.format(now)}`;
+  if (clock.textContent !== s) clock.textContent = s;
 }
 tick(); setInterval(tick, 10000);
+document.addEventListener("visibilitychange", tick);
 
 /* ---------- Pixel avatar: the real photo, downsampled ---------- */
 // The whole photo on a 32x32 grid: fine enough that the face reads at 76px,
@@ -71,10 +76,11 @@ avBtn.addEventListener("mouseleave", () => avBtn.classList.remove("hold"));
     if (reduce) return show(current());
     const out = x.createImageData(c.width, c.height), N = c.width * c.height, rank = new Float32Array(N);
     for (let k = 0; k < N; k++) rank[k] = Math.random() * 0.7 + (k / N) * 0.3; // roughly top-down, chiselled
+    const src = new Uint32Array(base.data.buffer), dst = new Uint32Array(out.data.buffer);
     const t0 = performance.now(), ms = 650;
     (function f(t) {
       const p = Math.min(1, (t - t0) / ms);
-      for (let k = 0; k < N; k++) if (rank[k] <= p) for (let q = 0; q < 4; q++) out.data[k * 4 + q] = base.data[k * 4 + q];
+      for (let k = 0; k < N; k++) if (rank[k] <= p) dst[k] = src[k]; // whole RGBA pixel at once
       x.putImageData(out, 0, 0);
       if (p < 1) requestAnimationFrame(f); else show(current());
     })(t0);
@@ -92,6 +98,4 @@ avBtn.addEventListener("mouseleave", () => avBtn.classList.remove("hold"));
     step++; show(current()); label(current());
   });
 })();
-
-
 })();

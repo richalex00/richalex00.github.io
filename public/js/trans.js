@@ -24,10 +24,12 @@
     Object.assign(c.style, { position: "fixed", inset: "0", width: "100vw", height: "100vh", zIndex: 1000, imageRendering: "pixelated", pointerEvents: "none" });
     document.documentElement.appendChild(c);
     const ctx = c.getContext("2d"), img = ctx.createImageData(W, H);
-    const field = new Float32Array(W * H), jitter = new Float32Array(W * H);
+    const field = new Float32Array(W * H), jitter = new Float32Array(W * H), band = new Int32Array(W * H);
     for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
       const x = i / W, y = (j / H) * (H / W);
-      field[j * W + i] = hills.reduce((s, k) => s + k.a * Math.exp(-((x - k.x) ** 2 + (y - k.y * H / W) ** 2) / (2 * k.r * k.r)), 0);
+      let s = 0;
+      for (const k of hills) s += k.a * Math.exp(-((x - k.x) ** 2 + (y - k.y * H / W) ** 2) / (2 * k.r * k.r));
+      field[j * W + i] = s;
       jitter[j * W + i] = Math.random();
     }
     let dist = null, distKey = "";
@@ -41,14 +43,14 @@
         distKey = key;
       }
       const d8 = img.data;
+      for (let k = 0; k < W * H; k++) band[k] = Math.floor((field[k] + phase) / STEP); // once per pixel, not 3x
       for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
         const k = j * W + i, o = k * 4;
         const d = dist[k];
         const on = covering ? d <= p : d > p;
         if (!on) { d8[o + 3] = 0; continue; }
-        const b = Math.floor((field[k] + phase) / STEP);
-        const edge = i < W - 1 && j < H - 1 &&
-          (b !== Math.floor((field[k + 1] + phase) / STEP) || b !== Math.floor((field[k + W] + phase) / STEP));
+        const b = band[k];
+        const edge = i < W - 1 && j < H - 1 && (b !== band[k + 1] || b !== band[k + W]);
         const col = edge ? (((b % 5) + 5) % 5 === 0 ? INDEX : LINE) : PINE;
         d8[o] = col[0]; d8[o + 1] = col[1]; d8[o + 2] = col[2]; d8[o + 3] = 255;
       }
@@ -88,7 +90,6 @@
       const { c, draw } = overlay(state.hills);
       const ox = innerWidth / 2, oy = innerHeight / 2;
       draw(-1, ox, oy, STEP, false);
-      document.documentElement.classList.remove("trans-in");
       animate(380, p => draw(ease(p) * 1.02, ox, oy, STEP + p * STEP, false)).then(() => c.remove());
     }
   }

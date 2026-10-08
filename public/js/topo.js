@@ -9,12 +9,14 @@
     const hero = cv.parentElement;
     const CELL = 5;
     const W = Math.ceil(hero.clientWidth / CELL), H = Math.ceil(hero.clientHeight / CELL);
-    cv.width = W; cv.height = H;
-    const x = cv.getContext("2d");
     const hills = Array.from({ length: 7 }, () => ({ x: Math.random() * W, y: Math.random() * H, r: 18 + Math.random() * 40, a: Math.random() < 0.3 ? -1 : 1 }));
-    const f = (i, j) => hills.reduce((s, k) => s + k.a * Math.exp(-((i - k.x) ** 2 + (j - k.y) ** 2) / (2 * k.r * k.r)), 0);
-    const field = []; for (let j = 0; j < H; j++) { field[j] = []; for (let i = 0; i < W; i++) field[j][i] = f(i, j); }
-    const STEP = 0.17, band = (v) => Math.floor(v / STEP);
+    // height field, already cut into contour bands (flat typed array, no per-pixel closures)
+    const STEP = 0.17, band = new Int32Array(W * H);
+    for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
+      let s = 0;
+      for (const k of hills) s += k.a * Math.exp(-((i - k.x) ** 2 + (j - k.y) ** 2) / (2 * k.r * k.r));
+      band[j * W + i] = Math.floor(s / STEP);
+    }
 
     // the clear zone: union of the labelled elements' boxes, plus padding
     const hr = hero.getBoundingClientRect(), pad = 14;
@@ -29,13 +31,17 @@
       y0: (box.t - hr.top - pad) / CELL, y1: (box.b - hr.top + pad) / CELL,
     };
 
+    cv.width = W; cv.height = H; // after the layout reads above, so they don't force a reflow
+    const x = cv.getContext("2d");
+    // write the pixels straight into one ImageData: a single upload instead of a fillRect per pixel
+    const img = x.createImageData(W, H), d = img.data;
     for (let j = 0; j < H - 1; j++) for (let i = 0; i < W - 1; i++) {
-      const b = band(field[j][i]);
-      if (b === band(field[j][i + 1]) && b === band(field[j + 1][i])) continue;
+      const k = j * W + i, b = band[k];
+      if (b === band[k + 1] && b === band[k + W]) continue;
       if (clear && i > clear.x0 && i < clear.x1 && j > clear.y0 && j < clear.y1) continue;
-      const index = ((b % 5) + 5) % 5 === 0;
-      x.fillStyle = index ? "rgba(79,125,115,0.42)" : "rgba(79,125,115,0.18)";
-      x.fillRect(i, j, 1, 1);
+      const o = k * 4, index = ((b % 5) + 5) % 5 === 0;
+      d[o] = 79; d[o + 1] = 125; d[o + 2] = 115; d[o + 3] = index ? 107 : 46; // alpha 0.42 / 0.18
     }
+    x.putImageData(img, 0, 0);
   }
 })();
