@@ -265,8 +265,8 @@ export const projects: Project[] = [
     subtitle: "A pirate reflex game that runs itself",
     year: "2026",
     place: "University of Twente, demoed at a Dutch amusement park (8.2/10)",
-    role: "Team project: character, voice, build",
-    tools: "Laser cutting, ElevenLabs, projection, mechanics",
+    role: "Team project",
+    tools: "Arduino, servos, 3D printing, laser cutting, woodwork, ElevenLabs, projection",
     cover: { src: "/img/galleon/ship.jpg", alt: "The finished Pelle's Reflex Galleon: a wooden ship under a Reflex Galjoen sail, with Pelle projected beside it" },
     fan: "/img/galleon/logo-tile.jpg",
     intro:
@@ -284,11 +284,13 @@ export const projects: Project[] = [
         ],
       },
       {
-        heading: "My part",
+        heading: "How it was made",
         body: [
-          "I owned Pelle: his voice and his image. I designed a custom voice for him until he sounded like a theatrical Dutch pirate rather than a narrator, because the voice is the whole interface. There is no screen of instructions. I also built the water reservoir, helped fit the gear system that drives the drop, laser-cut the catch holder and designed the pirate logo that was later painted.",
+          "The ship is a wooden frame we cut, screwed and nailed together ourselves. It has a hand-painted sail, a net, portholes and a water reservoir under the deck for missed treasure. A laser-cut holder along the front catches the bottles, and a pile of pirate props does the rest of the dressing.",
+          "Under the mast, an Arduino drives a row of servos that hold the treasure bottles and let them go at random moments, so no two rounds play the same. 3D-printed gears on a wooden shaft wind the treasure back up when the flag is raised.",
+          "A round starts with a real ship's bell: a microphone listens for the ring and kicks off the game. From there Pelle runs everything. He's an animated cartoon pirate projected beside the ship, with a custom voice made in ElevenLabs. He calls people over, explains the compass and the bell, and tells them to raise the flag at the end. There is no screen of instructions; the voice is the interface.",
         ],
-        shots: [{ src: "/img/galleon/logo.jpg", alt: "Pelle's Reflex Galjoen pirate logo", caption: "The logo I designed for the ship." }],
+        shots: [{ src: "/img/galleon/logo.jpg", alt: "Pelle's Reflex Galjoen pirate logo", caption: "The logo, later painted onto the sail." }],
       },
     ],
   },

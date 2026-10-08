@@ -81,7 +81,10 @@ const contacts = [
           <div class="body"><p class="edu-note">{e.school}, {e.place}. {e.note}</p></div>
         </details>
       ))}
-      <a class="cv" href={person.cv}>Download the full CV (PDF)</a>
+      <a class="cv" href={person.cv}>
+        <svg viewBox="0 0 8 8" fill="currentColor" aria-hidden="true"><rect x="3" y="0" width="2" height="4"/><rect x="1" y="3" width="6" height="1"/><rect x="2" y="4" width="4" height="1"/><rect x="3" y="5" width="2" height="1"/><rect x="0" y="7" width="8" height="1"/></svg>
+        Download my full CV (PDF)
+      </a>
     </div>
 
     <p>Here's a live snapshot of me:</p>
@@ -217,7 +220,10 @@ const contacts = [
   .log .body li::before { content: "> "; color: var(--contour); }
   .log .tags { color: var(--muted); font-size: 12px; }
   .log .edu-note { margin: 0; }
-  .cv { display: inline-block; margin-top: 14px; font-size: 13px; }
+  .cv { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; font: 700 14px/1 var(--mono); color: var(--paper); background: var(--raspberry); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 13px 20px; text-decoration: none; transition: transform 0.08s steps(2), box-shadow 0.08s steps(2); }
+  .cv svg { width: 12px; height: 12px; shape-rendering: crispEdges; }
+  .cv:hover { background: var(--pine); }
+  .cv:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
 
   /* Live snapshot */
   .code { background: var(--ink); color: var(--paper); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--pine); padding: 18px 20px; margin: 8px 0 44px; font-size: 14px; line-height: 1.8; counter-reset: line; overflow-x: auto; }
