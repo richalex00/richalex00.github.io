@@ -39,6 +39,7 @@ export type Project = {
   demo?: { href: string; label: string; note: string }; // opens in a window over the case study
   tile?: { src: string; bg: string; animated?: boolean }; // homepage tile image shown whole on a solid colour, instead of the cover; animated = live logo component
   tileVideo?: { src: string; poster: string; bg: string }; // homepage tile animation, played on hover
+  tileSkull?: boolean; // homepage tile is the Galleon logo with a chattering jaw
 };
 
 // Order = priority. First is the lead in the grid and the top card in the fan.
@@ -269,6 +270,7 @@ export const projects: Project[] = [
     tools: "Arduino, servos, 3D printing, laser cutting, woodwork, ElevenLabs, projection",
     cover: { src: "/img/galleon/ship.jpg", alt: "The finished Pelle's Reflex Galleon: a wooden ship under a Reflex Galjoen sail, with Pelle projected beside it" },
     fan: "/img/galleon/logo-tile.jpg",
+    tileSkull: true,
     intro:
       "An interactive installation that needs no operator. A projected cartoon pirate, Pelle, draws people in and talks them through the game. Treasure drops at random, players catch what they can, and raising the ship's flag hauls the missed treasure back out of the water and resets the game for the next person.",
     sections: [

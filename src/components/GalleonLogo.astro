@@ -1,0 +1,30 @@
+---
+// The Pelle's Reflex Galjoen logo with a chattering jaw: the base is the tile
+// image with the mouth painted dark, and the jaw is cut out of the same image
+// and laid back exactly where it was (532,533 on the 1216x760 tile).
+// Hovering the parent tile plays it, like the StuddyBuddy logo.
+---
+<div class="gl-logo" role="img" aria-label="Pelle's Reflex Galjoen logo">
+  <img src="/img/galleon/logo-tile-mouth.jpg" alt="" />
+  <img class="gl-jaw" src="/img/galleon/jaw.png" alt="" data-cycle />
+</div>
+
+<style is:global>
+  .gl-logo { position: relative; width: 100%; height: 100%; }
+  .gl-logo img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .gl-logo .gl-jaw { inset: auto; left: 43.75%; top: 70.13%; width: 12.5%; height: auto; transform-origin: 50% 0; will-change: transform; }
+
+  /* One 1.8s cycle: four quick snaps, each a little smaller, then rest. */
+  .gl-logo.play .gl-jaw { animation: gl-chatter 1.8s infinite; }
+  @keyframes gl-chatter {
+    0%, 52%, 100% { transform: translateY(0) rotate(0); animation-timing-function: cubic-bezier(.3, 0, .6, 1); }
+    6% { transform: translateY(26%) rotate(-3deg); }
+    12% { transform: translateY(0) rotate(0); }
+    19% { transform: translateY(24%) rotate(3deg); }
+    25% { transform: translateY(0) rotate(0); }
+    32% { transform: translateY(18%) rotate(-2deg); }
+    38% { transform: translateY(0) rotate(0); }
+    45% { transform: translateY(12%) rotate(1.5deg); }
+  }
+  @media (prefers-reduced-motion: reduce) { .gl-logo.play .gl-jaw { animation: none !important; } }
+</style>

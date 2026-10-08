@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import StuddyLogo from "../components/StuddyLogo.astro";
+import GalleonLogo from "../components/GalleonLogo.astro";
 import { person, projects, experience, education } from "../data/site";
 
 // "Apr 2025 – Sep 2025" -> "2025", "Feb 2024 – Apr 2025" -> "2024–25"
@@ -50,6 +51,8 @@ const contacts = [
           <div class="frame" style={p.tile ? `background: ${p.tile.bg}` : p.tileVideo ? `background: ${p.tileVideo.bg}` : undefined}>
             {p.tileVideo
               ? <video src={p.tileVideo.src} poster={p.tileVideo.poster} muted playsinline preload="metadata" aria-label={`${p.title} logo animation`}></video>
+              : p.tileSkull
+              ? <GalleonLogo />
               : p.tile?.animated
               ? <StuddyLogo />
               : p.tile
@@ -122,7 +125,7 @@ const contacts = [
       if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const play = (v) => { if (v.paused) { v.currentTime = 0; v.play().catch(() => {}); } };
       // Live logos loop while hovered, then finish the current cycle and stop.
-      document.querySelectorAll(".sb-logo").forEach((logo) => {
+      document.querySelectorAll(".sb-logo, .gl-logo").forEach((logo) => {
         const tile = logo.closest(".tile");
         let leaving = false;
         const start = () => { leaving = false; logo.classList.add("play"); };
@@ -130,7 +133,7 @@ const contacts = [
         tile.addEventListener("focus", start);
         tile.addEventListener("mouseleave", () => { leaving = true; });
         tile.addEventListener("blur", () => { leaving = true; });
-        logo.querySelector(".sb-body").addEventListener("animationiteration", () => {
+        logo.querySelector(".sb-body, [data-cycle]").addEventListener("animationiteration", () => {
           if (leaving) logo.classList.remove("play");
         });
         if (matchMedia("(hover: none)").matches && "IntersectionObserver" in window) {
