@@ -11,7 +11,7 @@ export const person = {
   subline: "HCI designer at KTH, with engineering experience at IBM, General Motors and Ericsson.",
   // Homepage text, top to bottom
   intro: [
-    "I'm a design engineer from Ireland. Before moving into design, I wrote production software at IBM, General Motors and Ericsson.",
+    "I'm a design engineer from Ireland. I've written production software at IBM, General Motors and Ericsson.",
     "I'm now doing an MSc in Human-Computer Interaction at KTH in Stockholm.",
   ],
   games: "I studied computer games development, and it still shows. I like things you can poke, and I like interfaces that explain themselves without a manual.",
