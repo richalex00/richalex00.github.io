@@ -90,7 +90,7 @@ const contacts = [
     <p>Here's a live snapshot of me:</p>
     <div class="code" aria-label="Live snapshot: based in Stockholm, studying HCI at KTH">
       <div><span class="k">let</span> <span class="v">location</span> = <span class="s">'Stockholm'</span></div>
-      <div><span class="k">let</span> <span class="v">time</span> = <span class="s" id="codetime">'--:--'</span></div>
+      <div><span class="k">let</span> <span class="v">route</span> = <span class="s">'Ireland → Netherlands → Sweden'</span></div>
       <div><span class="k">let</span> <span class="v">studying</span> = <span class="s">'HCI @ KTH'</span></div>
       <div><span class="k">let</span> <span class="v">hobbies</span> = [</div>
       {person.hobbies.map((h) => <div>   <span class="s">'{h}'</span>,</div>)}
@@ -227,6 +227,7 @@ const contacts = [
 
   /* Live snapshot */
   .code { background: var(--ink); color: var(--paper); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--pine); padding: 18px 20px; margin: 8px 0 44px; font-size: 14px; line-height: 1.8; counter-reset: line; overflow-x: auto; }
+  .code { overflow-x: auto; }
   .code div { white-space: pre; }
   .code div::before { counter-increment: line; content: counter(line); display: inline-block; width: 2ch; margin-right: 18px; color: #6E8079; text-align: right; }
   .k { color: #E58AB8; } .v { color: #9CCFC0; } .s { color: #E8D9A8; }

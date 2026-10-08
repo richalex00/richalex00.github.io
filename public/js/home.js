@@ -6,7 +6,6 @@ function tick() {
   const t = now.toLocaleTimeString("en-GB", { timeZone: "Europe/Stockholm", hour: "2-digit", minute: "2-digit" });
   const d = now.toLocaleDateString("en-GB", { timeZone: "Europe/Stockholm", weekday: "short" });
   document.getElementById("clock").textContent = `Stockholm ${d} ${t}`;
-  document.getElementById("codetime").textContent = `'${t}'`;
 }
 tick(); setInterval(tick, 10000);
 

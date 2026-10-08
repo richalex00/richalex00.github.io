@@ -16,7 +16,7 @@ export const person = {
   ],
   games: "I studied computer games development, and it still shows. I like things you can poke, and I like interfaces that explain themselves without a manual.",
   lifting: "Away from the screen, I lift. I think of it as design in a much slower material.",
-  hobbies: ["Lifting"],
+  hobbies: ["Tinkering with electronics", "Daily-driving Fedora Linux", "Board games", "Sport", "Travel and the outdoors"],
 };
 
 export type Shot = { src: string; alt: string; caption?: string; wide?: boolean };
