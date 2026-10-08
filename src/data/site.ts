@@ -35,7 +35,7 @@ export type Project = {
   tileDark?: boolean; // pine background behind a contained image on the homepage tile
   intro: string;
   sections: Section[];
-  link?: { label: string; href: string };
+  links?: { label: string; href: string }[];
   demo?: { href: string; label: string; note: string }; // opens in a window over the case study
   tile?: { src: string; bg: string; animated?: boolean }; // homepage tile image shown whole on a solid colour, instead of the cover; animated = live logo component
   tileVideo?: { src: string; poster: string; bg: string }; // homepage tile animation, played on hover
@@ -59,16 +59,19 @@ export const projects: Project[] = [
       label: "Try the live demo",
       note: "StuddyBuddy isn't running publicly at the moment, because keeping the AI hosted costs more than it's worth between rounds of testing. This is the real app running on a frozen copy of my own KTH Canvas and timetable data. AI replies are scripted, and your changes reset when you reload.",
     },
+    links: [{ label: "Read the Business Development Lab report (PDF)", href: "/papers/studdybuddy-business-report.pdf" }],
     intro:
-      "Students can see their deadlines, but not when to start. StuddyBuddy connects to Canvas, plans the week with AI and gives every course its own tutor. I founded it through Novel-T's Entrepreneurial Experience at the University of Twente, pitched it to investors, and carried it on after the programme ended.",
+      "Students can see their deadlines, but not when to start. StuddyBuddy connects to Canvas, plans the week with AI and gives every course its own tutor. It started as a course project in the University of Twente's Business Development Lab. I carried it into Novel-T's Entrepreneurial Experience, pitched it to investors, and kept going after the programme ended.",
     sections: [
       {
-        heading: "From challenge to startup",
+        heading: "From course project to startup",
         body: [
-          "StuddyBuddy began as our entry to Novel-T's Entrepreneurial Experience: three UTwente students, a problem we lived every week, and a working prototype built over one hackathon weekend.",
+          "StuddyBuddy began in the Business Development Lab at the University of Twente, under the working name SchedulAI. With my course team I interviewed students, tested the concept and built a first financial model. That work is in the report linked above.",
+          "When the course ended, I took the idea into Novel-T's Entrepreneurial Experience: three UTwente students, a problem we lived every week, and a working prototype built over one hackathon weekend.",
           "As founder I set the vision and carried the pitch. We framed the problem, shaped a business model (freemium, with a €4.99 premium tier and university licensing later) and pitched it to investors at the end of the programme.",
           "When the programme finished, I kept going. I moved the prototype onto a stack I control, connected it to real Canvas and timetable data, and demoed it at the KTH Lovable Buildathon in Stockholm on 1 September 2026.",
         ],
+        shots: [{ src: "/img/studdybuddy/novelt-finals.jpg", alt: "Teams from the Entrepreneurial Experience on stage at the finals, holding the award cheques, with gold confetti on the floor", caption: "With the other teams at the finals of the first Entrepreneurial Experience, 17 June 2026.", wide: true }],
       },
       {
         heading: "The trust problem",
@@ -84,7 +87,7 @@ export const projects: Project[] = [
       {
         heading: "What students told us",
         body: [
-          "With my course team at the University of Twente, I ran 7 interviews and 3 observational studies with students, then 10 more interviews to test the concept.",
+          "In the Business Development Lab, my course team and I ran 7 interviews and 3 observational studies with students, then 10 more interviews to test the concept.",
           "Two findings shaped the design. Our hypothesis that AI time estimates would reduce stress was not supported: most students distrusted them, and wanted to keep control or have the AI learn from them over time. And across the interviews the same point kept coming back: the product should take away mental effort, not take over the schedule.",
           "That became the rule for the product. The AI proposes, the student decides.",
         ],
@@ -107,6 +110,7 @@ export const projects: Project[] = [
           "It's also how I build. The first prototype came together on Lovable; I then moved it to React and Supabase on Cloudflare, working with Claude Code. I set the design and interaction rules and review every change before it ships.",
           "Using AI well also means knowing where not to trust it. Early versions left the language model to choose the times, with the rules written only into its prompt. I moved slot-finding into plain, tested code: the model now says what to schedule and roughly when, and the scheduler places each block around lectures, personal plans and the student's sleep hours. A proposal can't clash with a class or land at 3am, whatever the model asks for.",
         ],
+        shots: [{ src: "/img/studdybuddy/building.jpg", alt: "Richard in headphones, typing on a laptop at a crowded table", caption: "Heads down on StuddyBuddy at the KTH Lovable Buildathon, 1 September 2026." }],
       },
       {
         heading: "Next: group scheduling",
@@ -132,6 +136,7 @@ export const projects: Project[] = [
     tileVideo: { src: "/img/vigil/mark.mp4", poster: "/img/vigil/mark-end.jpg", bg: "#111F1B" },
     fanContain: true,
     tileDark: true,
+    links: [{ label: "See the pitch deck (PDF)", href: "/papers/vigil-pitch-deck.pdf" }],
     intro:
       "A two-week venture sprint at the Polytechnic University of Bari, from problem framing to Pitch Day in front of an industry and investor jury. Vigil turns the EU's mandatory Digital Product Passport from a compliance cost into a source of revenue.",
     sections: [
@@ -170,6 +175,10 @@ export const projects: Project[] = [
       label: "Try the generator",
       note: "A web port of the Unity tool: the same algorithm, tiles and controls. Drag a slider and the same map reshapes, press Space for a new one, or play through the five stages of generation.",
     },
+    links: [
+      { label: "Read the thesis (PDF)", href: "/papers/map-generator-thesis.pdf" },
+      { label: "Source on GitHub", href: "https://github.com/richalex00/Procedural-Content-Generation" },
+    ],
     intro:
       "My final-year project: a Unity tool that generates layered 2D terrain. It combines Perlin noise, cellular automata and flood fill, with live controls for map size, saturation, variation and minimum island size, plus saving and loading. It was graded A1.",
     sections: [
@@ -195,18 +204,18 @@ export const projects: Project[] = [
         ],
       },
     ],
-    link: { label: "Source and thesis on GitHub", href: "https://github.com/richalex00/Procedural-Content-Generation" },
   },
   {
     slug: "lactation-rooms",
     title: "Lactation rooms",
     subtitle: "Calm, personal control in a room built for care",
     year: "2026",
-    place: "University of Twente, Enschede",
+    place: "University of Twente, Enschede (8/10)",
     role: "Team project: research, concept, prototype",
     tools: "Interviews, thematic analysis, Figma, Wizard of Oz",
     cover: { src: "/img/lactation/room.jpg", alt: "The prototype set up in the lactation room with a tablet, lamp and wall display" },
     fan: "/img/lactation/tablet-hand.jpg",
+    links: [{ label: "Read the full report (PDF)", href: "/papers/lactation-rooms-report.pdf" }],
     intro:
       "Workplace lactation rooms usually meet the legal minimum and nothing more. We set out to understand what parents actually need from them, and found the problem was less about furniture and more about feeling safe, unhurried and in control.",
     sections: [
@@ -216,7 +225,20 @@ export const projects: Project[] = [
           "We interviewed lactating parents and used thematic analysis to arrive at seven themes. The biggest shift was in how we framed the problem: from missing infrastructure to a lack of emotional and organisational support for care work.",
           "From that we wrote ten design requirements, from a lock that tells others the room is in use to ambient presets you can set from the chair.",
         ],
-        shots: [{ src: "/img/lactation/sketch.jpg", alt: "Pencil sketch of the lactation room layout", caption: "Early sketch of the room layout." }],
+        shots: [
+          { src: "/img/lactation/sketch.jpg", alt: "Pencil sketch of the lactation room layout", caption: "Early sketch of the room layout." },
+          { src: "/img/lactation/paper.jpg", alt: "Paper prototype with a welcome screen of presets, a Light card and two paper speakers", caption: "Paper prototype: presets on a welcome screen, with paper speakers and a light card standing in for the room." },
+        ],
+      },
+      {
+        heading: "Before and after",
+        body: [
+          "We wrote the same scenario twice. Emily, a parent back at work, pumps in the room as it is, then in the room we wanted to build. The first storyboard marks every moment she hesitates, cleans up after someone else or feels exposed. The second takes those moments away one at a time, starting at the door.",
+        ],
+        shots: [
+          { src: "/img/lactation/scenario-before.jpg", alt: "Six-panel storyboard of a mother in the current room: entering, finding it messy, unsure where to sit, pumping next to a noisy coffee machine, packing, cleaning up", caption: "Before: the room as it is. Storyboard frames generated with AI.", wide: true },
+          { src: "/img/lactation/scenario-after.jpg", alt: "Six-panel storyboard of the improved room: harsh light, a wall tablet with Lights, Visuals and Sound, choosing a Tropical Relax mood, then pumping calmly surrounded by ocean screens", caption: "After: one tap on the wall tablet turns a harsh room calm. Also AI-generated.", wide: true },
+        ],
       },
       {
         heading: "Prototype in the real room",
@@ -242,12 +264,11 @@ export const projects: Project[] = [
     title: "Pelle's Reflex Galleon",
     subtitle: "A pirate reflex game that runs itself",
     year: "2026",
-    place: "University of Twente, demoed at a Dutch amusement park",
+    place: "University of Twente, demoed at a Dutch amusement park (8.2/10)",
     role: "Team project: character, voice, build",
     tools: "Laser cutting, ElevenLabs, projection, mechanics",
-    cover: { src: "/img/galleon/demo.jpg", alt: "A visitor playing Pelle's Reflex Galleon at the public demo" },
-    fan: "/img/galleon/logo.jpg",
-    fanContain: true,
+    cover: { src: "/img/galleon/ship.jpg", alt: "The finished Pelle's Reflex Galleon: a wooden ship under a Reflex Galjoen sail, with Pelle projected beside it" },
+    fan: "/img/galleon/logo-tile.jpg",
     intro:
       "An interactive installation that needs no operator. A projected cartoon pirate, Pelle, draws people in and talks them through the game. Treasure drops at random, players catch what they can, and raising the ship's flag hauls the missed treasure back out of the water and resets the game for the next person.",
     sections: [
@@ -256,7 +277,11 @@ export const projects: Project[] = [
         body: [
           "Pick a difficulty on the compass and ring the bell. The music shifts and objects start falling. Catches go into the laser-cut ridges at the front, misses splash into the water below. When the round ends, Pelle tells you to raise the flag, and that one rope pull is both the finale and the reset.",
         ],
-        shots: [{ src: "/img/galleon/demo-2.jpg", alt: "The installation with ropes, bell and projected screen", caption: "The installation at the public demo.", wide: true }],
+        shots: [
+          { src: "/img/galleon/bottles.jpg", alt: "Treasure bottles filled with sand and beads hanging from a row of servo-driven hooks", caption: "The treasure: bottles on servo hooks, released one at a time." },
+          { src: "/img/galleon/gears.jpg", alt: "Underside of the mast with 3D-printed gears on a wooden shaft and a box of wiring", caption: "Under the mast: the geared shaft and the electronics." },
+          { src: "/img/galleon/demo-2.jpg", alt: "An earlier version with hanging strings in front of a black curtain", caption: "Where it started: the Wizard-of-Oz version, before the mechanism was built.", wide: true },
+        ],
       },
       {
         heading: "My part",

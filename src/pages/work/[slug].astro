@@ -40,6 +40,7 @@ const group = (shots: Shot[] = []) => {
       <dt>Where</dt><dd>{p.place}</dd>
       <dt>Role</dt><dd>{p.role}</dd>
       <dt>Tools</dt><dd>{p.tools}</dd>
+      {p.links && <><dt>Read</dt><dd class="links">{p.links.map((l) => <a href={l.href}>{l.label}</a>)}</dd></>}
     </dl>
     <p>{p.intro}</p>
     {p.demo && <DemoWindow href={p.demo.href} title={p.title} label={p.demo.label} note={p.demo.note} />}
@@ -61,8 +62,6 @@ const group = (shots: Shot[] = []) => {
         ))}
       </section>
     ))}
-
-    {p.link && <p><a href={p.link.href}>{p.link.label}</a></p>}
 
     <nav class="next">
       <a href="/" data-trans>Back to the world map</a>
@@ -87,6 +86,7 @@ const group = (shots: Shot[] = []) => {
   .meta { font-size: 12px; color: var(--muted); border-top: 2px solid var(--ink); border-bottom: 1px dashed var(--contour); padding: 10px 0; margin: 0 0 32px; display: grid; grid-template-columns: 80px 1fr; gap: 2px 12px; }
   .meta dt { color: var(--ink); font-weight: 700; }
   .meta dd { margin: 0; }
+  .meta .links { display: flex; flex-wrap: wrap; gap: 2px 16px; }
   .case h2 { font: 700 15px/1.4 var(--mono); margin: 44px 0 12px; }
   .case h2::before { content: "## "; color: var(--contour); }
   .case figure { margin: 24px 0; }
