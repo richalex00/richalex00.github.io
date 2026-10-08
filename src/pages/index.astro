@@ -55,7 +55,7 @@ const contacts = [
         <a class={`tile${i === 0 ? " lead" : ""}${p.tile ? " logo" : ""}${p.tileVideo ? " anim" : ""}`} href={`/work/${p.slug}/`} data-trans>
           <div class="frame" style={p.tile ? `background: ${p.tile.bg}` : p.tileVideo ? `background: ${p.tileVideo.bg}` : undefined}>
             {p.tileVideo
-              ? <video src={p.tileVideo.src} poster={p.tileVideo.poster} muted playsinline preload="none" aria-label={`${p.title} logo animation`}></video>
+              ? <video src={p.tileVideo.src} poster={p.tileVideo.poster} muted playsinline preload="metadata" aria-label={`${p.title} logo animation`}></video>
               : p.tileSkull
               ? <GalleonLogo />
               : p.tile?.animated
