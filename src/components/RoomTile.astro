@@ -1,0 +1,16 @@
+---
+// The lactation-rooms tile: a 64x40 pixel room drawn as a 48-frame strip
+// (scratch script room.py). At rest it shows the sunset preset; hovering the
+// tile taps the tablet and fades the room through forest, sea and back.
+---
+<div class="rm-logo" role="img" aria-label="Pixel-art lactation room whose light and wall screen change between presets">
+  <img class="rm-strip" src="/img/lactation/room-strip.png" alt="" width="3072" height="40" loading="lazy" decoding="async" data-cycle />
+</div>
+
+<style is:global>
+  .rm-logo { position: relative; width: 100%; height: 100%; overflow: hidden; }
+  .rm-logo .rm-strip { position: absolute; left: 0; top: 0; width: 4800%; max-width: none; height: 100%; image-rendering: pixelated; }
+  /* 48 frames at 10 fps; translateX(-100%) is the strip's full width, so each step is one frame. */
+  .rm-logo.play .rm-strip { animation: rm-cycle 4.8s steps(48) infinite; }
+  @keyframes rm-cycle { to { transform: translateX(-100%); } }
+</style>

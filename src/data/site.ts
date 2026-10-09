@@ -37,7 +37,7 @@ export type Project = {
   demo?: { href: string; label: string; note: string }; // opens in a window over the case study
   tile?: { src: string; bg: string; animated?: boolean }; // homepage tile image shown whole on a solid colour, instead of the cover; animated = live logo component
   tileVideo?: { src: string; poster: string; bg: string }; // homepage tile animation, played on hover
-  tileSkull?: boolean; // homepage tile is the Galleon logo with a chattering jaw
+  tileAnim?: "skull" | "room"; // homepage tile is a live component: the Galleon skull or the pixel room
 };
 
 // Order = priority. First is the lead in the grid and the top card in the fan.
@@ -212,6 +212,7 @@ export const projects: Project[] = [
     tools: "Interviews, thematic analysis, Figma, Wizard of Oz",
     cover: { src: "/img/lactation/room.jpg", alt: "The prototype set up in the lactation room with a tablet, lamp and wall display" },
     fan: "/img/lactation/tablet-hand.jpg",
+    tileAnim: "room",
     links: [{ label: "Read the full report (PDF)", href: "/papers/lactation-rooms-report.pdf" }],
     intro:
       "Workplace lactation rooms usually meet the legal minimum and nothing more. We set out to understand what parents actually need from them, and found the problem was less about furniture and more about feeling safe, unhurried and in control.",
@@ -266,7 +267,7 @@ export const projects: Project[] = [
     tools: "Arduino, servos, 3D printing, laser cutting, woodwork, ElevenLabs, projection",
     cover: { src: "/img/galleon/ship.jpg", alt: "The finished Pelle's Reflex Galleon: a wooden ship under a Reflex Galjoen sail, with Pelle projected beside it" },
     fan: "/img/galleon/logo-tile.jpg",
-    tileSkull: true,
+    tileAnim: "skull",
     intro:
       "An interactive installation that needs no operator. A projected cartoon pirate, Pelle, draws people in and talks them through the game. Treasure drops at random, players catch what they can, and raising the ship's flag hauls the missed treasure back out of the water and resets the game for the next person.",
     sections: [

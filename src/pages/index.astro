@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import StuddyLogo from "../components/StuddyLogo.astro";
 import GalleonLogo from "../components/GalleonLogo.astro";
+import RoomTile from "../components/RoomTile.astro";
 import { person, projects, experience, education } from "../data/site";
 import { size } from "../data/imageSize";
 
@@ -23,7 +24,7 @@ const rects = (rows: string[]) =>
   rows.flatMap((row, y) => [...row].map((ch, x) => (ch === "#" ? `<rect x="${x}" y="${y}" width="1" height="1"/>` : ""))).join("");
 // Only the plain image tiles need a size; the others are videos or logo components
 const tileDims = await Promise.all(projects.map((p, i) =>
-  p.tileVideo || p.tileSkull || p.tile?.animated ? undefined : size(p.tile?.src ?? (i === 0 ? p.cover.src : p.fan)),
+  p.tileVideo || p.tileAnim || p.tile?.animated ? undefined : size(p.tile?.src ?? (i === 0 ? p.cover.src : p.fan)),
 ));
 const contacts = [
   { name: "Email", href: `mailto:${person.email}`, colour: "#22302C" },
@@ -56,8 +57,10 @@ const contacts = [
           <div class="frame" style={p.tile ? `background: ${p.tile.bg}` : p.tileVideo ? `background: ${p.tileVideo.bg}` : undefined}>
             {p.tileVideo
               ? <video src={p.tileVideo.src} poster={p.tileVideo.poster} muted playsinline preload="metadata" aria-label={`${p.title} logo animation`}></video>
-              : p.tileSkull
+              : p.tileAnim === "skull"
               ? <GalleonLogo />
+              : p.tileAnim === "room"
+              ? <RoomTile />
               : p.tile?.animated
               ? <StuddyLogo />
               : p.tile
@@ -131,7 +134,7 @@ const contacts = [
       const touch = matchMedia("(hover: none)").matches && "IntersectionObserver" in window;
       const play = (v) => { if (v.paused) { v.currentTime = 0; v.play().catch(() => {}); } };
       // Live logos loop while hovered, then finish the current cycle and stop.
-      document.querySelectorAll(".sb-logo, .gl-logo").forEach((logo) => {
+      document.querySelectorAll(".sb-logo, .gl-logo, .rm-logo").forEach((logo) => {
         const tile = logo.closest(".tile");
         let leaving = false;
         const start = () => { leaving = false; logo.classList.add("play"); };
