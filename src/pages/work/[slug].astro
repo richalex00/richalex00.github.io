@@ -25,7 +25,7 @@ const dims = Object.fromEntries(await Promise.all(
   [p.cover, ...p.sections.flatMap((s) => s.shots ?? [])].map(async (sh) => [sh.src, await size(sh.src)]),
 ));
 ---
-<Base title={p.title} description={`${p.title}: ${p.subtitle}.`}>
+<Base title={`${p.title}, ${p.kind}`} description={`${p.title}: ${p.subtitle}.`}>
   <div class="bar">
     <a class="back" href="/" data-trans>
       <svg viewBox="0 0 8 8" fill="currentColor" aria-hidden="true"><rect x="0" y="3" width="8" height="2"/><rect x="1" y="2" width="1" height="4"/><rect x="2" y="1" width="1" height="6"/><rect x="3" y="0" width="1" height="8"/></svg>
@@ -86,17 +86,16 @@ const dims = Object.fromEntries(await Promise.all(
   .case-hero { min-height: 240px; padding: 56px 16px 28px; }
   .case-hero h1, .case-hero .sub { position: relative; }
   .case-hero h1 { font: 500 clamp(36px, 7vw, 56px)/1.05 var(--pixel); color: var(--pine); margin: 0 0 8px; text-align: center; text-wrap: balance; max-width: 560px; }
-  .case-hero .sub { text-align: center; font: italic 19px/1.4 var(--serif); color: var(--contour); margin: 0; max-width: 560px; }
+  .case-hero .sub { text-align: center; font: 400 15px/1.5 var(--mono); color: var(--contour); margin: 0; max-width: 560px; }
   .case { padding-top: 8px; }
   .meta { font-size: 12px; color: var(--muted); border-top: 2px solid var(--ink); border-bottom: 1px dashed var(--contour); padding: 10px 0; margin: 0 0 32px; display: grid; grid-template-columns: 80px 1fr; gap: 2px 12px; }
   .meta dt { color: var(--ink); font-weight: 700; }
   .meta dd { margin: 0; }
   .meta .links { display: flex; flex-wrap: wrap; gap: 2px 16px; }
-  .case h2 { font: 700 15px/1.4 var(--mono); margin: 44px 0 12px; }
-  .case h2::before { content: "## "; color: var(--contour); }
+  .case h2 { font: 500 20px/1.2 var(--pixel); color: var(--pine); margin: 44px 0 12px; }
   .case figure { margin: 24px 0; }
   .case figure img { width: 100%; display: block; border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); background: var(--panel); }
-  .case figcaption { font: italic 15px/1.4 var(--serif); color: var(--contour); margin-top: 10px; }
+  .case figcaption { font: 400 12px/1.6 var(--mono); color: var(--contour); margin-top: 10px; }
   .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .pair figure { margin: 12px 0; }
   .next { margin: 72px 0 0; padding-top: 16px; border-top: 2px solid var(--ink); display: flex; justify-content: space-between; font-size: 13px; gap: 12px; }

@@ -25,6 +25,7 @@ export type Project = {
   slug: string;
   title: string;
   subtitle: string;
+  kind: string; // what the project is, for the browser tab: "StuddyBuddy, AI study planner"
   year: string;
   place: string;
   role: string;
@@ -46,6 +47,7 @@ export const projects: Project[] = [
     slug: "studdybuddy",
     title: "StuddyBuddy",
     subtitle: "An AI study planner that asks before it acts",
+    kind: "AI study planner",
     year: "2025–2026",
     place: "Enschede and Stockholm",
     role: "Founder, product design, front end",
@@ -126,6 +128,7 @@ export const projects: Project[] = [
     slug: "vigil",
     title: "Vigil",
     subtitle: "A living record for every device in Europe",
+    kind: "product passport startup",
     year: "2026",
     place: "EIT Digital Summer School, Bari",
     role: "Team venture: brand, pitch, product",
@@ -160,6 +163,7 @@ export const projects: Project[] = [
     slug: "map-generator",
     title: "2D map generator",
     subtitle: "Procedural islands from noise and cellular automata",
+    kind: "procedural generation thesis",
     year: "2023",
     place: "University of Limerick, BSc thesis (A1)",
     role: "Solo project",
@@ -206,6 +210,7 @@ export const projects: Project[] = [
     slug: "lactation-rooms",
     title: "Lactation rooms",
     subtitle: "Calm, personal control in a room built for care",
+    kind: "human-centred design project",
     year: "2026",
     place: "University of Twente, Enschede (8/10)",
     role: "Team project: research, concept, prototype",
@@ -261,6 +266,7 @@ export const projects: Project[] = [
     slug: "galleon",
     title: "Pelle's Reflex Galleon",
     subtitle: "A pirate reflex game that runs itself",
+    kind: "interactive installation",
     year: "2026",
     place: "University of Twente, demoed at a Dutch amusement park (8.2/10)",
     role: "Team project",

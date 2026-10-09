@@ -2,7 +2,7 @@
 import { person } from "../data/site";
 interface Props { title?: string; description?: string }
 const { title, description = `${person.name}, ${person.role} in Stockholm. ${person.subline}` } = Astro.props;
-const pageTitle = title ? `${title} | ${person.name}` : `${person.name}, ${person.role}`;
+const pageTitle = title ? `${title} | ${person.name}` : `${person.name} | ${person.role}`;
 ---
 <!doctype html>
 <html lang="en">
@@ -19,7 +19,7 @@ const pageTitle = title ? `${title} | ${person.name}` : `${person.name}, ${perso
     <script is:inline>try { if (sessionStorage.getItem("px-trans")) document.documentElement.classList.add("trans-in"); } catch (e) {}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Pixelify+Sans:wght@500&family=Spectral:ital@1&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Pixelify+Sans:wght@500&display=swap" />
   </head>
   <body>
     <slot />
@@ -41,7 +41,6 @@ const pageTitle = title ? `${title} | ${person.name}` : `${person.name}, ${perso
     --muted: #56615C;
     --mono: "JetBrains Mono", ui-monospace, monospace;
     --pixel: "Pixelify Sans", var(--mono);
-    --serif: "Spectral", Georgia, serif;
     color-scheme: light;
   }
   html.trans-in { background: var(--pine); }
