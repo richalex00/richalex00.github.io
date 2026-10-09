@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "demo:sync": "rm -rf public/studdybuddy-demo && cp -r ../studdybuddy-ai/dist/client public/studdybuddy-demo && rm public/studdybuddy-demo/_shell.html"
+    "demo:sync": "rm -rf public/studdybuddy-demo && cp -r ../studdybuddy-ai/dist/client public/studdybuddy-demo && rm public/studdybuddy-demo/_shell.html",
+    "vigil:sync": "npm --prefix ../vigil-demo/app run build && rm -rf public/vigil-demo && cp -r ../vigil-demo/app/dist public/vigil-demo"
   },
   "dependencies": {
     "astro": "^7.3.5"
