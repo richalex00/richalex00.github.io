@@ -58,7 +58,7 @@ export const projects: Project[] = [
     demo: {
       href: "/studdybuddy-demo/",
       label: "Try the live demo",
-      note: "StuddyBuddy isn't running publicly at the moment, because keeping the AI hosted costs more than it's worth between rounds of testing. This is the real app running on a frozen copy of my own KTH Canvas and timetable data. AI replies are scripted, and your changes reset when you reload.",
+      note: "StuddyBuddy isn't running publicly at the moment, because keeping the AI hosted costs more than it's worth between rounds of testing. In this demo, AI replies are scripted and your changes reset when you reload.",
     },
     links: [{ label: "Read the Business Development Lab report (PDF)", href: "/papers/studdybuddy-business-report.pdf" }],
     intro:
@@ -69,7 +69,7 @@ export const projects: Project[] = [
         body: [
           "StuddyBuddy began in the Business Development Lab at the University of Twente, under the working name SchedulAI. With my course team I interviewed students, tested the concept and built a first financial model. That work is in the report linked above.",
           "When the course ended, I took the idea into Novel-T's Entrepreneurial Experience: three UTwente students, a problem we lived every week, and a working prototype built over one hackathon weekend.",
-          "As founder I set the vision and carried the pitch. We framed the problem, shaped a business model (freemium, with a €4.99 premium tier and university licensing later) and pitched it to investors at the end of the programme.",
+          "As founder I set the vision and carried the pitch. We framed the problem, shaped a business model and pitched it to investors at the end of the programme.",
           "When the programme finished, I kept going. I moved the prototype onto a stack I control, connected it to real Canvas and timetable data, and demoed it at the KTH Lovable Buildathon in Stockholm on 1 September 2026.",
         ],
         shots: [{ src: "/img/studdybuddy/novelt-finals.jpg", alt: "Teams from the Entrepreneurial Experience on stage at the finals, holding the award cheques, with gold confetti on the floor", caption: "With the other teams at the finals of the first Entrepreneurial Experience, 17 June 2026.", wide: true }],
