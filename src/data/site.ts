@@ -165,12 +165,9 @@ export const projects: Project[] = [
       {
         heading: "After the summer school",
         body: [
-          "The pitch claimed that AI could fill most of a passport from documents that already exist. After Bari I wanted to know whether that was true, so I kept going on my own. I built a pipeline that reads real battery datasheets, and a demo where you check its work. Batteries came first because their passport becomes law in February 2027.",
-          "Pick a battery. The demo replays a real extraction run on one of three public datasheets: the PDF scrolls past as the AI pulls out 25 passport fields.",
-          "Check its work. Every value comes with the exact line it was copied from, and plain code, not the AI, checks that the line exists and the number in it matches. Hover a field and its source lights up. Anything the checker can't confirm lands in front of you to confirm or fix.",
-          "Close the rings. The growth rings from the logo became the progress display: the inner ring for values from the datasheet, the coral ring for the ones you checked, the outer ring for data only a supplier holds. When every field has a decision, the passport prints.",
-          "Look ahead. A Life tab sketches the second half of the pitch, a battery's history recorded year by year. It's marked as simulated.",
-          "I tested it on 21 datasheets I hadn't tuned it on, against a plain one-prompt version. Asking for quotes removed the made-up values entirely and lifted accuracy from 95% to 97%, and 98% of the fields it accepted were right. The checker didn't catch the last few mistakes, though. Each one came with a real quote, just the wrong one, like a minimum capacity taken for the typical one. That's the part a person still has to see, and why the review screen exists.",
+          "After Bari I kept going on my own, to test the pitch's core claim: that AI can fill most of a passport from documents that already exist. I started with batteries, whose passport becomes law in February 2027.",
+          "Pick a real datasheet and watch the AI pull out 25 passport fields. Plain code checks each value against the exact line it came from, so hovering a field lights up its source, and anything it can't confirm comes to you. The growth rings from the logo fill as you decide, and when they close, the passport prints.",
+          "Tested on 21 datasheets it had never seen, 98% of the fields it accepted were correct, and it made up nothing.",
         ],
         shots: [
           { src: "/img/vigil/demo-review.jpg", alt: "The demo's review screen: datasheet text on the left with one line highlighted, growth rings in the middle, fields to check on the right", caption: "Checking a field: its source line lights up, and the rings fill as you decide.", wide: true },
