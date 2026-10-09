@@ -41,12 +41,20 @@ const pageTitle = title ? `${title} | ${person.name}` : `${person.name} | ${pers
     --muted: #56615C;
     --mono: "JetBrains Mono", ui-monospace, monospace;
     --pixel: "Pixelify Sans", var(--mono);
+    /* Pixel cursors from Kenney's Cursor Pixel Pack (CC0, kenney.nl), recoloured to the palette:
+       point, look at (anything clickable), mine (the margins, set by mine.js). */
+    --cursor: url("/cursors/arrow.png") 2 2, auto;
+    --cursor-look: url("/cursors/look.png") 12 12, pointer;
+    --cursor-pick: url("/cursors/pick.png") 3 8, crosshair;
     color-scheme: light;
   }
   html.trans-in { background: var(--pine); }
   html.trans-in body { opacity: 0; }
   *, *::before, *::after { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
+  html { cursor: var(--cursor); }
+  a, button, summary, label, [role="button"] { cursor: var(--cursor-look); }
+  html.mining, html.mining * { cursor: var(--cursor-pick); }
   body { margin: 0; background: var(--paper); color: var(--ink); font: 400 15px/1.75 var(--mono); }
   img { max-width: 100%; height: auto; } /* keeps the aspect ratio when an <img> carries width/height attributes */
   a { color: var(--raspberry-text); text-underline-offset: 3px; }

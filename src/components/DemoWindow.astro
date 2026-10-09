@@ -62,7 +62,7 @@ const { href, title, label, note } = Astro.props;
     display: inline-flex; align-items: center; gap: 10px;
     font: 700 14px/1 var(--mono); color: var(--paper); background: var(--pine);
     border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
-    padding: 13px 20px; cursor: pointer;
+    padding: 13px 20px; cursor: var(--cursor-look);
     transition: transform 0.08s steps(2), box-shadow 0.08s steps(2);
   }
   .demo-open svg { width: 12px; height: 12px; shape-rendering: crispEdges; }
@@ -91,7 +91,7 @@ const { href, title, label, note } = Astro.props;
   .demo-tab { color: var(--paper); font-size: 12px; white-space: nowrap; }
   .demo-tab:hover { color: #F2C9DD; }
   .demo-close {
-    width: 30px; height: 30px; flex: none; display: grid; place-items: center; cursor: pointer;
+    width: 30px; height: 30px; flex: none; display: grid; place-items: center; cursor: var(--cursor-look);
     background: var(--paper); color: var(--ink); border: 2px solid var(--ink);
   }
   .demo-close svg { width: 12px; height: 12px; shape-rendering: crispEdges; }

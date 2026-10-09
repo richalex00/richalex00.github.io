@@ -40,6 +40,14 @@
   }
   const rnd = (a, b) => a + Math.random() * (b - a);
 
+  // show the pickaxe cursor wherever a click would mine
+  let mining = false;
+  addEventListener("pointermove", (e) => {
+    const m = e.pointerType === "mouse" && minable(e);
+    if (m !== mining) { mining = m; document.documentElement.classList.toggle("mining", m); }
+  }, { passive: true });
+  document.documentElement.addEventListener("pointerleave", () => { if (mining) { mining = false; document.documentElement.classList.remove("mining"); } });
+
   function strike(px, py) { // page coordinates
     // crack: a few short pixel rays from the impact, fading out over a few seconds
     const rays = [];

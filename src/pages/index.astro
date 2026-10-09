@@ -182,7 +182,7 @@ const contacts = [
      so its edges line up with the text; the bubble's tail lands on its top edge. */
   .intro { position: relative; padding-top: 34px; }
   .intro p:nth-of-type(2) { clear: left; } /* start below the photo, not wrapped round its corner */
-  .avatar { position: relative; float: left; top: 5px; width: 128px; height: 128px; margin: 0 16px 14px 0; border: 2px solid var(--ink); background: var(--panel); cursor: pointer; padding: 0; box-shadow: 3px 3px 0 var(--ink); }
+  .avatar { position: relative; float: left; top: 5px; width: 128px; height: 128px; margin: 0 16px 14px 0; border: 2px solid var(--ink); background: var(--panel); cursor: var(--cursor-look); padding: 0; box-shadow: 3px 3px 0 var(--ink); }
   .avatar canvas, .avatar img { width: 100%; height: 100%; display: block; image-rendering: pixelated; }
   .avatar img { display: none; object-fit: cover; }
   /* hover peeks at the photo; a click keeps it (aria-pressed) until the next click */
@@ -216,7 +216,7 @@ const contacts = [
   .log-head { font: 500 20px/1 var(--pixel); color: var(--pine); margin: 36px 0 0; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
   .log-head:first-child { margin-top: 0; }
   .log details { border-bottom: 1px dashed var(--contour); }
-  .log summary { list-style: none; cursor: pointer; padding: 12px 0; display: grid; grid-template-columns: 22px 1fr auto; gap: 12px; align-items: center; }
+  .log summary { list-style: none; cursor: var(--cursor-look); padding: 12px 0; display: grid; grid-template-columns: 22px 1fr auto; gap: 12px; align-items: center; }
   .log summary::-webkit-details-marker { display: none; }
   .log summary img { width: 22px; height: 22px; object-fit: contain; filter: grayscale(1) brightness(0.3); }
   .log summary .role { font-size: 14px; line-height: 1.4; }
@@ -245,7 +245,7 @@ const contacts = [
   .marble p { margin: 0; }
   .marble figure { margin: 0; }
   .marble canvas { width: 100%; height: auto; display: block; image-rendering: pixelated; }
-  .statue-btn { all: unset; display: block; width: 100%; cursor: pointer; }
+  .statue-btn { all: unset; display: block; width: 100%; cursor: var(--cursor-look); }
   .statue-btn:focus-visible { outline: 2px solid var(--raspberry); outline-offset: 3px; }
   .marble figcaption { font: 400 12px/1.4 var(--mono); color: var(--contour); text-align: center; margin-top: 6px; }
 
