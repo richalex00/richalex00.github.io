@@ -171,18 +171,18 @@ const contacts = [
 
 <style is:global>
   /* Hero height and title; the contour canvas styles live in Base.astro */
-  .hero { height: 260px; }
-  .hero h1 { position: relative; margin: 0; font: 500 clamp(44px, 9vw, 84px)/1 var(--pixel); color: var(--pine); letter-spacing: 0.01em; text-align: center; padding: 0 16px; }
+  .hero { height: var(--hero-h); }
+  .hero h1 { position: relative; margin: 0; font: 500 clamp(44px, 9vw, var(--fs-6))/1 var(--pixel); color: var(--pine); letter-spacing: 0.01em; text-align: center; padding: 0 16px; }
   .clock { position: absolute; top: 16px; right: 16px; font: 500 12px/1 var(--mono); color: var(--muted); display: flex; align-items: center; gap: 8px; background: var(--paper); padding: 6px 8px; border: 2px solid var(--ink); z-index: 1; }
   .clock i { width: 8px; height: 8px; background: var(--raspberry); display: block; animation: blink 2s steps(1) infinite; }
   @keyframes blink { 50% { opacity: 0.25; } }
 
   /* Avatar + speech bubble */
-  /* The photo floats in the first paragraph, three text lines tall (3 × 26.25px),
+  /* The photo floats in the first paragraph, four text lines tall (4 × 26px),
      so its edges line up with the text; the bubble's tail lands on its top edge. */
-  .intro { position: relative; padding-top: 34px; }
+  .intro { position: relative; padding-top: var(--s-34); }
   .intro p:nth-of-type(2) { clear: left; } /* start below the photo, not wrapped round its corner */
-  .avatar { position: relative; float: left; top: 5px; width: 128px; height: 128px; margin: 0 16px 14px 0; border: 2px solid var(--ink); background: var(--panel); cursor: var(--cursor-look); padding: 0; box-shadow: 3px 3px 0 var(--ink); }
+  .avatar { position: relative; float: left; top: 0; width: 104px; height: 104px; margin: 0 var(--gutter) var(--s-8) 0; border: 2px solid var(--ink); background: var(--panel); cursor: var(--cursor-look); padding: 0; box-shadow: 3px 3px 0 var(--ink); }
   .avatar canvas, .avatar img { width: 100%; height: 100%; display: block; image-rendering: pixelated; }
   .avatar img { display: none; object-fit: cover; }
   /* hover peeks at the photo; a click keeps it (aria-pressed) until the next click */
@@ -191,12 +191,12 @@ const contacts = [
   .avatar.hold:hover canvas { display: block; } /* just clicked back to pixels: stay pixelated until the pointer leaves */
   .avatar.hold:hover img { display: none; }
   .avatar:focus-visible { outline: 2px dashed var(--raspberry); outline-offset: 3px; }
-  /* 24px tall + 6px tail: top = avatar top (34 + 5) − 30 */
-  .bubble { position: absolute; left: 10px; top: 9px; height: 24px; font: 500 12px/16px var(--mono); background: var(--paper); border: 2px solid var(--ink); padding: 2px 7px; white-space: nowrap; }
+  /* 24px tall + 6px tail: top = avatar top (34) − 30 */
+  .bubble { position: absolute; left: 10px; top: 4px; height: 24px; font: 500 12px/16px var(--mono); background: var(--paper); border: 2px solid var(--ink); padding: 2px 7px; white-space: nowrap; }
   .bubble::after { content: ""; position: absolute; left: 8px; bottom: -8px; width: 6px; height: 6px; background: var(--ink); }
 
   /* Project tiles */
-  .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 8px 0 44px; }
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); margin: var(--s-8) 0 var(--s-55); }
   .tile { display: block; color: inherit; text-decoration: none; }
   .tile .frame { aspect-ratio: 16 / 10; border: 2px solid var(--ink); background: var(--panel); box-shadow: 4px 4px 0 var(--ink); overflow: hidden; transition: transform 120ms steps(2), box-shadow 120ms steps(2); }
   .tile.lead { grid-column: 1 / -1; }
@@ -207,59 +207,61 @@ const contacts = [
   .tile.anim video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .tile:hover .frame, .tile:focus-visible .frame { transform: translate(-2px, -2px) rotate(-1.5deg); box-shadow: 6px 6px 0 var(--raspberry); }
   .tile:nth-child(odd):hover .frame { transform: translate(-2px, -2px) rotate(1.5deg); }
-  .tile .label { margin-top: 10px; font-size: 13px; line-height: 1.5; }
-  .tile .label span { color: var(--muted); display: block; }
+  .tile .label { margin-top: var(--s-13); font-size: var(--fs-s); line-height: var(--lh-small); }
+  .tile .label span { color: var(--muted); display: block; text-wrap: balance; }
   .tile .label .live { font: 700 10px/1 var(--mono); font-style: normal; text-transform: uppercase; letter-spacing: 0.06em; color: var(--paper); background: var(--raspberry); padding: 3px 6px; margin-left: 8px; vertical-align: 2px; }
 
   /* Experience + education log */
-  .log { margin: 8px 0 44px; }
-  .log-head { font: 500 20px/1 var(--pixel); color: var(--pine); margin: 36px 0 0; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
+  .log { margin: var(--s-8) 0 var(--s-55); }
+  .log-head { font: 500 var(--fs-1)/1 var(--pixel); color: var(--pine); margin: var(--s-34) 0 0; padding-bottom: var(--s-13); border-bottom: 2px solid var(--ink); }
   .log-head:first-child { margin-top: 0; }
   .log details { border-bottom: 1px dashed var(--contour); }
   .log summary { list-style: none; cursor: var(--cursor-look); padding: 12px 0; display: grid; grid-template-columns: 22px 1fr auto; gap: 12px; align-items: center; }
   .log summary::-webkit-details-marker { display: none; }
   .log summary img { width: 22px; height: 22px; object-fit: contain; filter: grayscale(1) brightness(0.3); }
-  .log summary .role { font-size: 14px; line-height: 1.4; }
-  .log summary .when { font-size: 12px; color: var(--muted); text-align: right; white-space: nowrap; }
+  .log summary .role { font-size: var(--fs-s); line-height: var(--lh-small); }
+  .log summary .when { font-size: var(--fs-xs); color: var(--muted); text-align: right; white-space: nowrap; }
   .log summary .when::after { content: " +"; color: var(--raspberry-text); font-weight: 700; }
   .log summary:hover .role, .log summary:hover .when, .log summary:focus-visible .role, .log summary:focus-visible .when { color: var(--raspberry-text); }
   .log details[open] .when::after { content: " −"; }
-  .log .body { padding: 0 0 14px 34px; font-size: 13px; line-height: 1.7; }
+  .log .body { padding: 0 0 var(--s-13) var(--s-34); font-size: var(--fs-s); line-height: 22px; }
   .log .body ul { margin: 0 0 8px; padding-left: 0; list-style: none; }
   .log .body li::before { content: "> "; color: var(--contour); }
-  .log .tags { color: var(--muted); font-size: 12px; }
+  .log .tags { color: var(--muted); font-size: var(--fs-xs); }
   .log .edu-note { margin: 0; }
-  .cv { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; font: 700 14px/1 var(--mono); color: var(--paper); background: var(--raspberry); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 13px 20px; text-decoration: none; transition: transform 0.08s steps(2), box-shadow 0.08s steps(2); }
+  .cv { display: inline-flex; align-items: center; gap: 10px; margin-top: var(--s-21); font: 700 var(--fs-s)/1 var(--mono); color: var(--paper); background: var(--raspberry); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 13px 20px; text-decoration: none; transition: transform 0.08s steps(2), box-shadow 0.08s steps(2); }
   .cv svg { width: 12px; height: 12px; shape-rendering: crispEdges; }
   .cv:hover { background: var(--pine); }
   .cv:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
 
   /* Live snapshot */
-  .code { background: var(--ink); color: var(--paper); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--pine); padding: 18px 20px; margin: 8px 0 44px; font-size: 14px; line-height: 1.8; counter-reset: line; overflow-x: auto; }
+  .code { background: var(--ink); color: var(--paper); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--pine); padding: var(--s-21); margin: var(--s-8) 0 var(--s-55); font-size: var(--fs-s); line-height: var(--lh-body); counter-reset: line; overflow-x: auto; }
   .code div { white-space: pre; }
   .code div::before { counter-increment: line; content: counter(line); display: inline-block; width: 2ch; margin-right: 18px; color: #6E8079; text-align: right; }
   .k { color: #E58AB8; } .v { color: #9CCFC0; } .s { color: #E8D9A8; }
 
   /* Sisyphus (marble, 120px sprite at 2x; stacked under the text on phones) */
-  .marble { display: grid; grid-template-columns: 1fr 240px; gap: 24px; align-items: center; margin: 8px 0 1.4em; }
+  .marble { display: grid; grid-template-columns: 1fr 240px; gap: var(--s-21); align-items: center; margin: var(--s-8) 0 var(--s-21); }
   .marble p { margin: 0; }
   .marble figure { margin: 0; }
   .marble canvas { width: 100%; height: auto; display: block; image-rendering: pixelated; }
   .statue-btn { all: unset; display: block; width: 100%; cursor: var(--cursor-look); }
   .statue-btn:focus-visible { outline: 2px solid var(--raspberry); outline-offset: 3px; }
-  .marble figcaption { font: 400 12px/1.4 var(--mono); color: var(--contour); text-align: center; margin-top: 6px; }
+  .marble figcaption { font: 400 var(--fs-xs)/var(--lh-small) var(--mono); color: var(--muted); text-align: center; margin-top: var(--s-8); text-wrap: balance; }
 
   /* Contact */
-  .thanks { margin-top: 64px; }
-  .icons { display: flex; gap: 28px; margin: 12px 0 0; flex-wrap: wrap; }
-  .icons a { display: grid; justify-items: center; gap: 6px; color: var(--ink); text-decoration: none; font-size: 11px; }
+  .thanks { margin-top: var(--s-55); }
+  /* Equal-width cells, so the icons sit at even intervals whatever the label length */
+  .icons { display: flex; justify-content: center; gap: var(--s-21); margin: var(--s-8) 0 0; flex-wrap: wrap; }
+  .icons a { display: grid; justify-items: center; gap: var(--s-8); width: 64px; color: var(--ink); text-decoration: none; font-size: var(--fs-xs); line-height: var(--lh-small); }
   .icons svg { width: 44px; height: 44px; shape-rendering: crispEdges; transition: transform 100ms steps(2); }
   .icons a:hover svg { transform: translateY(-3px); }
 
   @media (max-width: 420px) {
     .tiles { grid-template-columns: 1fr; }
-    .icons { gap: 18px; }
-    .marble { grid-template-columns: 1fr; gap: 16px; }
+    .icons { gap: var(--s-13); }
+    .code { font-size: var(--fs-xs); padding: var(--s-13); }
+    .marble { grid-template-columns: 1fr; gap: var(--gutter); }
     .marble figure { width: 240px; max-width: 100%; justify-self: center; }
   }
 </style>

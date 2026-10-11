@@ -8,7 +8,7 @@ export const person = {
   github: "https://github.com/richalex00",
   cv: "/Richard_Alexander_CV.pdf",
   headline: "I design what I build",
-  subline: "HCI designer at KTH, with engineering experience at IBM, General Motors and Ericsson.",
+  subline: "HCI master's student at KTH, with engineering experience at IBM, General Motors and Ericsson.",
   // Homepage text, top to bottom
   intro: [
     "I'm a design engineer from Ireland. I've written production software at IBM, General Motors and Ericsson.",
@@ -65,16 +65,6 @@ export const projects: Project[] = [
       "Students can see their deadlines, but not when to start. StuddyBuddy connects to Canvas, plans the week with AI and gives every course its own tutor. It started as a course project in the University of Twente's Business Development Lab. I carried it into Novel-T's Entrepreneurial Experience, pitched it to investors, and kept going after the programme ended.",
     sections: [
       {
-        heading: "From course project to startup",
-        body: [
-          "StuddyBuddy began in the Business Development Lab at the University of Twente, under the working name SchedulAI. With my course team I interviewed students, tested the concept and built a first financial model. That work is in the report linked above.",
-          "When the course ended, I took the idea into Novel-T's Entrepreneurial Experience: three UTwente students, a problem we lived every week, and a working prototype built over one hackathon weekend.",
-          "As founder I set the vision and carried the pitch. We framed the problem, shaped a business model and pitched it to investors at the end of the programme.",
-          "When the programme finished, I kept going. I moved the prototype onto a stack I control, connected it to real Canvas and timetable data, and demoed it at the KTH Lovable Buildathon in Stockholm on 1 September 2026.",
-        ],
-        shots: [{ src: "/img/studdybuddy/novelt-finals.jpg", alt: "Teams from the Entrepreneurial Experience on stage at the finals, holding the award cheques, with gold confetti on the floor", caption: "With the other teams at the finals of the first Entrepreneurial Experience, 17 June 2026.", wide: true }],
-      },
-      {
         heading: "The trust problem",
         body: [
           "Canvas tells students what's due, never when to start. StuddyBuddy's answer is an AI that plans the week, but an AI rewriting your calendar is a trust problem before it's a UI problem.",
@@ -112,6 +102,16 @@ export const projects: Project[] = [
           "Using AI well also means knowing where not to trust it. Early versions left the language model to choose the times, with the rules written only into its prompt. I moved slot-finding into plain, tested code: the model now says what to schedule and roughly when, and the scheduler places each block around lectures, personal plans and the student's sleep hours. A proposal can't clash with a class or land at 3am, whatever the model asks for.",
         ],
         shots: [{ src: "/img/studdybuddy/building.jpg", alt: "Richard in headphones, typing on a laptop at a crowded table", caption: "Heads down on StuddyBuddy at the KTH Lovable Buildathon, 1 September 2026." }],
+      },
+      {
+        heading: "From course project to startup",
+        body: [
+          "StuddyBuddy began in the Business Development Lab at the University of Twente, under the working name SchedulAI. With my course team I interviewed students, tested the concept and built a first financial model. That work is in the report linked above.",
+          "When the course ended, I took the idea into Novel-T's Entrepreneurial Experience: three UTwente students, a problem we lived every week, and a working prototype built over one hackathon weekend.",
+          "As founder I set the vision and carried the pitch. We framed the problem, shaped a business model and pitched it to investors at the end of the programme.",
+          "When the programme finished, I kept going. I moved the prototype onto a stack I control, connected it to real Canvas and timetable data, and demoed it at the KTH Lovable Buildathon in Stockholm on 1 September 2026.",
+        ],
+        shots: [{ src: "/img/studdybuddy/novelt-finals.jpg", alt: "Teams from the Entrepreneurial Experience on stage at the finals, holding the award cheques, with gold confetti on the floor", caption: "With the other teams at the finals of the first Entrepreneurial Experience, 17 June 2026.", wide: true }],
       },
       {
         heading: "Next: group scheduling",
@@ -167,7 +167,7 @@ export const projects: Project[] = [
         body: [
           "After Bari I kept going on my own, to test the pitch's core claim: that AI can fill most of a passport from documents that already exist. I started with batteries, whose passport becomes law in February 2027.",
           "Pick a real datasheet and watch the AI pull out 25 passport fields. Plain code checks each value against the exact line it came from, so hovering a field lights up its source, and anything it can't confirm comes to you. The growth rings from the logo fill as you decide, and when they close, the passport prints.",
-          "Tested on 21 datasheets it had never seen, 98% of the fields it accepted were correct, and it made up nothing.",
+          "Tested on 21 datasheets it had never seen, it made up nothing, and 98% of the fields it confirmed on its own were right. Everything else goes to a person, because a wrong value can still arrive with a convincing quote.",
         ],
         shots: [
           { src: "/img/vigil/demo-review.jpg", alt: "The demo's review screen: datasheet text on the left with one line highlighted, growth rings in the middle, fields to check on the right", caption: "Checking a field: its source line lights up, and the rings fill as you decide.", wide: true },
