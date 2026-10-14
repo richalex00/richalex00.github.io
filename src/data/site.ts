@@ -141,7 +141,10 @@ export const projects: Project[] = [
       label: "Try the live demo",
       note: "Real output from real battery datasheets, replayed. The AI ran offline beforehand, so nothing here calls an AI, and your decisions reset when you reload. The Life tab is a concept with simulated data.",
     },
-    links: [{ label: "See the pitch deck (PDF)", href: "/papers/vigil-pitch-deck.pdf" }],
+    links: [
+      { label: "See the pitch deck (PDF)", href: "/papers/vigil-pitch-deck.pdf" },
+      { label: "Source on GitHub", href: "https://github.com/richalex00/vigil" },
+    ],
     intro:
       "A two-week venture sprint at the Polytechnic University of Bari, from problem framing to Pitch Day in front of an industry and investor jury. Vigil turns the EU's mandatory Digital Product Passport from a compliance cost into a source of revenue.",
     sections: [
@@ -172,6 +175,13 @@ export const projects: Project[] = [
         shots: [
           { src: "/img/vigil/demo-review.jpg", alt: "The demo's review screen: datasheet text on the left with one line highlighted, growth rings in the middle, fields to check on the right", caption: "Checking a field: its source line lights up, and the rings fill as you decide.", wide: true },
           { src: "/img/vigil/demo-passport.jpg", alt: "The printed passport: fields grouped by cluster, each tagged self-declared, verified, estimated or derived", caption: "The printed passport, with where every value came from.", wide: true },
+        ],
+      },
+      {
+        heading: "An agent that tunes the checker",
+        body: [
+          "In October 2026 I joined the Builder Cohort at Claude Founder House in Stockholm, and used the day to build an agent that improves the checker on its own. Each round it reads the checker's mistakes, changes one rule, runs the tests and re-scores. It keeps the change only if fewer correct values go to a person without any wrong ones getting through, and otherwise undoes it. It practised on 5 datasheets and never saw the other 21 until I scored them once at the end.",
+          "On those 21, correct values sent to a person for no reason dropped from 14 to 8, and the fields it confirmed were still right 98% of the time. The cause was ordinary: PDFs break table cells and sentences across lines, so the value sat just past the quoted line. The answers it was scored against were drafted with AI and haven't all been checked by hand yet, so these numbers are provisional.",
         ],
       },
     ],
