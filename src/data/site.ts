@@ -163,7 +163,6 @@ export const projects: Project[] = [
         body: [
           "Our first identity read like a video-game emblem, so I rebuilt it around a different idea: the record of a device's life. The mark is a set of growth rings, cut at one point like a single slice through a trunk. That shared gap is the one verified checkpoint. I tested three ring treatments in Figma and kept the cleanest.",
         ],
-        shots: [{ src: "/img/vigil/slide-11.jpg", alt: "Revenue streams slide", caption: "Three-tier pricing from the pitch.", wide: true }],
       },
       {
         heading: "After the summer school",
@@ -183,6 +182,7 @@ export const projects: Project[] = [
           "In October 2026 I joined the Builder Cohort at Claude Founder House in Stockholm, and used the day to build an agent that improves the checker on its own. Each round it reads the checker's mistakes, changes one rule, runs the tests and re-scores. It keeps the change only if fewer correct values go to a person without any wrong ones getting through, and otherwise undoes it. It practised on 5 datasheets and never saw the other 21 until I scored them once at the end.",
           "On those 21, correct values sent to a person for no reason dropped from 14 to 8, and the fields it confirmed were still right 98% of the time. The cause was ordinary: PDFs break table cells and sentences across lines, so the value sat just past the quoted line. The answers it was scored against were drafted with AI and haven't all been checked by hand yet, so these numbers are provisional.",
         ],
+        shots: [{ src: "/img/vigil/founder-house.jpg", alt: "Richard standing in front of an orange wall with the sign Claude Founder House Stockholm", caption: "At Claude Founder House in Stockholm, October 2026." }],
       },
     ],
   },
