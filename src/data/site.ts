@@ -240,7 +240,7 @@ export const projects: Project[] = [
     kind: "interactive installation",
     year: "2026",
     place: "KTH, Physical Interaction Design and Realisation. Exhibited 20 October 2026",
-    role: "Team of four. I built Softy's body: how she moves, breathes and glows",
+    role: "Team project: concept, electronics, firmware, phone app and build",
     tools: "Arduino, servo, air pump, LED strip, soft inflatables, Android app, 3D printing",
     cover: { src: "/img/softy/cover.jpg", alt: "Softy, a jellyfish made of fabric and inflatable tentacles, glowing violet as she calms in a dark box" },
     fan: "/img/softy/cover.jpg",
@@ -262,7 +262,7 @@ export const projects: Project[] = [
         heading: "One number drives her whole body",
         body: [
           "The phone measures how agitated Softy should be as a mood from 0 to 100, and sends it five times a second over Wi-Fi to an Arduino above the box, along with events like pickup and putdown. Every output reads the same number, so her light, motion, breathing and voice always agree. If the phone goes quiet for three seconds, she falls back to agitated on her own.",
-          "My part was turning that number into a body. A servo shakes her harder as the mood rises, sways her slowly when calm, and jolts her when the phone is picked up. An air pump inflates her soft tentacles: quick pants when she panics, ten-second breaths when calm, a gasp on every event. I measured the inflatable first (48 bubbles, about 220 mL) and timed the breaths to it. The LED strip flickers an angry red and settles into a slow blue wave.",
+          "Her body turns that number into behaviour. A servo shakes her harder as the mood rises, sways her slowly when calm, and jolts her when the phone is picked up. An air pump inflates her soft tentacles: quick pants when she panics, ten-second breaths when calm, a gasp on every event. The inflatable was measured first (48 bubbles, about 220 mL) so the breaths could be timed to it. An LED strip flickers an angry red and settles into a slow blue wave.",
         ],
         shots: [
           { src: "/img/softy/angry.jpg", alt: "Softy lit red and orange, tentacles blurred from shaking", caption: "Phone face up: red, shaking, panting." },
