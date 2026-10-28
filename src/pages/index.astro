@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import StuddyLogo from "../components/StuddyLogo.astro";
 import GalleonLogo from "../components/GalleonLogo.astro";
 import RoomTile from "../components/RoomTile.astro";
+import JellyTile from "../components/JellyTile.astro";
 import { person, projects, experience, education } from "../data/site";
 import { size } from "../data/imageSize";
 
@@ -61,6 +62,8 @@ const contacts = [
               ? <GalleonLogo />
               : p.tileAnim === "room"
               ? <RoomTile />
+              : p.tileAnim === "jelly"
+              ? <JellyTile />
               : p.tile?.animated
               ? <StuddyLogo />
               : p.tile
@@ -134,7 +137,7 @@ const contacts = [
       const touch = matchMedia("(hover: none)").matches && "IntersectionObserver" in window;
       const play = (v) => { if (v.paused) { v.currentTime = 0; v.play().catch(() => {}); } };
       // Live logos loop while hovered, then finish the current cycle and stop.
-      document.querySelectorAll(".sb-logo, .gl-logo, .rm-logo").forEach((logo) => {
+      document.querySelectorAll(".sb-logo, .gl-logo, .rm-logo, .jl-logo").forEach((logo) => {
         const tile = logo.closest(".tile");
         let leaving = false;
         const start = () => { leaving = false; logo.classList.add("play"); };

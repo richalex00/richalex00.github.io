@@ -19,7 +19,7 @@ export const person = {
   hobbies: ["Tinkering with electronics", "Daily-driving Fedora Linux", "Board games", "Sport", "Travel and the outdoors"],
 };
 
-export type Shot = { src: string; alt: string; caption?: string; wide?: boolean };
+export type Shot = { src: string; alt: string; caption?: string; wide?: boolean; poster?: string }; // poster = src is a video
 export type Section = { heading: string; body: string[]; shots?: Shot[] };
 export type Project = {
   slug: string;
@@ -38,7 +38,7 @@ export type Project = {
   demo?: { href: string; label: string; note: string }; // opens in a window over the case study
   tile?: { src: string; bg: string; animated?: boolean }; // homepage tile image shown whole on a solid colour, instead of the cover; animated = live logo component
   tileVideo?: { src: string; poster: string; bg: string }; // homepage tile animation, played on hover
-  tileAnim?: "skull" | "room"; // homepage tile is a live component: the Galleon skull or the pixel room
+  tileAnim?: "skull" | "room" | "jelly"; // homepage tile is a live component: the Galleon skull, the pixel room or the pixel jellyfish
 };
 
 // Order = priority. First is the lead in the grid and the top card in the fan.
@@ -229,6 +229,62 @@ export const projects: Project[] = [
         ],
         shots: [
           { src: "/img/mapgen/grid.jpg", alt: "A large map made of four regions with different amounts of land", caption: "A 2×2 grid of 48×48 maps.", wide: true },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "softy",
+    title: "Softy",
+    subtitle: "A jellyfish that only calms down when you put your phone to bed",
+    kind: "interactive installation",
+    year: "2026",
+    place: "KTH, Physical Interaction Design and Realisation. Exhibited 20 October 2026",
+    role: "Team of four. I built Softy's body: how she moves, breathes and glows",
+    tools: "Arduino, servo, air pump, LED strip, soft inflatables, Android app, 3D printing",
+    cover: { src: "/img/softy/cover.jpg", alt: "Softy, a jellyfish made of fabric and inflatable tentacles, glowing violet as she calms in a dark box" },
+    fan: "/img/softy/cover.jpg",
+    tileAnim: "jelly",
+    intro:
+      "Softy is a jellyfish who lives in a dark box next to a phone that never stops scrolling. Lift the curtain and she's red, shaking and panting. Put the phone face down, or tuck it into its little bed, and she slowly calms: the light fades to blue, her breathing slows and the shaking turns into a sway. Pick the phone up again and it all starts over.",
+    sections: [
+      {
+        heading: "The phone is the only control",
+        body: [
+          "There are no buttons and no instructions. We set ourselves one rule: nothing in the box tells you what to do. The phone plays an endless feed of real short-form clips, Softy reacts to it, and the bed beside it, with a pillow and a blanket, is the only hint.",
+          "Once a visitor picks the phone up, the feed starts to drift: a viral clip cuts to a nature montage, then calm nature, then now and then someone telling you to stop scrolling. Put it down and Softy takes a breath. Leave it face up and she gets worse.",
+        ],
+        shots: [
+          { src: "/img/softy/film.mp4", poster: "/img/softy/film-poster.jpg", alt: "Short film introducing Softy: her habitat, her distress at a scrolling phone, and how she calms", caption: "The film we made for the exhibition.", wide: true },
+        ],
+      },
+      {
+        heading: "One number drives her whole body",
+        body: [
+          "The phone measures how agitated Softy should be as a mood from 0 to 100, and sends it five times a second over Wi-Fi to an Arduino above the box, along with events like pickup and putdown. Every output reads the same number, so her light, motion, breathing and voice always agree. If the phone goes quiet for three seconds, she falls back to agitated on her own.",
+          "My part was turning that number into a body. A servo shakes her harder as the mood rises, sways her slowly when calm, and jolts her when the phone is picked up. An air pump inflates her soft tentacles: quick pants when she panics, ten-second breaths when calm, a gasp on every event. I measured the inflatable first (48 bubbles, about 220 mL) and timed the breaths to it. The LED strip flickers an angry red and settles into a slow blue wave.",
+        ],
+        shots: [
+          { src: "/img/softy/angry.jpg", alt: "Softy lit red and orange, tentacles blurred from shaking", caption: "Phone face up: red, shaking, panting." },
+          { src: "/img/softy/calm.jpg", alt: "Softy lit a calm blue, hanging still", caption: "Phone put to bed: blue, slow breaths." },
+        ],
+      },
+      {
+        heading: "Power was the hardest part",
+        body: [
+          "On the laptop's USB, the servo reset the board every time it moved, and the pump crashed the Wi-Fi chip at any strength. Everything moved to its own 5 V supply with the grounds joined, and the board kept only its logic.",
+          "The LED strip lit up white, or did nothing at all, for two days. The clock signal was arriving and the data wasn't, and in the end we found the strip had been wired from its output end. The pump's solder joint also snapped mid-test, and its electrical noise scrambled the serial output whenever it started.",
+        ],
+      },
+      {
+        heading: "At the exhibition",
+        body: [
+          "Visitors found the bed on their own. Most picked the phone up first, watched Softy get worse, and worked out the rest from her.",
+        ],
+        shots: [
+          { src: "/img/softy/exhibition.mp4", poster: "/img/softy/exhibition-poster.jpg", alt: "Handheld walkthrough of the installation: the sign outside, the phone and bed inside, Softy turning from red to blue", caption: "A walkthrough on the day.", wide: true },
+          { src: "/img/softy/sign.jpg", alt: "A chalkboard sign reading Meet Softy beside the fabric-covered box", caption: "Outside the box." },
+          { src: "/img/softy/bed.jpg", alt: "The phone beside its knitted blanket and printed bed inside the box", caption: "Inside: the phone and its bed." },
         ],
       },
     ],

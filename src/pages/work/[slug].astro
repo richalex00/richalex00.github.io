@@ -22,7 +22,7 @@ const group = (shots: Shot[] = []) => {
 };
 
 const dims = Object.fromEntries(await Promise.all(
-  [p.cover, ...p.sections.flatMap((s) => s.shots ?? [])].map(async (sh) => [sh.src, await size(sh.src)]),
+  [p.cover, ...p.sections.flatMap((s) => s.shots ?? [])].map(async (sh) => [sh.src, await size(sh.poster ?? sh.src)]),
 ));
 ---
 <Base title={`${p.title}, ${p.kind}`} description={`${p.title}: ${p.subtitle}.`} image={p.cover.src}>
@@ -59,7 +59,9 @@ const dims = Object.fromEntries(await Promise.all(
           <div class={g.length > 1 ? "pair" : ""}>
             {g.map((sh) => (
               <figure>
-                <img src={sh.src} alt={sh.alt} {...dims[sh.src]} loading="lazy" decoding="async" />
+                {sh.poster
+                  ? <video src={sh.src} poster={sh.poster} aria-label={sh.alt} {...dims[sh.src]} controls playsinline preload="none"></video>
+                  : <img src={sh.src} alt={sh.alt} {...dims[sh.src]} loading="lazy" decoding="async" />}
                 {sh.caption && <figcaption>{sh.caption}</figcaption>}
               </figure>
             ))}
@@ -94,7 +96,7 @@ const dims = Object.fromEntries(await Promise.all(
   .meta .links { display: flex; flex-wrap: wrap; gap: 0 var(--gutter); }
   .case h2 { font: 500 var(--fs-1)/1.2 var(--pixel); color: var(--pine); margin: var(--s-55) 0 var(--s-13); }
   .case figure { margin: var(--s-34) 0; }
-  .case figure img { width: 100%; display: block; border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); background: var(--panel); }
+  .case figure img, .case figure video { width: 100%; height: auto; display: block; border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); background: var(--panel); }
   .case figcaption { font: 400 var(--fs-xs)/var(--lh-small) var(--mono); color: var(--muted); margin-top: var(--s-13); text-wrap: balance; }
   /* Pairs share one frame shape, so their bottoms and captions line up */
   .pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); margin: var(--s-34) 0; }

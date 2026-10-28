@@ -1,0 +1,16 @@
+---
+// The Softy tile: a 64x40 pixel jellyfish over a phone, drawn as a 72-frame strip
+// (scratch script jelly.py). At rest she's red and angry over the scrolling feed;
+// hovering flips the phone face down, she calms to blue, then the phone flips back.
+---
+<div class="jl-logo" role="img" aria-label="Pixel-art jellyfish, angry and red over a scrolling phone, calming to blue when the phone is turned over">
+  <img class="jl-strip" src="/img/softy/tile-strip.png" alt="" width="4608" height="40" loading="lazy" decoding="async" data-cycle />
+</div>
+
+<style is:global>
+  .jl-logo { position: relative; width: 100%; height: 100%; overflow: hidden; }
+  .jl-logo .jl-strip { position: absolute; left: 0; top: 0; width: 7200%; max-width: none; height: 100%; image-rendering: pixelated; }
+  /* 72 frames at 10 fps; translateX(-100%) is the strip's full width, so each step is one frame. */
+  .jl-logo.play .jl-strip { animation: jl-cycle 7.2s steps(72) infinite; }
+  @keyframes jl-cycle { to { transform: translateX(-100%); } }
+</style>
