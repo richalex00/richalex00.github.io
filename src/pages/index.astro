@@ -39,7 +39,7 @@ const contacts = [
     <canvas data-topo data-topo-clear="h1, .tagline" aria-hidden="true"></canvas>
     <div class="clock" aria-label="Local time in Stockholm"><i></i><span id="clock">Stockholm</span></div>
     <h1>{person.name}</h1>
-    <p class="tagline"><b>{person.role}.</b> {person.headline}.</p>
+    <p class="tagline">{person.headline}.</p>
   </header>
 
   <main class="col">
@@ -178,7 +178,6 @@ const contacts = [
   .hero { height: var(--hero-h); }
   .hero h1 { position: relative; margin: 0; font: 500 clamp(44px, 9vw, var(--fs-6))/1 var(--pixel); color: var(--pine); letter-spacing: 0.01em; text-align: center; padding: 0 16px; }
   .tagline { position: relative; margin: var(--s-13) 0 0; padding: 0 16px; text-align: center; font: 400 var(--fs-0)/var(--lh-body) var(--mono); color: var(--muted); text-wrap: balance; }
-  .tagline b { color: var(--ink); font-weight: 700; }
   .clock { position: absolute; top: 16px; right: 16px; font: 500 12px/1 var(--mono); color: var(--muted); display: flex; align-items: center; gap: 8px; background: var(--paper); padding: 6px 8px; border: 2px solid var(--ink); z-index: 1; }
   .clock i { width: 8px; height: 8px; background: var(--raspberry); display: block; animation: blink 2s steps(1) infinite; }
   @keyframes blink { 50% { opacity: 0.25; } }
