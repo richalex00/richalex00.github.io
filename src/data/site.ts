@@ -14,7 +14,7 @@ export const person = {
     "I'm a design engineer from Ireland. I've written production software at IBM, General Motors and Ericsson.",
     "I'm now doing an MSc in Human-Computer Interaction at KTH in Stockholm.",
   ],
-  games: "I studied computer games development, and it still shows. I like things you can poke, and I like interfaces that explain themselves without a manual.",
+  games: "I studied computer games development. It's why I like things you can poke, and interfaces that explain themselves without a manual.",
   lifting: "Away from the screen, I lift.",
   hobbies: ["Tinkering with electronics", "Daily-driving Fedora Linux", "Board games", "Sport", "Travel and the outdoors"],
 };
@@ -144,12 +144,12 @@ export const projects: Project[] = [
       { label: "Source on GitHub", href: "https://github.com/richalex00/vigil" },
     ],
     intro:
-      "A two-week venture sprint at the Polytechnic University of Bari, from problem framing to Pitch Day in front of an industry and investor jury. The EU is making a Digital Product Passport mandatory, and Vigil's pitch was that companies could earn from it instead of treating it as a cost.",
+      "A two-week venture sprint at the Polytechnic University of Bari, from problem framing to Pitch Day in front of an industry and investor jury. The EU is making a Digital Product Passport mandatory, and Vigil helps companies earn from it instead of treating it as a cost.",
     sections: [
       {
         heading: "Where it is now",
         body: [
-          "I kept building Vigil on my own after the summer school. In October 2026 that took me to the Builder Cohort at Claude Founder House in Stockholm, where I built an agent in a day that makes the demo's checker more accurate. How it got there is below.",
+          "I kept building Vigil on my own after the summer school. In October 2026 that took me to the Builder Cohort at Claude Founder House in Stockholm, where I built an agent in a day that makes Vigil's checker more accurate.",
         ],
         shots: [{ src: "/img/vigil/founder-house.jpg", alt: "Richard standing in front of an orange wall with the sign Claude Founder House Stockholm", caption: "At Claude Founder House in Stockholm, October 2026." }],
       },
@@ -174,7 +174,7 @@ export const projects: Project[] = [
         body: [
           "After Bari I set out to test the pitch's core claim: that AI can fill most of a passport from documents that already exist. I started with batteries, whose passport becomes law in February 2027.",
           "Pick a real datasheet and watch the AI pull out 25 passport fields. Plain code checks each value against the exact line it came from, so hovering a field lights up its source, and anything it can't confirm comes to you. The growth rings from the logo fill as you decide, and when they close, the passport prints.",
-          "I tested it on 21 datasheets it had never seen. Anything the checker can't confirm goes to a person, because a wrong value can still arrive with a convincing quote.",
+          "Anything the checker can't confirm goes to a person, because a wrong value can still arrive with a convincing quote.",
         ],
         shots: [
           { src: "/img/vigil/demo-review.jpg", alt: "The demo's review screen: datasheet text on the left with one line highlighted, growth rings in the middle, fields to check on the right", caption: "Checking a field: its source line lights up, and the rings fill as you decide.", wide: true },
@@ -347,7 +347,7 @@ export const projects: Project[] = [
     kind: "interactive installation",
     year: "2026",
     place: "University of Twente, demoed at a Dutch amusement park",
-    role: "Team project",
+    role: "Team project: concept, mechanism, electronics, build and character",
     tools: "Arduino, servos, 3D printing, laser cutting, woodwork, ElevenLabs, projection",
     cover: { src: "/img/galleon/ship.jpg", alt: "The finished Pelle's Reflex Galleon: a wooden ship under a Reflex Galjoen sail, with Pelle projected beside it" },
     fan: "/img/galleon/logo-tile.jpg",
@@ -398,8 +398,8 @@ export const experience: Job[] = [
     logo: "/logos/ibm-logo.svg",
     title: "Full-stack Developer", company: "IBM", dates: "Apr 2025 – Sep 2025", place: "Cork",
     bullets: [
-      "Resolved customer integration issues on IBM API Connect, IBM's API management platform.",
-      "Handled the webMethods integration work that followed IBM's acquisition of Software AG's API products.",
+      "Diagnosed and fixed enterprise customer integrations on IBM API Connect, IBM's API management platform.",
+      "Took on the webMethods integration work after IBM acquired Software AG's API products.",
       "Worked across the whole stack, from React to PostgreSQL, on Kubernetes and OpenShift deployments.",
     ],
     tags: ["Node.js", "React", "PostgreSQL", "GraphQL", "Kubernetes", "OpenShift"],
@@ -408,9 +408,9 @@ export const experience: Job[] = [
     logo: "/logos/general-motors-logo.svg",
     title: "Software Developer", company: "General Motors", dates: "Feb 2024 – Apr 2025", place: "Limerick",
     bullets: [
-      "Maintained and modernised legacy production systems.",
-      "Shipped through Azure DevOps pipelines in a team workflow.",
-      "Completed an intensive 8-month training and assessment programme in mainframe technologies.",
+      "Modernised and maintained production mainframe systems.",
+      "Shipped changes through Azure DevOps CI/CD pipelines.",
+      "Qualified through GM's intensive 8-month mainframe engineering programme.",
     ],
     tags: ["COBOL", "JCL", "REXX", "PL/I", "Azure DevOps", "Git"],
   },
@@ -418,7 +418,7 @@ export const experience: Job[] = [
     logo: "/logos/ericsson-logo.svg",
     title: "Software Engineer", company: "Ericsson", dates: "Jan 2022 – Aug 2022", place: "Athlone",
     bullets: [
-      "Set up and maintained microservices on Linux in an agile team.",
+      "Set up and ran microservices on Linux in an agile team.",
       "Deployed with Docker and Kubernetes, with code review in Gerrit.",
     ],
     tags: ["Docker", "Kubernetes", "Linux", "JavaScript", "Gerrit"],
