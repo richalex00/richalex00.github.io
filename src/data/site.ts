@@ -15,7 +15,7 @@ export const person = {
     "I'm now doing an MSc in Human-Computer Interaction at KTH in Stockholm.",
   ],
   games: "I studied computer games development, and it still shows. I like things you can poke, and I like interfaces that explain themselves without a manual.",
-  lifting: "Away from the screen, I lift. I think of it as design in a much slower material.",
+  lifting: "Away from the screen, I lift.",
   hobbies: ["Tinkering with electronics", "Daily-driving Fedora Linux", "Board games", "Sport", "Travel and the outdoors"],
 };
 
@@ -58,19 +58,18 @@ export const projects: Project[] = [
     demo: {
       href: "/studdybuddy-demo/",
       label: "Try the live demo",
-      note: "StuddyBuddy isn't running publicly at the moment, because keeping the AI hosted costs more than it's worth between rounds of testing. In this demo, AI replies are scripted and your changes reset when you reload.",
+      note: "In this demo, AI replies are scripted and your changes reset when you reload.",
     },
     links: [{ label: "Read the Business Development Lab report (PDF)", href: "/papers/studdybuddy-business-report.pdf" }],
     intro:
-      "Students can see their deadlines, but not when to start. StuddyBuddy connects to Canvas, plans the week with AI and gives every course its own tutor. It started as a course project in the University of Twente's Business Development Lab. I carried it into Novel-T's Entrepreneurial Experience, pitched it to investors, and kept going after the programme ended.",
+      "Students can see their deadlines, but not when to start. StuddyBuddy connects to Canvas, plans the week with AI and gives every course its own tutor. It started as a course project at the University of Twente and became a startup through Novel-T's Entrepreneurial Experience.",
     sections: [
       {
         heading: "From course project to startup",
         body: [
-          "StuddyBuddy began in the Business Development Lab at the University of Twente, under the working name SchedulAI. With my course team I interviewed students, tested the concept and built a first financial model. That work is in the report linked above.",
-          "When the course ended, I took the idea into Novel-T's Entrepreneurial Experience: three UTwente students, a problem we lived every week, and a working prototype built over one hackathon weekend.",
-          "As founder I set the vision and carried the pitch. We framed the problem, shaped a business model and pitched it to investors at the end of the programme.",
-          "When the programme finished, I kept going. I moved the prototype onto a stack I control, connected it to real Canvas and timetable data, and demoed it at the KTH Lovable Buildathon in Stockholm on 1 September 2026.",
+          "It began in the University of Twente's Business Development Lab under the working name SchedulAI. My course team and I interviewed students, tested the concept and built a first financial model. That work is in the report linked above.",
+          "After the course I took it into Novel-T's Entrepreneurial Experience with two other UTwente students and a prototype we'd built over a hackathon weekend. As founder I led the team and the pitch. Together we shaped the business model and pitched to investors at the finals.",
+          "After the programme I moved the prototype onto my own stack, connected it to real Canvas and timetable data, and demoed it at the KTH Lovable Buildathon in Stockholm on 1 September 2026.",
         ],
         shots: [
           { src: "/img/studdybuddy/novelt-certificate.jpg", alt: "Richard shaking hands on stage as he receives his Entrepreneurial Experience certificate", caption: "Getting my certificate at the Novel-T finals, 17 June 2026." },
@@ -80,17 +79,15 @@ export const projects: Project[] = [
       {
         heading: "Building with AI",
         body: [
-          "AI runs through the product: the planner drafts the week, and every course gets its own tutor that answers from that course's Canvas material.",
-          "It's also how I build. The first prototype came together on Lovable; I then moved it to React and Supabase on Cloudflare, working with Claude Code. I set the design and interaction rules and review every change before it ships.",
-          "Using AI well also means knowing where not to trust it. Early versions left the language model to choose the times, with the rules written only into its prompt. I moved slot-finding into plain, tested code: the model now says what to schedule and roughly when, and the scheduler places each block around lectures, personal plans and the student's sleep hours. A proposal can't clash with a class or land at 3am, whatever the model asks for.",
+          "The first prototype came together on Lovable. I then moved it to React and Supabase on Cloudflare, working with Claude Code. I set the design and interaction rules and review every change.",
+          "I keep the model away from anything that has to be exact. Early versions let it pick the times, with the rules only in its prompt. I moved slot-finding into tested code. The model now says what to schedule and roughly when, and the scheduler places each block around lectures, personal plans and the student's sleep hours. A proposal can't clash with a class or land at 3am.",
         ],
         shots: [{ src: "/img/studdybuddy/building.jpg", alt: "Richard in headphones, typing on a laptop at a crowded table", caption: "Heads down on StuddyBuddy at the KTH Lovable Buildathon, 1 September 2026." }],
       },
       {
         heading: "The trust problem",
         body: [
-          "Canvas tells students what's due, never when to start. StuddyBuddy's answer is an AI that plans the week, but an AI rewriting your calendar is a trust problem before it's a UI problem.",
-          "The first version asked for blind trust in two places. The dashboard offered one suggestion at a time, with a yes-or-dismiss choice and no reason given. The planner listed its changes with a single Accept or Reject for the whole batch, so a student who liked four changes out of five had to take all five or none.",
+          "Letting an AI rewrite your calendar only works if you trust it. The first version asked for blind trust twice. Dashboard suggestions came with no reason, just yes or dismiss. The planner had one Accept or Reject for the whole batch, so liking four changes out of five meant taking all five or none.",
         ],
         shots: [
           { src: "/img/studdybuddy/before-suggestion.png", alt: "Dark suggestion card with Yes, plan it and Dismiss buttons", caption: "Before: one suggestion, yes or dismiss." },
@@ -100,26 +97,25 @@ export const projects: Project[] = [
       {
         heading: "What students told us",
         body: [
-          "In the Business Development Lab, my course team and I ran 7 interviews and 3 observational studies with students, then 10 more interviews to test the concept.",
-          "Two findings shaped the design. Our hypothesis that AI time estimates would reduce stress was not supported: most students distrusted them, and wanted to keep control or have the AI learn from them over time. And across the interviews the same point kept coming back: the product should take away mental effort, not take over the schedule.",
-          "That became the rule for the product. The AI proposes, the student decides.",
+          "We ran 7 interviews and 3 observational studies with students, then 10 more interviews to test the concept.",
+          "Two findings shaped the design. Our hypothesis that AI time estimates would reduce stress was not supported. Most students distrusted them, and wanted to keep control or have the AI learn from them over time. And again and again, students said they wanted less to think about but to stay in charge of their own schedule.",
+          "So the AI only ever suggests changes, and the student approves each one.",
         ],
       },
       {
         heading: "Preview first, act inline",
         body: [
-          "Instead of a list to approve, the AI's plan appears on the calendar itself, as dashed ghost blocks in the free slots around lectures. Each block is its own decision, made in place. When the AI wants to move or remove something already on the calendar, it explains why in the chat beside it.",
+          "The AI's plan now appears on the calendar itself, as dashed ghost blocks in the free slots around lectures. Each block is accepted or skipped on its own. When the AI wants to move or remove something already there, it explains why in the chat beside it.",
         ],
         shots: [
-          { src: "/img/studdybuddy/flow-1-preview.jpg", alt: "Week calendar with three dashed ghost study blocks, and a bar reading 3 of 3 proposed slots selected", caption: "1. Asked to plan the week, the AI drafts three study blocks as ghosts. Nothing is saved yet.", wide: true },
-          { src: "/img/studdybuddy/flow-2-choose.jpg", alt: "The same calendar with one ghost block marked skipped, and the bar reading 2 of 3 selected", caption: "2. Tap a ghost to skip it. The bar keeps count, so accepting is no longer all-or-nothing.", wide: true },
-          { src: "/img/studdybuddy/flow-3-added.jpg", alt: "The calendar with the two accepted study blocks now solid", caption: "3. Only the ticked blocks land on the calendar.", wide: true },
+          { src: "/img/studdybuddy/flow-2-choose.jpg", alt: "Week calendar with dashed ghost study blocks, one marked skipped, and a bar reading 2 of 3 selected", caption: "1. The AI drafts the week as ghost blocks. Tap one to skip it. Nothing is saved until you add the rest.", wide: true },
+          { src: "/img/studdybuddy/flow-3-added.jpg", alt: "The calendar with the two accepted study blocks now solid", caption: "2. Only the ticked blocks land on the calendar.", wide: true },
         ],
       },
       {
         heading: "Next: group scheduling",
         body: [
-          "Group scheduling was the other pain point students confirmed, with 6 of 10 calling it a real problem. The next piece shows when a team is free as a heatmap and suggests meeting times to vote on. It's a concept for now: in the demo it runs on sample teammates.",
+          "6 of the 10 students we interviewed called group scheduling a real problem. The next feature shows when a team is free as a heatmap and suggests meeting times to vote on. In the demo it runs on sample teammates.",
         ],
         shots: [
           { src: "/img/studdybuddy/groups-concept.jpg", alt: "Heatmap of a team's free hours across the week, with suggested meeting times outlined and a vote list", caption: "Concept: who's free this week, with suggested times outlined.", wide: true },
@@ -130,7 +126,7 @@ export const projects: Project[] = [
   {
     slug: "vigil",
     title: "Vigil",
-    subtitle: "A living record for every device in Europe",
+    subtitle: "A product passport that keeps itself up to date",
     kind: "product passport startup",
     year: "2026",
     place: "EIT Digital Summer School, Bari",
@@ -142,19 +138,19 @@ export const projects: Project[] = [
     demo: {
       href: "/vigil-demo/",
       label: "Try the live demo",
-      note: "Real output from real battery datasheets, replayed. The AI ran offline beforehand, so nothing here calls an AI, and your decisions reset when you reload. The Life tab is a concept with simulated data.",
+      note: "Replays real AI output from real battery datasheets. Your decisions reset when you reload, and the Life tab uses simulated data.",
     },
     links: [
       { label: "See the pitch deck (PDF)", href: "/papers/vigil-pitch-deck.pdf" },
       { label: "Source on GitHub", href: "https://github.com/richalex00/vigil" },
     ],
     intro:
-      "A two-week venture sprint at the Polytechnic University of Bari, from problem framing to Pitch Day in front of an industry and investor jury. Vigil turns the EU's mandatory Digital Product Passport from a compliance cost into a source of revenue.",
+      "A two-week venture sprint at the Polytechnic University of Bari, from problem framing to Pitch Day in front of an industry and investor jury. The EU is making a Digital Product Passport mandatory, and Vigil's pitch was that companies could earn from it instead of treating it as a cost.",
     sections: [
       {
         heading: "The idea",
         body: [
-          "Every electronic device sold in the EU will need a Digital Product Passport. Vigil builds it as a living record: AI fills data gaps and drafts supplier requests, and verified lifecycle data opens up value in the second-hand market.",
+          "Every electronic device sold in the EU will need a Digital Product Passport, a record of what it's made of, where it came from and how to repair and recycle it. Vigil keeps that passport current over the device's life. AI fills data gaps and drafts supplier requests, and verified lifecycle data opens up value in the second-hand market.",
         ],
         shots: [
           { src: "/img/vigil/slide-03.jpg", alt: "Problem slide", caption: "The problem." },
@@ -164,7 +160,7 @@ export const projects: Project[] = [
       {
         heading: "The brand",
         body: [
-          "Our first identity read like a video-game emblem, so I rebuilt it around a different idea: the record of a device's life. The mark is a set of growth rings, cut at one point like a single slice through a trunk. That shared gap is the one verified checkpoint. I tested three ring treatments in Figma and kept the cleanest.",
+          "The logo is a set of growth rings, like a slice through a tree trunk, standing for the record of a device's life. The gap where the rings are cut is the verified checkpoint.",
         ],
       },
       {
@@ -172,7 +168,7 @@ export const projects: Project[] = [
         body: [
           "After Bari I kept going on my own, to test the pitch's core claim: that AI can fill most of a passport from documents that already exist. I started with batteries, whose passport becomes law in February 2027.",
           "Pick a real datasheet and watch the AI pull out 25 passport fields. Plain code checks each value against the exact line it came from, so hovering a field lights up its source, and anything it can't confirm comes to you. The growth rings from the logo fill as you decide, and when they close, the passport prints.",
-          "Tested on 21 datasheets it had never seen, it made up nothing, and 98% of the fields it confirmed on its own were right. Everything else goes to a person, because a wrong value can still arrive with a convincing quote.",
+          "I tested it on 21 datasheets it had never seen. Anything the checker can't confirm goes to a person, because a wrong value can still arrive with a convincing quote.",
         ],
         shots: [
           { src: "/img/vigil/founder-house.jpg", alt: "Richard standing in front of an orange wall with the sign Claude Founder House Stockholm", caption: "At Claude Founder House in Stockholm, October 2026." },
@@ -183,8 +179,8 @@ export const projects: Project[] = [
       {
         heading: "An agent that tunes the checker",
         body: [
-          "In October 2026 I joined the Builder Cohort at Claude Founder House in Stockholm, and used the day to build an agent that improves the checker on its own. Each round it reads the checker's mistakes, changes one rule, runs the tests and re-scores. It keeps the change only if fewer correct values go to a person without any wrong ones getting through, and otherwise undoes it. It practised on 5 datasheets and never saw the other 21 until I scored them once at the end.",
-          "On those 21, correct values sent to a person for no reason dropped from 14 to 8, and the fields it confirmed were still right 98% of the time. The cause was ordinary: PDFs break table cells and sentences across lines, so the value sat just past the quoted line. The answers it was scored against were drafted with AI and haven't all been checked by hand yet, so these numbers are provisional.",
+          "In October 2026 I joined the Builder Cohort at Claude Founder House in Stockholm, and built an agent in a day that improves the checker on its own. Each round it reads the checker's mistakes, changes one rule, runs the tests and re-scores. It keeps the change only if fewer correct values go to a person without any wrong ones getting through, and otherwise undoes it. It practised on 5 datasheets and was scored once at the end on the 21 it had never seen.",
+          "On those 21 it sent fewer correct values to a person for no reason, without letting any wrong ones through. The main cause it fixed was PDFs breaking table cells and sentences across lines, so the value sat just past the quoted line.",
         ],
       },
     ],
@@ -265,7 +261,7 @@ export const projects: Project[] = [
         heading: "One number drives her whole body",
         body: [
           "The phone measures how agitated Softy should be as a mood from 0 to 100, and sends it five times a second over Wi-Fi to an Arduino above the box, along with events like pickup and putdown. Every output reads the same number, so her light, motion, breathing and voice always agree. If the phone goes quiet for three seconds, she falls back to agitated on her own.",
-          "Her body turns that number into behaviour. A servo shakes her harder as the mood rises, sways her slowly when calm, and jolts her when the phone is picked up. An air pump inflates her soft tentacles: quick pants when she panics, ten-second breaths when calm, a gasp on every event. The inflatable was measured first (48 bubbles, about 220 mL) so the breaths could be timed to it. An LED strip flickers an angry red and settles into a slow blue wave.",
+          "Her servo, pump and lights all follow that number. The servo shakes her harder as the mood rises, sways her slowly when calm, and jolts her when the phone is picked up. An air pump inflates her soft tentacles: quick pants when she panics, ten-second breaths when calm, a gasp on every event. The inflatable was measured first (48 bubbles, about 220 mL) so the breaths could be timed to it. An LED strip flickers an angry red and settles into a slow blue wave.",
         ],
         shots: [
           { src: "/img/softy/angry.jpg", alt: "Softy lit red and orange, tentacles blurred from shaking", caption: "Phone face up: red, shaking, panting." },
@@ -273,10 +269,10 @@ export const projects: Project[] = [
         ],
       },
       {
-        heading: "Power was the hardest part",
+        heading: "Getting the power right",
         body: [
           "On the laptop's USB, the servo reset the board every time it moved, and the pump crashed the Wi-Fi chip at any strength. Everything moved to its own 5 V supply with the grounds joined, and the board kept only its logic.",
-          "The LED strip lit up white, or did nothing at all, for two days. The clock signal was arriving and the data wasn't, and in the end we found the strip had been wired from its output end. The pump's solder joint also snapped mid-test, and its electrical noise scrambled the serial output whenever it started.",
+          "The LED strip lit up white, or not at all, for two days. The clock signal was arriving and the data wasn't. We traced it to the strip being fed from its output end, and rewired it.",
         ],
       },
       {
@@ -295,10 +291,10 @@ export const projects: Project[] = [
   {
     slug: "lactation-rooms",
     title: "Lactation rooms",
-    subtitle: "Calm, personal control in a room built for care",
+    subtitle: "Letting parents set the light and sound in a workplace lactation room",
     kind: "human-centred design project",
     year: "2026",
-    place: "University of Twente, Enschede (8/10)",
+    place: "University of Twente, Enschede",
     role: "Team project: research, concept, prototype",
     tools: "Interviews, thematic analysis, Figma, Wizard of Oz",
     cover: { src: "/img/lactation/room.jpg", alt: "The prototype set up in the lactation room with a tablet, lamp and wall display" },
@@ -306,12 +302,12 @@ export const projects: Project[] = [
     tileAnim: "room",
     links: [{ label: "Read the full report (PDF)", href: "/papers/lactation-rooms-report.pdf" }],
     intro:
-      "Workplace lactation rooms usually meet the legal minimum and nothing more. We set out to understand what parents actually need from them, and found the problem was less about furniture and more about feeling safe, unhurried and in control.",
+      "Workplace lactation rooms usually meet the legal minimum and nothing more. We researched what parents need from these rooms. Most of it came down to feeling safe, unhurried and in control.",
     sections: [
       {
         heading: "Research",
         body: [
-          "We interviewed lactating parents and used thematic analysis to arrive at seven themes. The biggest shift was in how we framed the problem: from missing infrastructure to a lack of emotional and organisational support for care work.",
+          "We interviewed lactating parents and used thematic analysis to arrive at seven themes. We started out thinking the rooms lacked equipment. The interviews showed the bigger gap was emotional and organisational support for care work.",
           "From that we wrote ten design requirements, from a lock that tells others the room is in use to ambient presets you can set from the chair.",
         ],
         shots: [
@@ -326,7 +322,7 @@ export const projects: Project[] = [
         ],
         shots: [
           { src: "/img/lactation/scenario-before.jpg", alt: "Six-panel storyboard of a mother in the current room: entering, finding it messy, unsure where to sit, pumping next to a noisy coffee machine, packing, cleaning up", caption: "Before: the room as it is. Storyboard frames generated with AI.", wide: true },
-          { src: "/img/lactation/scenario-after.jpg", alt: "Six-panel storyboard of the improved room: harsh light, a wall tablet with Lights, Visuals and Sound, choosing a Tropical Relax mood, then pumping calmly surrounded by ocean screens", caption: "After: one tap on the wall tablet turns a harsh room calm. Also AI-generated.", wide: true },
+          { src: "/img/lactation/scenario-after.jpg", alt: "Six-panel storyboard of the improved room: harsh light, a wall tablet with Lights, Visuals and Sound, choosing a Tropical Relax mood, then pumping calmly surrounded by ocean screens", caption: "After: one tap on the wall tablet makes the room calm.", wide: true },
         ],
       },
       {
@@ -343,7 +339,7 @@ export const projects: Project[] = [
       {
         heading: "What we learned",
         body: [
-          "Presets worked as anchors: people did not want to fine-tune, they wanted one tap to a known state. Knowing the room was booked mattered as much as anything inside it. The report closes with the social and ethical implications of designing for a group none of us belonged to.",
+          "People mostly stuck to the presets. They didn't want to fine-tune anything, just tap once and get a setting they knew. Knowing the room was booked mattered as much as anything inside it. The report closes with the social and ethical implications of designing for people outside the team's own experience.",
         ],
       },
     ],
@@ -354,7 +350,7 @@ export const projects: Project[] = [
     subtitle: "A pirate reflex game that runs itself",
     kind: "interactive installation",
     year: "2026",
-    place: "University of Twente, demoed at a Dutch amusement park (8.2/10)",
+    place: "University of Twente, demoed at a Dutch amusement park",
     role: "Team project",
     tools: "Arduino, servos, 3D printing, laser cutting, woodwork, ElevenLabs, projection",
     cover: { src: "/img/galleon/ship.jpg", alt: "The finished Pelle's Reflex Galleon: a wooden ship under a Reflex Galjoen sail, with Pelle projected beside it" },
@@ -366,7 +362,7 @@ export const projects: Project[] = [
       {
         heading: "The loop",
         body: [
-          "Pick a difficulty on the compass and ring the bell. The music shifts and objects start falling. Catches go into the laser-cut ridges at the front, misses splash into the water below. When the round ends, Pelle tells you to raise the flag, and that one rope pull is both the finale and the reset.",
+          "Pick a difficulty on the compass and ring the bell. The music shifts and objects start falling. Catches go into the laser-cut ridges at the front, misses splash into the water below. When the round ends, Pelle tells you to raise the flag. Pulling the rope ends the round and resets the game.",
         ],
         shots: [
           { src: "/img/galleon/bottles.jpg", alt: "Treasure bottles filled with sand and beads hanging from a row of servo-driven hooks", caption: "The treasure: bottles on servo hooks, released one at a time." },
@@ -377,9 +373,9 @@ export const projects: Project[] = [
       {
         heading: "How it was made",
         body: [
-          "The ship is a wooden frame we cut, screwed and nailed together ourselves. It has a hand-painted sail, a net, portholes and a water reservoir under the deck for missed treasure. A laser-cut holder along the front catches the bottles, and a pile of pirate props does the rest of the dressing.",
-          "Under the mast, an Arduino drives a row of servos that hold the treasure bottles and let them go at random moments, so no two rounds play the same. 3D-printed gears on a wooden shaft wind the treasure back up when the flag is raised.",
-          "A round starts with a real ship's bell: a microphone listens for the ring and kicks off the game. From there Pelle runs everything. He's an animated cartoon pirate projected beside the ship, with a custom voice made in ElevenLabs. He calls people over, explains the compass and the bell, and tells them to raise the flag at the end. There is no screen of instructions; the voice is the interface.",
+          "The ship is a wooden frame we cut, screwed and nailed together ourselves. It has a hand-painted sail, a net, portholes and a water reservoir under the deck for missed treasure. A laser-cut holder along the front catches the bottles, and pirate props finish the set.",
+          "Under the mast, an Arduino drives a row of servos that hold the treasure bottles and let them go at random moments, so each round is different. 3D-printed gears on a wooden shaft wind the treasure back up when the flag is raised.",
+          "A round starts with a real ship's bell: a microphone listens for the ring and kicks off the game. From there Pelle runs everything. He's an animated cartoon pirate projected beside the ship, with a custom voice made in ElevenLabs. He calls people over, explains the compass and the bell, and tells them to raise the flag at the end. There's no instruction screen.",
         ],
         shots: [{ src: "/img/galleon/logo.jpg", alt: "Pelle's Reflex Galjoen pirate logo", caption: "The logo, later painted onto the sail." }],
       },
@@ -404,9 +400,9 @@ export const experience: Job[] = [
     logo: "/logos/general-motors-logo.svg",
     title: "Software Developer", company: "General Motors", dates: "Feb 2024 – Apr 2025", place: "Limerick",
     bullets: [
-      "Completed an intensive 8-month training and assessment programme in mainframe technologies.",
       "Maintained and modernised legacy production systems.",
       "Shipped through Azure DevOps pipelines in a team workflow.",
+      "Completed an intensive 8-month training and assessment programme in mainframe technologies.",
     ],
     tags: ["COBOL", "JCL", "REXX", "PL/I", "Azure DevOps", "Git"],
   },
