@@ -69,7 +69,6 @@ export const projects: Project[] = [
         body: [
           "It began in the University of Twente's Business Development Lab under the working name SchedulAI. My course team and I interviewed students, tested the concept and built a first financial model. That work is in the report linked above.",
           "After the course I took it into Novel-T's Entrepreneurial Experience with two other UTwente students and a prototype we'd built over a hackathon weekend. As founder I led the team and the pitch. Together we shaped the business model and pitched to investors at the finals.",
-          "After the programme I moved the prototype onto my own stack, connected it to real Canvas and timetable data, and demoed it at the KTH Lovable Buildathon in Stockholm on 1 September 2026.",
         ],
         shots: [
           { src: "/img/studdybuddy/novelt-certificate.jpg", alt: "Richard shaking hands on stage as he receives his Entrepreneurial Experience certificate", caption: "Getting my certificate at the Novel-T finals, 17 June 2026." },
@@ -79,7 +78,7 @@ export const projects: Project[] = [
       {
         heading: "Building with AI",
         body: [
-          "The first prototype came together on Lovable. I then moved it to React and Supabase on Cloudflare, working with Claude Code. I set the design and interaction rules and review every change.",
+          "The first prototype came together on Lovable. After the programme I moved it to React and Supabase on Cloudflare, working with Claude Code, connected it to real Canvas and timetable data, and demoed it at the KTH Lovable Buildathon in Stockholm on 1 September 2026. I set the design and interaction rules and review every change.",
           "I keep the model away from anything that has to be exact. Early versions let it pick the times, with the rules only in its prompt. I moved slot-finding into tested code. The model now says what to schedule and roughly when, and the scheduler places each block around lectures, personal plans and the student's sleep hours. A proposal can't clash with a class or land at 3am.",
         ],
         shots: [{ src: "/img/studdybuddy/building.jpg", alt: "Richard in headphones, typing on a laptop at a crowded table", caption: "Heads down on StuddyBuddy at the KTH Lovable Buildathon, 1 September 2026." }],
@@ -258,9 +257,10 @@ export const projects: Project[] = [
         body: [
           "There are no buttons and no instructions. We set ourselves one rule: nothing in the box tells you what to do. The phone plays an endless feed of real short-form clips, Softy reacts to it, and the bed beside it, with a pillow and a blanket, is the only hint.",
           "Once a visitor picks the phone up, the feed starts to drift: a viral clip cuts to a nature montage, then calm nature, then now and then someone telling you to stop scrolling. Put it down and Softy takes a breath. Leave it face up and she gets worse.",
+          "At the exhibition, visitors found the bed on their own. Most picked the phone up first, watched Softy get worse, and worked out the rest from her.",
         ],
         shots: [
-          { src: "/img/softy/exhibition.mp4", poster: "/img/softy/exhibition-poster.jpg", alt: "Handheld walkthrough of the installation: the sign outside, the phone and bed inside, Softy turning from red to blue", caption: "A walkthrough on the day.", wide: true },
+          { src: "/img/softy/exhibition.mp4", poster: "/img/softy/exhibition-poster.jpg", alt: "Handheld walkthrough of the installation: the sign outside, the phone and bed inside, Softy turning from red to blue", caption: "Visitors on exhibition day, 20 October 2026.", wide: true },
         ],
       },
       {
@@ -282,9 +282,9 @@ export const projects: Project[] = [
         ],
       },
       {
-        heading: "At the exhibition",
+        heading: "The exhibition",
         body: [
-          "Visitors found the bed on their own. Most picked the phone up first, watched Softy get worse, and worked out the rest from her.",
+          "For the exhibition we made a short film introducing Softy, and set the box up with a chalkboard sign outside and the phone's bed inside.",
         ],
         shots: [
           { src: "/img/softy/film.mp4", poster: "/img/softy/film-poster.jpg", alt: "Short film introducing Softy: her habitat, her distress at a scrolling phone, and how she calms", caption: "The film we made for the exhibition.", wide: true },
@@ -316,10 +316,6 @@ export const projects: Project[] = [
           "We interviewed lactating parents and used thematic analysis to arrive at seven themes. We started out thinking the rooms lacked equipment. The interviews showed the bigger gap was emotional and organisational support for care work.",
           "From that we wrote ten design requirements, from a lock that tells others the room is in use to ambient presets you can set from the chair.",
         ],
-        shots: [
-          { src: "/img/lactation/sketch.jpg", alt: "Pencil sketch of the lactation room layout", caption: "Early sketch of the room layout." },
-          { src: "/img/lactation/paper.jpg", alt: "Paper prototype with a welcome screen of presets, a Light card and two paper speakers", caption: "Paper prototype: presets on a welcome screen, with paper speakers and a light card standing in for the room." },
-        ],
       },
       {
         heading: "Before and after",
@@ -332,11 +328,13 @@ export const projects: Project[] = [
         ],
       },
       {
-        heading: "Prototype in the real room",
+        heading: "From paper to the real room",
         body: [
-          "We built an ambient personalisation system: a tablet interface designed in Figma that controls lighting, sound and wall visuals. We staged it in the actual lactation room and tested it Wizard-of-Oz style with six participants, using think-aloud and a follow-up survey.",
+          "We started on paper, with a sketch of the room and a paper prototype of the presets. Then we built an ambient personalisation system: a tablet interface designed in Figma that controls lighting, sound and wall visuals. We staged it in the actual lactation room and tested it Wizard-of-Oz style with six participants, using think-aloud and a follow-up survey.",
         ],
         shots: [
+          { src: "/img/lactation/sketch.jpg", alt: "Pencil sketch of the lactation room layout", caption: "Early sketch of the room layout." },
+          { src: "/img/lactation/paper.jpg", alt: "Paper prototype with a welcome screen of presets, a Light card and two paper speakers", caption: "Paper prototype: presets on a welcome screen, with paper speakers and a light card standing in for the room." },
           { src: "/img/lactation/ui.jpg", alt: "Tablet interface with ambience presets", caption: "The tablet interface, with presets for light, sound and visuals." },
           { src: "/img/lactation/tablet-hand.jpg", alt: "A hand using the tablet in the room", caption: "Testing in the room." },
           { src: "/img/lactation/room-2.jpg", alt: "The room set up for evaluation", caption: "The evaluation setup.", wide: true },
@@ -370,20 +368,32 @@ export const projects: Project[] = [
         body: [
           "Pick a difficulty on the compass and ring the bell. The music shifts and objects start falling. Catches go into the laser-cut ridges at the front, misses splash into the water below. When the round ends, Pelle tells you to raise the flag. Pulling the rope ends the round and resets the game.",
         ],
+      },
+      {
+        heading: "Building the ship",
+        body: [
+          "We started with a Wizard-of-Oz version, then built the real thing. The ship is a wooden frame we cut, screwed and nailed together ourselves. It has a hand-painted sail, a net, portholes and a water reservoir under the deck for missed treasure. A laser-cut holder along the front catches the bottles, and pirate props finish the set.",
+        ],
         shots: [
-          { src: "/img/galleon/bottles.jpg", alt: "Treasure bottles filled with sand and beads hanging from a row of servo-driven hooks", caption: "The treasure: bottles on servo hooks, released one at a time." },
-          { src: "/img/galleon/gears.jpg", alt: "Underside of the mast with 3D-printed gears on a wooden shaft and a box of wiring", caption: "Under the mast: the geared shaft and the electronics." },
           { src: "/img/galleon/demo-2.jpg", alt: "An earlier version with hanging strings in front of a black curtain", caption: "Where it started: the Wizard-of-Oz version, before the mechanism was built.", wide: true },
+          { src: "/img/galleon/logo.jpg", alt: "Pelle's Reflex Galjoen pirate logo", caption: "The logo, later painted onto the sail." },
         ],
       },
       {
-        heading: "How it was made",
+        heading: "The mechanism",
         body: [
-          "The ship is a wooden frame we cut, screwed and nailed together ourselves. It has a hand-painted sail, a net, portholes and a water reservoir under the deck for missed treasure. A laser-cut holder along the front catches the bottles, and pirate props finish the set.",
           "Under the mast, an Arduino drives a row of servos that hold the treasure bottles and let them go at random moments, so each round is different. 3D-printed gears on a wooden shaft wind the treasure back up when the flag is raised.",
+        ],
+        shots: [
+          { src: "/img/galleon/bottles.jpg", alt: "Treasure bottles filled with sand and beads hanging from a row of servo-driven hooks", caption: "The treasure: bottles on servo hooks, released one at a time." },
+          { src: "/img/galleon/gears.jpg", alt: "Underside of the mast with 3D-printed gears on a wooden shaft and a box of wiring", caption: "Under the mast: the geared shaft and the electronics." },
+        ],
+      },
+      {
+        heading: "Pelle runs the game",
+        body: [
           "A round starts with a real ship's bell: a microphone listens for the ring and kicks off the game. From there Pelle runs everything. He's an animated cartoon pirate projected beside the ship, with a custom voice made in ElevenLabs. He calls people over, explains the compass and the bell, and tells them to raise the flag at the end. There's no instruction screen.",
         ],
-        shots: [{ src: "/img/galleon/logo.jpg", alt: "Pelle's Reflex Galjoen pirate logo", caption: "The logo, later painted onto the sail." }],
       },
     ],
   },
