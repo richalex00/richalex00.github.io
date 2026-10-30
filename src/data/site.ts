@@ -148,6 +148,13 @@ export const projects: Project[] = [
       "A two-week venture sprint at the Polytechnic University of Bari, from problem framing to Pitch Day in front of an industry and investor jury. The EU is making a Digital Product Passport mandatory, and Vigil's pitch was that companies could earn from it instead of treating it as a cost.",
     sections: [
       {
+        heading: "Where it is now",
+        body: [
+          "I kept building Vigil on my own after the summer school. In October 2026 that took me to the Builder Cohort at Claude Founder House in Stockholm, where I built an agent in a day that makes the demo's checker more accurate. How it got there is below.",
+        ],
+        shots: [{ src: "/img/vigil/founder-house.jpg", alt: "Richard standing in front of an orange wall with the sign Claude Founder House Stockholm", caption: "At Claude Founder House in Stockholm, October 2026." }],
+      },
+      {
         heading: "The idea",
         body: [
           "Every electronic device sold in the EU will need a Digital Product Passport, a record of what it's made of, where it came from and how to repair and recycle it. Vigil keeps that passport current over the device's life. AI fills data gaps and drafts supplier requests, and verified lifecycle data opens up value in the second-hand market.",
@@ -164,22 +171,21 @@ export const projects: Project[] = [
         ],
       },
       {
-        heading: "After the summer school",
+        heading: "Building the demo",
         body: [
-          "After Bari I kept going on my own, to test the pitch's core claim: that AI can fill most of a passport from documents that already exist. I started with batteries, whose passport becomes law in February 2027.",
+          "After Bari I set out to test the pitch's core claim: that AI can fill most of a passport from documents that already exist. I started with batteries, whose passport becomes law in February 2027.",
           "Pick a real datasheet and watch the AI pull out 25 passport fields. Plain code checks each value against the exact line it came from, so hovering a field lights up its source, and anything it can't confirm comes to you. The growth rings from the logo fill as you decide, and when they close, the passport prints.",
           "I tested it on 21 datasheets it had never seen. Anything the checker can't confirm goes to a person, because a wrong value can still arrive with a convincing quote.",
         ],
         shots: [
-          { src: "/img/vigil/founder-house.jpg", alt: "Richard standing in front of an orange wall with the sign Claude Founder House Stockholm", caption: "At Claude Founder House in Stockholm, October 2026." },
           { src: "/img/vigil/demo-review.jpg", alt: "The demo's review screen: datasheet text on the left with one line highlighted, growth rings in the middle, fields to check on the right", caption: "Checking a field: its source line lights up, and the rings fill as you decide.", wide: true },
           { src: "/img/vigil/demo-passport.jpg", alt: "The printed passport: fields grouped by cluster, each tagged self-declared, verified, estimated or derived", caption: "The printed passport, with where every value came from.", wide: true },
         ],
       },
       {
-        heading: "An agent that tunes the checker",
+        heading: "Tuning the checker",
         body: [
-          "In October 2026 I joined the Builder Cohort at Claude Founder House in Stockholm, and built an agent in a day that improves the checker on its own. Each round it reads the checker's mistakes, changes one rule, runs the tests and re-scores. It keeps the change only if fewer correct values go to a person without any wrong ones getting through, and otherwise undoes it. It practised on 5 datasheets and was scored once at the end on the 21 it had never seen.",
+          "At Founder House I built an agent that improves the checker on its own. Each round it reads the checker's mistakes, changes one rule, runs the tests and re-scores. It keeps the change only if fewer correct values go to a person without any wrong ones getting through, and otherwise undoes it. It practised on 5 datasheets and was scored once at the end on the 21 it had never seen.",
           "On those 21 it sent fewer correct values to a person for no reason, without letting any wrong ones through. The main cause it fixed was PDFs breaking table cells and sentences across lines, so the value sat just past the quoted line.",
         ],
       },
