@@ -79,14 +79,14 @@ export const projects: Project[] = [
         heading: "Building with AI",
         body: [
           "The first prototype came together on Lovable. After the programme I moved it to React and Supabase on Cloudflare, working with Claude Code, connected it to real Canvas and timetable data, and demoed it at the KTH Lovable Buildathon in Stockholm on 1 September 2026. I set the design and interaction rules and review every change.",
-          "I keep the model away from anything that has to be exact. Early versions let it pick the times, with the rules only in its prompt. I moved slot-finding into tested code. The model now says what to schedule and roughly when, and the scheduler places each block around lectures, personal plans and the student's sleep hours. A proposal can't clash with a class or land at 3am.",
+          "I keep the model away from anything that has to be exact. It says what to schedule and roughly when, and a tested scheduler in plain code places each block around lectures, personal plans and the student's sleep hours. A proposal can't clash with a class or land at 3am.",
         ],
         shots: [{ src: "/img/studdybuddy/building.jpg", alt: "Richard in headphones, typing on a laptop at a crowded table", caption: "Heads down on StuddyBuddy at the KTH Lovable Buildathon, 1 September 2026." }],
       },
       {
-        heading: "The trust problem",
+        heading: "Designing for trust",
         body: [
-          "Letting an AI rewrite your calendar only works if you trust it. The first version asked for blind trust twice. Dashboard suggestions came with no reason, just yes or dismiss. The planner had one Accept or Reject for the whole batch, so liking four changes out of five meant taking all five or none.",
+          "Letting an AI rewrite your calendar only works if you trust it, so I redesigned the two places where students act on its suggestions. These were the starting points: a dashboard card with just yes or dismiss, and a planner with one Accept or Reject for the whole batch, where liking four changes out of five meant taking all five or none.",
         ],
         shots: [
           { src: "/img/studdybuddy/before-suggestion.png", alt: "Dark suggestion card with Yes, plan it and Dismiss buttons", caption: "Before: one suggestion, yes or dismiss." },
@@ -277,18 +277,11 @@ export const projects: Project[] = [
         heading: "One number drives her whole body",
         body: [
           "The phone measures how agitated Softy should be as a mood from 0 to 100, and sends it five times a second over Wi-Fi to an Arduino above the box, along with events like pickup and putdown. Every output reads the same number, so her light, motion, breathing and voice always agree. If the phone goes quiet for three seconds, she falls back to agitated on her own.",
-          "Her servo, pump and lights all follow that number. The servo shakes her harder as the mood rises, sways her slowly when calm, and jolts her when the phone is picked up. An air pump inflates her soft tentacles: quick pants when she panics, ten-second breaths when calm, a gasp on every event. The inflatable was measured first (48 bubbles, about 220 mL) so the breaths could be timed to it. An LED strip flickers an angry red and settles into a slow blue wave.",
+          "Her servo, pump and lights all follow that number. The servo shakes her harder as the mood rises, sways her slowly when calm, and jolts her when the phone is picked up. An air pump inflates her soft tentacles: quick pants when she panics, ten-second breaths when calm, a gasp on every event. The inflatable was measured first (48 bubbles, about 220 mL) so the breaths could be timed to it. An LED strip flickers an angry red and settles into a slow blue wave. The servo and pump run off their own 5 V supply, sharing a ground with the Arduino, which handles only the logic and Wi-Fi.",
         ],
         shots: [
           { src: "/img/softy/angry.jpg", alt: "Softy lit red and orange, tentacles blurred from shaking", caption: "Phone face up: red, shaking, panting." },
           { src: "/img/softy/calm.jpg", alt: "Softy lit a calm blue, hanging still", caption: "Phone put to bed: blue, slow breaths." },
-        ],
-      },
-      {
-        heading: "Getting the power right",
-        body: [
-          "On the laptop's USB, the servo reset the board every time it moved, and the pump crashed the Wi-Fi chip at any strength. Everything moved to its own 5 V supply with the grounds joined, and the board kept only its logic.",
-          "The LED strip lit up white, or not at all, for two days. The clock signal was arriving and the data wasn't. We traced it to the strip being fed from its output end, and rewired it.",
         ],
       },
     ],
