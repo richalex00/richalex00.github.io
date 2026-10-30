@@ -72,7 +72,10 @@ export const projects: Project[] = [
           "As founder I set the vision and carried the pitch. We framed the problem, shaped a business model and pitched it to investors at the end of the programme.",
           "When the programme finished, I kept going. I moved the prototype onto a stack I control, connected it to real Canvas and timetable data, and demoed it at the KTH Lovable Buildathon in Stockholm on 1 September 2026.",
         ],
-        shots: [{ src: "/img/studdybuddy/novelt-finals.jpg", alt: "Teams from the Entrepreneurial Experience on stage at the finals, holding the award cheques, with gold confetti on the floor", caption: "With the other teams at the finals of the first Entrepreneurial Experience, 17 June 2026.", wide: true }],
+        shots: [
+          { src: "/img/studdybuddy/novelt-certificate.jpg", alt: "Richard shaking hands on stage as he receives his Entrepreneurial Experience certificate", caption: "Getting my certificate at the Novel-T finals, 17 June 2026." },
+          { src: "/img/studdybuddy/novelt-finals.jpg", alt: "Teams from the Entrepreneurial Experience on stage at the finals, holding the award cheques, with gold confetti on the floor", caption: "All the teams on stage at the finals." },
+        ],
       },
       {
         heading: "Building with AI",
