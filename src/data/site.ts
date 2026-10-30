@@ -410,7 +410,7 @@ export const experience: Job[] = [
     bullets: [
       "Modernised and maintained production mainframe systems.",
       "Shipped changes through Azure DevOps CI/CD pipelines.",
-      "Qualified through GM's intensive 8-month mainframe engineering programme.",
+      "Completed GM's intensive 8-month mainframe engineering programme.",
     ],
     tags: ["COBOL", "JCL", "REXX", "PL/I", "Azure DevOps", "Git"],
   },
