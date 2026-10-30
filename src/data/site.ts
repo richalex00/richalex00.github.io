@@ -253,14 +253,24 @@ export const projects: Project[] = [
       "Softy is a jellyfish who lives in a dark box next to a phone that never stops scrolling. Lift the curtain and she's red, shaking and panting. Put the phone face down, or tuck it into its little bed, and she slowly calms: the light fades to blue, her breathing slows and the shaking turns into a sway. Pick the phone up again and it all starts over.",
     sections: [
       {
+        heading: "At the exhibition",
+        body: [
+          "Visitors found the bed on their own. Most picked the phone up first, watched Softy get worse, and worked out the rest from her.",
+        ],
+        shots: [
+          { src: "/img/softy/exhibition.mp4", poster: "/img/softy/exhibition-poster.jpg", alt: "Handheld walkthrough of the installation: the sign outside, the phone and bed inside, Softy turning from red to blue", caption: "A walkthrough on the day.", wide: true },
+          { src: "/img/softy/sign.jpg", alt: "A chalkboard sign reading Meet Softy beside the fabric-covered box", caption: "Outside the box." },
+          { src: "/img/softy/bed.jpg", alt: "The phone beside its knitted blanket and printed bed inside the box", caption: "Inside: the phone and its bed." },
+        ],
+      },
+      {
         heading: "The phone is the only control",
         body: [
           "There are no buttons and no instructions. We set ourselves one rule: nothing in the box tells you what to do. The phone plays an endless feed of real short-form clips, Softy reacts to it, and the bed beside it, with a pillow and a blanket, is the only hint.",
           "Once a visitor picks the phone up, the feed starts to drift: a viral clip cuts to a nature montage, then calm nature, then now and then someone telling you to stop scrolling. Put it down and Softy takes a breath. Leave it face up and she gets worse.",
-          "At the exhibition, visitors found the bed on their own. Most picked the phone up first, watched Softy get worse, and worked out the rest from her.",
         ],
         shots: [
-          { src: "/img/softy/exhibition.mp4", poster: "/img/softy/exhibition-poster.jpg", alt: "Handheld walkthrough of the installation: the sign outside, the phone and bed inside, Softy turning from red to blue", caption: "Visitors on exhibition day, 20 October 2026.", wide: true },
+          { src: "/img/softy/film.mp4", poster: "/img/softy/film-poster.jpg", alt: "Short film introducing Softy: her habitat, her distress at a scrolling phone, and how she calms", caption: "The film we made for the exhibition.", wide: true },
         ],
       },
       {
@@ -279,17 +289,6 @@ export const projects: Project[] = [
         body: [
           "On the laptop's USB, the servo reset the board every time it moved, and the pump crashed the Wi-Fi chip at any strength. Everything moved to its own 5 V supply with the grounds joined, and the board kept only its logic.",
           "The LED strip lit up white, or not at all, for two days. The clock signal was arriving and the data wasn't. We traced it to the strip being fed from its output end, and rewired it.",
-        ],
-      },
-      {
-        heading: "The exhibition",
-        body: [
-          "For the exhibition we made a short film introducing Softy, and set the box up with a chalkboard sign outside and the phone's bed inside.",
-        ],
-        shots: [
-          { src: "/img/softy/film.mp4", poster: "/img/softy/film-poster.jpg", alt: "Short film introducing Softy: her habitat, her distress at a scrolling phone, and how she calms", caption: "The film we made for the exhibition.", wide: true },
-          { src: "/img/softy/sign.jpg", alt: "A chalkboard sign reading Meet Softy beside the fabric-covered box", caption: "Outside the box." },
-          { src: "/img/softy/bed.jpg", alt: "The phone beside its knitted blanket and printed bed inside the box", caption: "Inside: the phone and its bed." },
         ],
       },
     ],
