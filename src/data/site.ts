@@ -65,6 +65,25 @@ export const projects: Project[] = [
       "Students can see their deadlines, but not when to start. StuddyBuddy connects to Canvas, plans the week with AI and gives every course its own tutor. It started as a course project in the University of Twente's Business Development Lab. I carried it into Novel-T's Entrepreneurial Experience, pitched it to investors, and kept going after the programme ended.",
     sections: [
       {
+        heading: "From course project to startup",
+        body: [
+          "StuddyBuddy began in the Business Development Lab at the University of Twente, under the working name SchedulAI. With my course team I interviewed students, tested the concept and built a first financial model. That work is in the report linked above.",
+          "When the course ended, I took the idea into Novel-T's Entrepreneurial Experience: three UTwente students, a problem we lived every week, and a working prototype built over one hackathon weekend.",
+          "As founder I set the vision and carried the pitch. We framed the problem, shaped a business model and pitched it to investors at the end of the programme.",
+          "When the programme finished, I kept going. I moved the prototype onto a stack I control, connected it to real Canvas and timetable data, and demoed it at the KTH Lovable Buildathon in Stockholm on 1 September 2026.",
+        ],
+        shots: [{ src: "/img/studdybuddy/novelt-finals.jpg", alt: "Teams from the Entrepreneurial Experience on stage at the finals, holding the award cheques, with gold confetti on the floor", caption: "With the other teams at the finals of the first Entrepreneurial Experience, 17 June 2026.", wide: true }],
+      },
+      {
+        heading: "Building with AI",
+        body: [
+          "AI runs through the product: the planner drafts the week, and every course gets its own tutor that answers from that course's Canvas material.",
+          "It's also how I build. The first prototype came together on Lovable; I then moved it to React and Supabase on Cloudflare, working with Claude Code. I set the design and interaction rules and review every change before it ships.",
+          "Using AI well also means knowing where not to trust it. Early versions left the language model to choose the times, with the rules written only into its prompt. I moved slot-finding into plain, tested code: the model now says what to schedule and roughly when, and the scheduler places each block around lectures, personal plans and the student's sleep hours. A proposal can't clash with a class or land at 3am, whatever the model asks for.",
+        ],
+        shots: [{ src: "/img/studdybuddy/building.jpg", alt: "Richard in headphones, typing on a laptop at a crowded table", caption: "Heads down on StuddyBuddy at the KTH Lovable Buildathon, 1 September 2026." }],
+      },
+      {
         heading: "The trust problem",
         body: [
           "Canvas tells students what's due, never when to start. StuddyBuddy's answer is an AI that plans the week, but an AI rewriting your calendar is a trust problem before it's a UI problem.",
@@ -93,25 +112,6 @@ export const projects: Project[] = [
           { src: "/img/studdybuddy/flow-2-choose.jpg", alt: "The same calendar with one ghost block marked skipped, and the bar reading 2 of 3 selected", caption: "2. Tap a ghost to skip it. The bar keeps count, so accepting is no longer all-or-nothing.", wide: true },
           { src: "/img/studdybuddy/flow-3-added.jpg", alt: "The calendar with the two accepted study blocks now solid", caption: "3. Only the ticked blocks land on the calendar.", wide: true },
         ],
-      },
-      {
-        heading: "Building with AI",
-        body: [
-          "AI runs through the product: the planner drafts the week, and every course gets its own tutor that answers from that course's Canvas material.",
-          "It's also how I build. The first prototype came together on Lovable; I then moved it to React and Supabase on Cloudflare, working with Claude Code. I set the design and interaction rules and review every change before it ships.",
-          "Using AI well also means knowing where not to trust it. Early versions left the language model to choose the times, with the rules written only into its prompt. I moved slot-finding into plain, tested code: the model now says what to schedule and roughly when, and the scheduler places each block around lectures, personal plans and the student's sleep hours. A proposal can't clash with a class or land at 3am, whatever the model asks for.",
-        ],
-        shots: [{ src: "/img/studdybuddy/building.jpg", alt: "Richard in headphones, typing on a laptop at a crowded table", caption: "Heads down on StuddyBuddy at the KTH Lovable Buildathon, 1 September 2026." }],
-      },
-      {
-        heading: "From course project to startup",
-        body: [
-          "StuddyBuddy began in the Business Development Lab at the University of Twente, under the working name SchedulAI. With my course team I interviewed students, tested the concept and built a first financial model. That work is in the report linked above.",
-          "When the course ended, I took the idea into Novel-T's Entrepreneurial Experience: three UTwente students, a problem we lived every week, and a working prototype built over one hackathon weekend.",
-          "As founder I set the vision and carried the pitch. We framed the problem, shaped a business model and pitched it to investors at the end of the programme.",
-          "When the programme finished, I kept going. I moved the prototype onto a stack I control, connected it to real Canvas and timetable data, and demoed it at the KTH Lovable Buildathon in Stockholm on 1 September 2026.",
-        ],
-        shots: [{ src: "/img/studdybuddy/novelt-finals.jpg", alt: "Teams from the Entrepreneurial Experience on stage at the finals, holding the award cheques, with gold confetti on the floor", caption: "With the other teams at the finals of the first Entrepreneurial Experience, 17 June 2026.", wide: true }],
       },
       {
         heading: "Next: group scheduling",
@@ -172,6 +172,7 @@ export const projects: Project[] = [
           "Tested on 21 datasheets it had never seen, it made up nothing, and 98% of the fields it confirmed on its own were right. Everything else goes to a person, because a wrong value can still arrive with a convincing quote.",
         ],
         shots: [
+          { src: "/img/vigil/founder-house.jpg", alt: "Richard standing in front of an orange wall with the sign Claude Founder House Stockholm", caption: "At Claude Founder House in Stockholm, October 2026." },
           { src: "/img/vigil/demo-review.jpg", alt: "The demo's review screen: datasheet text on the left with one line highlighted, growth rings in the middle, fields to check on the right", caption: "Checking a field: its source line lights up, and the rings fill as you decide.", wide: true },
           { src: "/img/vigil/demo-passport.jpg", alt: "The printed passport: fields grouped by cluster, each tagged self-declared, verified, estimated or derived", caption: "The printed passport, with where every value came from.", wide: true },
         ],
@@ -182,7 +183,6 @@ export const projects: Project[] = [
           "In October 2026 I joined the Builder Cohort at Claude Founder House in Stockholm, and used the day to build an agent that improves the checker on its own. Each round it reads the checker's mistakes, changes one rule, runs the tests and re-scores. It keeps the change only if fewer correct values go to a person without any wrong ones getting through, and otherwise undoes it. It practised on 5 datasheets and never saw the other 21 until I scored them once at the end.",
           "On those 21, correct values sent to a person for no reason dropped from 14 to 8, and the fields it confirmed were still right 98% of the time. The cause was ordinary: PDFs break table cells and sentences across lines, so the value sat just past the quoted line. The answers it was scored against were drafted with AI and haven't all been checked by hand yet, so these numbers are provisional.",
         ],
-        shots: [{ src: "/img/vigil/founder-house.jpg", alt: "Richard standing in front of an orange wall with the sign Claude Founder House Stockholm", caption: "At Claude Founder House in Stockholm, October 2026." }],
       },
     ],
   },
@@ -255,7 +255,7 @@ export const projects: Project[] = [
           "Once a visitor picks the phone up, the feed starts to drift: a viral clip cuts to a nature montage, then calm nature, then now and then someone telling you to stop scrolling. Put it down and Softy takes a breath. Leave it face up and she gets worse.",
         ],
         shots: [
-          { src: "/img/softy/film.mp4", poster: "/img/softy/film-poster.jpg", alt: "Short film introducing Softy: her habitat, her distress at a scrolling phone, and how she calms", caption: "The film we made for the exhibition.", wide: true },
+          { src: "/img/softy/exhibition.mp4", poster: "/img/softy/exhibition-poster.jpg", alt: "Handheld walkthrough of the installation: the sign outside, the phone and bed inside, Softy turning from red to blue", caption: "A walkthrough on the day.", wide: true },
         ],
       },
       {
@@ -282,7 +282,7 @@ export const projects: Project[] = [
           "Visitors found the bed on their own. Most picked the phone up first, watched Softy get worse, and worked out the rest from her.",
         ],
         shots: [
-          { src: "/img/softy/exhibition.mp4", poster: "/img/softy/exhibition-poster.jpg", alt: "Handheld walkthrough of the installation: the sign outside, the phone and bed inside, Softy turning from red to blue", caption: "A walkthrough on the day.", wide: true },
+          { src: "/img/softy/film.mp4", poster: "/img/softy/film-poster.jpg", alt: "Short film introducing Softy: her habitat, her distress at a scrolling phone, and how she calms", caption: "The film we made for the exhibition.", wide: true },
           { src: "/img/softy/sign.jpg", alt: "A chalkboard sign reading Meet Softy beside the fabric-covered box", caption: "Outside the box." },
           { src: "/img/softy/bed.jpg", alt: "The phone beside its knitted blanket and printed bed inside the box", caption: "Inside: the phone and its bed." },
         ],
